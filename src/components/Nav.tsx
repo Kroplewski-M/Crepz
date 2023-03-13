@@ -65,7 +65,8 @@ export const Nav = ()=>{
                         </>
                     ):(
                         <div className='w-[100%] flex place-content-end	'>
-                        <img src={mobileMenuIcon} alt="" onClick={()=> setShowMobileMenu(true)} className='w-[30px] h-[30px] mr-5 mt-[10px]'/>
+                            <img src={basket} alt="" className='w-[40px] h-[40px] hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px]'/>
+                            <img src={mobileMenuIcon} alt="" onClick={()=> setShowMobileMenu(true)} className='w-[30px] h-[30px] mr-5 mt-[10px] hover:cursor-pointer'/>
                         </div>
                     )
                 }

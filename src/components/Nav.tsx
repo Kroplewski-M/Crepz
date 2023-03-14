@@ -57,7 +57,7 @@ export const Nav = ()=>{
                                 <p className='hover:cursor-pointer hover:text-gray-400'>Kids</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400'>Sale</p>
                             </div>
-                            <div className='flex space-x-3 mt-[7px] mr-5 self-center -mt-[5px]'>
+                            <div className='flex space-x-3 mt-[7px] mr-5 self-center -mt-[7px]'>
                                 <img src={favorites} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
                                 <img src={userIcon} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
                                 <img src={basket} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>

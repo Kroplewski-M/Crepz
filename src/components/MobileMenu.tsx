@@ -8,7 +8,7 @@ export const MobileMenu = (props:Props)=>{
 
 
     return(
-        <div className="w-[100vw] h-[100vh] fixed top-0 right-0 bg-[#333333]">
+        <div className="w-[100vw] h-[100vh] fixed top-0 right-0 bg-[#333333] z-[100]">
             <div className='w-[100%] h-[35px]'>
                 <img src={close} alt="" className='w-[35px] absolute right-5 top-2 hover:cursor-pointer'  onClick={props.closeMenu}/>
             </div>

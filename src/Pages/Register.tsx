@@ -18,7 +18,11 @@ export const Register = ()=>{
                             <button className='font-semibold bg-gray-200 text-[#222222] hover:bg-gray-400 p-[10px]'>Log in</button>
                         </div>
                     </div>
-                    <RegisterForm />
+                    <div className='w-[100%] h-[100%] grid place-content-center'>
+                        <div className='w-[500px] h-[500px] -mt-10'>
+                            <RegisterForm />
+                        </div>
+                    </div>
                 </section>
             </section>
         </>

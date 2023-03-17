@@ -1,6 +1,7 @@
 import { Nav } from "./components/Nav"
 import { Home } from "./Pages/Home"
 import { Register } from "./Pages/Register";
+import { Login } from "./Pages/Login";
 import {UserContext}  from './context/UserContext';
 import { useState } from "react";
 import { Route, Routes  } from 'react-router-dom';
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </UserContext.Provider>
     </div>

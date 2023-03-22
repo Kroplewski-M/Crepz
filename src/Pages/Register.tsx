@@ -23,7 +23,7 @@ export const Register = ()=>{
                         </div>
                     </div>
                     <div className='w-[100%] grid place-content-center mt-10'>
-                        <div className='w-[500px]'>
+                        <div className='lg:w-[500px] md:w-[380px] w-[300px]'>
                             <RegisterForm />
                         </div>
                     </div>

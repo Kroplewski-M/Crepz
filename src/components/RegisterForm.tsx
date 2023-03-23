@@ -1,8 +1,7 @@
-import { useState } from "react"
-import {useForm,SubmitHandler} from "react-hook-form"
+import {useForm} from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup';
+import { supabase } from '../supabaseClient';
 import * as yup from "yup";
-
 
 const schema = yup.object({
     FullName: yup.string().required(),
@@ -13,17 +12,21 @@ const schema = yup.object({
   type FormData = yup.InferType<typeof schema>;
 
 export const RegisterForm = ()=>{
-    
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [confirmPassword, setConfirmPassword] = useState('');
-    // const [Tos, setTos] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
       });
 
-      const onSubmit = (data: FormData) => {
-        console.log(data);
+      async function onSubmit(dataForm: FormData){
+        try{
+          const { data, error } = await supabase.auth.signUp({
+            email: dataForm.Email,
+            password: dataForm.Password,
+          });
+          if(error)throw error;
+          else console.log("user created!");
+        }catch(error){
+          console.log(error);
+        }
       }
     
       return (

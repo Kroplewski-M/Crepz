@@ -12,7 +12,7 @@ const schema = yup.object({
   type FormData = yup.InferType<typeof schema>;
 
 export const RegisterForm = ()=>{
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
         resolver: yupResolver(schema)
       });
 
@@ -24,11 +24,17 @@ export const RegisterForm = ()=>{
           });
           if(error)throw error;
           else console.log("user created!");
-        }catch(error){
+        }catch(error){ 
           console.log(error);
+        }finally{
+          reset();
         }
       }
-    
+      //TO DO ADD USER TO TABLE
+      //CREATE USER CONTEXT
+      async function addUserToTable(userInfo: FormData){
+
+    }
       return (
         <section className="bg-[#444444] w-[100%] rounded-md pb-5">
             <h1 className="text-center font-bold text-[30px]">Register</h1>

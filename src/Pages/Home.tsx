@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import heroVid from '../assets/heroVideo.mp4';
-
+import nikeLogo from '../assets/images/NikeLogo.jpg';
 
 export const Home = ()=>{
 
@@ -22,7 +22,7 @@ export const Home = ()=>{
                 </div>
             </section>
             <section className='md:w-[95vw] w-[90vw] mx-auto'>
-                <video src={heroVid} autoPlay loop muted className='w-[100%] mx-auto rounded-md'></video>
+                <video src={heroVid} autoPlay loop muted className='w-[100%] mx-auto rounded-md' poster={nikeLogo}></video>
             </section>
             <section className='w-[100%] md:pl-[86px] pl-[20px] pt-5 mb-10'>
                 <h1 className='font-semibold md:text-[20px] text-[16px]'>Shop by brand</h1>

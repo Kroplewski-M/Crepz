@@ -23,7 +23,10 @@ export const RegisterForm = ()=>{
             password: dataForm.Password,
           });
           if(error)throw error;
-          else console.log("user created!");
+          else{
+            console.log("user created!");
+            addUserToTable(dataForm, data!.user!.id);
+          } 
         }catch(error){ 
           console.log(error);
         }finally{
@@ -32,8 +35,18 @@ export const RegisterForm = ()=>{
       }
       //TO DO ADD USER TO TABLE
       //CREATE USER CONTEXT
-      async function addUserToTable(userInfo: FormData){
-
+      async function addUserToTable(userInfo: FormData, userID: string){
+        console.log(userID);
+          try{
+            const {data,error} = await supabase.from('users')
+            .insert({ userID: userID, email: userInfo.Email, fullName: userInfo.FullName });
+            if(error) throw error;
+            else{
+              console.log('user added to table');
+            }
+          }catch(error){
+            console.log(error);
+          }
     }
       return (
         <section className="bg-[#444444] w-[100%] rounded-md pb-5">

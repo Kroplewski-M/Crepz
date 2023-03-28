@@ -2,6 +2,8 @@ import {useForm} from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup';
 import { supabase } from '../supabaseClient';
 import * as yup from "yup";
+import { useState,useContext } from "react";
+import {UserContext}  from '../context/UserContext';
 
 const schema = yup.object({
     FullName: yup.string().required(),
@@ -12,11 +14,15 @@ const schema = yup.object({
   type FormData = yup.InferType<typeof schema>;
 
 export const RegisterForm = ()=>{
+  const [loading,setLoading] = useState(false);
+  // const {user,setUser} = useContext(UserContext);
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
         resolver: yupResolver(schema)
       });
 
       async function onSubmit(dataForm: FormData){
+        setLoading(true);
         try{
           const { data, error } = await supabase.auth.signUp({
             email: dataForm.Email,
@@ -43,9 +49,12 @@ export const RegisterForm = ()=>{
             if(error) throw error;
             else{
               console.log('user added to table');
+              
             }
           }catch(error){
             console.log(error);
+          }finally{
+            setLoading(false);
           }
     }
       return (
@@ -71,7 +80,7 @@ export const RegisterForm = ()=>{
                 <input {...register("ConfirmPassword")} type="password" 
                 className={`bg-transparent border-b-2 border-b-solid  ${errors.ConfirmPassword? 'border-b-red-600': 'border-b-gray-400'} mt-[5px] text-[18px] focus:outline-0 mb-5`} />
                 <p className="text-red-500 -mt-[15px]">{errors.ConfirmPassword?.message}</p>
-                <input type="submit" className="w-[100px] h-[30px] rounded-md bg-gray-300 hover:bg-gray-500 hover:cursor-pointer text-[#333333] font-bold mt-5"/>
+                <input type="submit" className="w-[100px] h-[30px] rounded-md bg-gray-300 hover:bg-gray-500 hover:cursor-pointer text-[#333333] font-bold mt-5" disabled={loading}/>
             </form>
         </section>
       );

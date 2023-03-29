@@ -3,15 +3,15 @@ import { MouseEventHandler,MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 interface Props{
-    closeMenu: MouseEventHandler<HTMLDivElement>,
+    closeMenu: ()=>void,
 }
 export const MobileMenu = (props:Props)=>{
     const navigate = useNavigate();
     
-    function redirectUser(event:MouseEvent, url:string):void{
+    function redirectUser(url:string):void{
         navigate(url);
         //THIS ISNT WORKING --- FIX IT
-        props.closeMenu;
+        props.closeMenu();
     }
 
     return(
@@ -28,8 +28,8 @@ export const MobileMenu = (props:Props)=>{
                     <p className='text-[16px] text-gray-300 font-semibold pt-10 w-[90%]'>Become a Crepz Member for the best
                     products at amazing prices.</p>
                     <div className='flex space-x-4 pt-[15px]'>
-                        <button className='text-[15px] w-[40%] h-[30px] rounded-xl bg-gray-200 text-[#333333] hover:bg-gray-400' onClick={(click)=>redirectUser(click,'/register')}>Join Us</button>
-                        <button className='text-[15px] w-[40%] h-[32px] rounded-xl bg-[#222222] gray-200 hover:bg-[#444444] -mt-[1px]' onClick={(click)=>redirectUser(click,'/login')}>Sign in</button>
+                        <button className='text-[15px] w-[40%] h-[30px] rounded-xl bg-gray-200 text-[#333333] hover:bg-gray-400' onClick={()=>redirectUser('/register')}>Join Us</button>
+                        <button className='text-[15px] w-[40%] h-[32px] rounded-xl bg-[#222222] gray-200 hover:bg-[#444444] -mt-[1px]' onClick={()=>redirectUser('/login')}>Sign in</button>
                     </div>
                 </div>
         </div>

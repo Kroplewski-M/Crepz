@@ -27,7 +27,7 @@ export const LoadingPopUpcard = (props:PopUpCardProps)=>{
 
     return(<>
     <div className="w-[100vw] h-[100vh] backdrop-blur-lg grid place-content-center absolute top-0 z-50">
-        <div className="w-[500px] h-[300px] bg-[#333333] rounded-md">
+        <div className="w-[320px] md:w-[500px] h-[300px] bg-[#333333] rounded-md px-5 md:px-0 text-center md:text-left">
             {
                 props.loadingState == 'loading'?(
                     <div className="grid place-content-center w-[100%] h-[100%]">

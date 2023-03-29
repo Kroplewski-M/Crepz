@@ -7,8 +7,8 @@ export const Login = ()=>{
 
     return(
         <>
-            <section className="w-[100%] h-[100vh] flex relative">
-                <section className='md:w-[50vw] w-[100vw] h-[100vh] bg-[#222222] text-gray-200'>
+            <section className="w-[100vw] h-[100vh] flex relative">
+                <section className='w-[100%] h-[100vh] bg-[#222222] text-gray-200'>
                     <div className='grid w-[100%] place-items-end'>
                         <div className='flex mr-16 space-x-5'>
                             <button onClick={()=> navigate('/register')} className='font-semibold bg-gray-200 text-[#222222] hover:bg-gray-400 p-[10px]'>Register</button>
@@ -16,7 +16,7 @@ export const Login = ()=>{
                         </div>
                     </div>
                     <div className='w-[100%] grid place-content-center'>
-                        <div className='w-[500px] mt-16 '>
+                        <div className='md:w-[500px] w-[300px] mt-16 '>
                             <LoginForm />
                         </div>
                     </div>

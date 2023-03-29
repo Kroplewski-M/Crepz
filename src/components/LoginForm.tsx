@@ -4,7 +4,7 @@ export const LoginForm = ()=>{
     return(
         <>
             <section className="">
-                <form action="" className="bg-[#444444] w-[100%] rounded-md pb-5">
+                <form action="" className="bg-[#444444] md:w-[100%] w-[300px] rounded-md pb-5">
                     <div className="w-[250px] mx-auto">
                         <h1 className="text-[50px] font-bold mb-10">Login</h1>
                         <label htmlFor="Email" className="block">Email:</label>

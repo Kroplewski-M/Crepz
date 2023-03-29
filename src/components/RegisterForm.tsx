@@ -60,6 +60,7 @@ export const RegisterForm = (Props:RegisterFormProps)=>{
               const user = {id: data[0].userID, email: data[0].email,fullName: data[0].fullName}
               loginUser(user);
               Props.changeLoadingState(LoadingState.SUCCESS);
+
             }
           }catch(error){
             console.log(error);

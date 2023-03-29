@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { supabase } from '../supabaseClient';
 import * as yup from "yup";
 import { useState,useContext } from "react";
-import {UserContext}  from '../context/UserContext';
+import {useUserInfo} from '../context/UserContext';
 
 const schema = yup.object({
     FullName: yup.string().required(),
@@ -15,7 +15,7 @@ const schema = yup.object({
 
 export const RegisterForm = ()=>{
   const [loading,setLoading] = useState(false);
-  // const {user,setUser} = useContext(UserContext);
+  const {loginUser,logoutUser,userInfo} = useUserInfo();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
         resolver: yupResolver(schema)
@@ -41,15 +41,17 @@ export const RegisterForm = ()=>{
       }
       //TO DO ADD USER TO TABLE
       //CREATE USER CONTEXT
-      async function addUserToTable(userInfo: FormData, userID: string){
+      async function addUserToTable(userInforamtion: FormData, userID: string){
         console.log(userID);
           try{
             const {data,error} = await supabase.from('users')
-            .insert({ userID: userID, email: userInfo.Email, fullName: userInfo.FullName });
+            .insert({ userID: userID, email: userInforamtion.Email, fullName: userInforamtion.FullName }).select();
             if(error) throw error;
             else{
               console.log('user added to table');
-              
+              console.log(data);
+              const user = {id: data[0].userID, email: data[0].email,fullName: data[0].fullName}
+              loginUser(user);
             }
           }catch(error){
             console.log(error);

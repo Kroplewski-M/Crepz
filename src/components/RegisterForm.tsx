@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient';
 import * as yup from "yup";
 import { useState,useContext } from "react";
 import {useUserInfo} from '../context/UserContext';
+import { LoadingState } from "./LoadingPopUpCard";
 
 const schema = yup.object({
     FullName: yup.string().required(),
@@ -13,7 +14,11 @@ const schema = yup.object({
   }).required();
   type FormData = yup.InferType<typeof schema>;
 
-export const RegisterForm = ()=>{
+interface RegisterFormProps{
+  changeLoadingState: (state: LoadingState) => void;
+}
+
+export const RegisterForm = (Props:RegisterFormProps)=>{
   const [loading,setLoading] = useState(false);
   const {loginUser,logoutUser,userInfo} = useUserInfo();
 
@@ -23,6 +28,7 @@ export const RegisterForm = ()=>{
 
       async function onSubmit(dataForm: FormData){
         setLoading(true);
+        Props.changeLoadingState(LoadingState.LOADING);
         try{
           const { data, error } = await supabase.auth.signUp({
             email: dataForm.Email,
@@ -35,6 +41,7 @@ export const RegisterForm = ()=>{
           } 
         }catch(error){ 
           console.log(error);
+          Props.changeLoadingState(LoadingState.ERROR);
         }finally{
           reset();
         }
@@ -52,9 +59,11 @@ export const RegisterForm = ()=>{
               console.log(data);
               const user = {id: data[0].userID, email: data[0].email,fullName: data[0].fullName}
               loginUser(user);
+              Props.changeLoadingState(LoadingState.SUCCESS);
             }
           }catch(error){
             console.log(error);
+          Props.changeLoadingState(LoadingState.ERROR);
           }finally{
             setLoading(false);
           }

@@ -1,9 +1,16 @@
 import registerBg from '../assets/images/registerBg.png';
 import { RegisterForm } from '../components/RegisterForm';
 import { useNavigate  } from 'react-router-dom';
+import { LoadingPopUpcard,LoadingState } from '../components/LoadingPopUpCard';
+import { useState } from 'react';
 
 export const Register = ()=>{
     const navigate = useNavigate();
+    const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.NONE);
+
+    const changeLoadingState = (state: LoadingState) =>{
+        setLoadingState(state);
+    }
 
     return(
         <>
@@ -24,11 +31,18 @@ export const Register = ()=>{
                     </div>
                     <div className='w-[100%] grid place-content-center mt-10'>
                         <div className='lg:w-[500px] md:w-[380px] w-[300px]'>
-                            <RegisterForm />
+                            <RegisterForm changeLoadingState={changeLoadingState}  />
                         </div>
                     </div>
                 </section>
             </section>
+            {
+                loadingState != 'none' ?(<>
+                    <LoadingPopUpcard loadingText='Creating account please wait...' errorText='Error creating account please try again later!' 
+                    successText='Account created successfully!' loadingState={loadingState} changeLoadingState={changeLoadingState}/>
+                </>):(<></>)
+            }
+
         </>
     )
 }

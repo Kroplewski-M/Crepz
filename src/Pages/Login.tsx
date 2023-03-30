@@ -1,14 +1,21 @@
 import loginBg from '../assets/images/loginBg.jpg';
 import { LoginForm } from '../components/LoginForm';
 import { useNavigate  } from 'react-router-dom';
+import { useState } from 'react';
+
+enum LoginState{
+    SUCCESS = 'success',
+    ERROR = 'error',
+    DEFAULT = 'default',
+}
 
 export const Login = ()=>{
     const navigate = useNavigate();
-
+    const [loginState,setLoadingState] = useState<LoginState>(LoginState.DEFAULT);
     return(
         <>
             <section className="w-[100vw] h-[100vh] flex relative">
-                <section className='w-[100%] h-[100vh] bg-[#222222] text-gray-200'>
+                <section className='w-[50vw] h-[100vh] bg-[#222222] text-gray-200'>
                     <div className='grid w-[100%] place-items-end'>
                         <div className='flex mr-16 space-x-5'>
                             <button onClick={()=> navigate('/register')} className='font-semibold bg-gray-200 text-[#222222] hover:bg-gray-400 p-[10px]'>Register</button>

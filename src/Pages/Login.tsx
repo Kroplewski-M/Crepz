@@ -2,7 +2,7 @@ import loginBg from '../assets/images/loginBg.jpg';
 import { LoginForm } from '../components/LoginForm';
 import { useNavigate  } from 'react-router-dom';
 import { useState } from 'react';
-
+import { LoginPrompt } from '../components/LoginPromt';
 enum LoginState{
     SUCCESS = 'success',
     ERROR = 'error',
@@ -24,6 +24,7 @@ export const Login = ()=>{
                     </div>
                     <div className='w-[100%] grid place-content-center'>
                         <div className='md:w-[500px] w-[300px] mt-16 '>
+                            <LoginPrompt />
                             <LoginForm />
                         </div>
                     </div>

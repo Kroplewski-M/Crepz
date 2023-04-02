@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { supabase } from '../supabaseClient';
 import {useUserInfo} from '../context/UserContext';
+import { LoginState } from "../Pages/Login"
 
 interface LoginForm{
-
+    changeLoggingState:(state:LoginState)=>void,
 }
 export const LoginForm = (props:LoginForm)=>{
     const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -61,7 +62,7 @@ export const LoginForm = (props:LoginForm)=>{
     }
     return(
         <>
-            <section className="">
+            <section className="mt-10">
                 <form action="" onSubmit={login} className="bg-[#444444] md:w-[100%] w-[300px] rounded-md pb-5">
                     <div className="w-[250px] mx-auto">
                         <h1 className="text-[50px] font-bold mb-10">Login</h1>

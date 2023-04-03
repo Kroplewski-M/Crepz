@@ -7,7 +7,7 @@ interface LoginPromptProps{
 export const LoginPrompt = (props:LoginPromptProps)=>{
 
     return(
-        <section className="absolute w-[35%]">
+        <section className="absolute md:w-[500px] w-[300px] ">
                 {
                     props.state == 'default'?(
                     <div></div>):(<div></div>)

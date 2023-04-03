@@ -22,6 +22,7 @@ export const LoginForm = (props:LoginForm)=>{
     }
     async function login(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault();
+        props.changeLoggingState(LoginState.LOADING);
         setLoading(true);
         try{
             const { data, error } = await supabase.auth.signInWithPassword({
@@ -36,6 +37,7 @@ export const LoginForm = (props:LoginForm)=>{
               }
         }catch(error){
             console.log(error);
+            props.changeLoggingState(LoginState.ERROR);
         }finally{
             setLoading(false);
             setEmail('');
@@ -55,9 +57,11 @@ export const LoginForm = (props:LoginForm)=>{
                 const user = {id: data[0].userID, email: data[0].email,fullName: data[0].fullName}
                 loginUser(user);
                 console.log(user);
+                props.changeLoggingState(LoginState.SUCCESS);
             }
         }catch(error){
             console.log(error);
+            props.changeLoggingState(LoginState.ERROR);
         }
     }
     return(

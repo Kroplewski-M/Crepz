@@ -13,7 +13,7 @@ export enum LoginState{
 
 export const Login = ()=>{
     const navigate = useNavigate();
-    const [loginState,setLoggingState] = useState<LoginState>(LoginState.LOADING);
+    const [loginState,setLoggingState] = useState<LoginState>(LoginState.DEFAULT);
 
     function changeLoggingState(state:LoginState){
         setLoggingState(state);

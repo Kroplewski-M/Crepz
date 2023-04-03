@@ -4,14 +4,45 @@ import { Register } from "./Pages/Register";
 import { Login } from "./Pages/Login";
 import { Profile } from "./Pages/Profile";
 import {UserContext}  from './context/UserContext';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes  } from 'react-router-dom';
+import { supabase } from './supabaseClient';
+import {useUserInfo} from './context/UserContext';
 
 function App() {
+  const {loginUser,logoutUser,userInfo} = useUserInfo();
+
+  async function logInUser(ID:string){
+    try{
+      const { data, error } = await supabase
+      .from('users')
+      .select().eq('userID',ID);
+      if(error) throw error;
+      else{
+          console.log('user found:');
+          const user = {id: data[0].userID, email: data[0].email,fullName: data[0].fullName}
+          loginUser(user);
+      }
+    }catch(error){
+      console.log(error);
+      console.log('user not found');
+    }
+  }
+
+  useEffect(() =>{
+    let cachedUser = localStorage.getItem('sb-htxvetrvrwrdvoybymaz-auth-token');
+    if(cachedUser){
+      const profile = JSON.parse(cachedUser);
+    logInUser(profile.user.id);
+    }else{
+      console.log('not found cache');
+    }
+
+  },[])
+
   return (
     <div className="App">
       <div className="min-h-screen relative">
-        <UserContext>
           <Nav></Nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -26,8 +57,6 @@ function App() {
               </footer>
 
           </div>
-        </UserContext>
-
       </div>
     </div>
   )

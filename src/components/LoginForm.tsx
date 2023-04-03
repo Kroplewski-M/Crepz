@@ -2,12 +2,14 @@ import { useState } from "react";
 import { supabase } from '../supabaseClient';
 import {useUserInfo} from '../context/UserContext';
 import { LoginState } from "../Pages/Login"
+import { useNavigate  } from 'react-router-dom';
 
 interface LoginForm{
     changeLoggingState:(state:LoginState)=>void,
 }
 export const LoginForm = (props:LoginForm)=>{
     const {loginUser,logoutUser,userInfo} = useUserInfo();
+    const navigate = useNavigate();
 
     const [Email,setEmail] = useState('');
     const [Password,setPassword] = useState('');
@@ -58,6 +60,10 @@ export const LoginForm = (props:LoginForm)=>{
                 loginUser(user);
                 console.log(user);
                 props.changeLoggingState(LoginState.SUCCESS);
+
+                setTimeout(() => {
+                    navigate('/profile');
+                }, 2000);
             }
         }catch(error){
             console.log(error);

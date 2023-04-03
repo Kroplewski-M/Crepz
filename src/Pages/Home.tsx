@@ -12,7 +12,7 @@ export const Home = ()=>{
     }
     return (
         <>
-            <section className="w-[100vw] h-[300px] grid place-content-center">
+            <section className="w-[100vw] h-[300px] grid place-content-center mb-10">
                 <p className="text-center text-gray-600 font-semibold md:text-[16px] text-[13px]">Just in: Nike Air Max Plus </p>
                 <h1 id='headline' className=" font-bold md:text-[48px] text-[20px] text-[#222222] text-center mb-5">Feel next level comfort</h1>
                 <p className="md:w-[700px] w-[250px] text-center font-semibold text-gray-600 md:text-[16px] text-[13px]">Make some waves in the Nike Air Max Plus, a Tuned Air experience that offers premium stability and cushioning.</p>
@@ -40,10 +40,7 @@ export const Home = ()=>{
                     }
                 </div>
             </section>
-            <footer className='w-[100vw] h-[80px] bg-[#333333] text-gray-500 grid place-content-center mt-16 text-[12px] md:text-[16px]'>
-                <p>© 2023 Crepz, Inc. All Rights Reserved</p>
-                <p>Web app made by Mateusz Kroplewski</p>
-            </footer>
+
         </>
     )
 }

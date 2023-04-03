@@ -6,8 +6,10 @@ import { useState, useEffect } from 'react'
 import mobileMenuIcon from '../assets/images/mobileMenu.png'
 import  {MobileMenu}  from './MobileMenu'
 import { useNavigate  } from 'react-router-dom';
+import {useUserInfo} from '../context/UserContext';
 
 export const Nav = ()=>{
+    const {loginUser,logoutUser,userInfo} = useUserInfo();
     const navigate = useNavigate();
     const [windowSize, setWindowSize] = useState<number>(getWindowSize());
     const [mobileMenu, setMobileMenu] = useState<boolean>(false);
@@ -42,6 +44,13 @@ export const Nav = ()=>{
         const closeMobileMenu =():void=>{
             setShowMobileMenu(false);
         }
+        const isLoggedIn = ()=>{
+            if(userInfo.id == ""){
+                navigate('/register');
+            }else{
+                navigate('/profile');
+            }
+        }
     return(
         <>
             <nav className="w-[100vw] h-[60px] bg-[#333333] flex z-50">
@@ -60,7 +69,7 @@ export const Nav = ()=>{
                             </div>
                             <div className='flex space-x-3 mr-5 self-center -mt-[7px]'>
                                 <img src={favorites} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
-                                <img src={userIcon} alt="" onClick={()=> navigate('/register')} className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
+                                <img src={userIcon} alt="" onClick={isLoggedIn} className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
                                 <img src={basket} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
                             </div>
                         </>

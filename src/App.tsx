@@ -3,8 +3,7 @@ import { Home } from "./Pages/Home"
 import { Register } from "./Pages/Register";
 import { Login } from "./Pages/Login";
 import { Profile } from "./Pages/Profile";
-import {UserContext}  from './context/UserContext';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Route, Routes  } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 import {useUserInfo} from './context/UserContext';
@@ -28,7 +27,6 @@ function App() {
       console.log('user not found');
     }
   }
-
   useEffect(() =>{
     let cachedUser = localStorage.getItem('sb-htxvetrvrwrdvoybymaz-auth-token');
     if(cachedUser){

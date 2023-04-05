@@ -5,7 +5,7 @@ import { useNavigate  } from 'react-router-dom';
 import { useState } from 'react';
 
 
-export const ProfileComp = ()=>{
+export const ProfileCard = ()=>{
     const {loginUser,logoutUser,userInfo} = useUserInfo();
     const [logOutPromt,setLogOutPromt] = useState(false);
     const [loading,setLoading] = useState(false);
@@ -36,7 +36,7 @@ export const ProfileComp = ()=>{
             <div className='px-10 flex flex-col space-y-2 mt-5 md:w-[300px] md:px-0 md:mx-auto'>
                 <p className='text-gray-400 bg-[#444444] rounded-md p-[5px]'>ID: <span className='text-gray-200 font-bold'>{userInfo.id}</span></p>
                 <p className='text-gray-400 bg-[#444444] rounded-md p-[5px]'>Name: <span className='text-gray-200 font-bold'>{userInfo.fullName}</span></p>
-                <p className='text-gray-400 bg-[#444444] rounded-md p-[5px]'>Email: <span className='text-gray-200 font-bold'>{userInfo.email}</span></p>
+                <p className='text-gray-400 bg-[#444444] rounded-md p-[5px]'>Email: <span className='text-gray-200 font-bold text-[13px]'>{userInfo.email}</span></p>
             </div>
             <div className='w-[200px] mx-auto'>
                 <button className='w-[100%] rounded-md bg-red-600 hover:bg-red-700 font-bold mt-10' onClick={()=> setLogOutPromt(true)}>Log out</button>

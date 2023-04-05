@@ -1,16 +1,16 @@
 import close from '../assets/images/close.png'
-import { MouseEventHandler,MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
+import {useUserInfo} from '../context/UserContext';
 
 interface Props{
     closeMenu: ()=>void,
 }
 export const MobileMenu = (props:Props)=>{
+    const {loginUser,logoutUser,userInfo} = useUserInfo();
     const navigate = useNavigate();
     
     function redirectUser(url:string):void{
         navigate(url);
-        //THIS ISNT WORKING --- FIX IT
         props.closeMenu();
     }
 
@@ -25,12 +25,25 @@ export const MobileMenu = (props:Props)=>{
                     <p className='hover:cursor-pointer hover:text-gray-400'>Kids <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>
                     <p className='hover:cursor-pointer hover:text-gray-400'>Sale <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>
                     
-                    <p className='text-[16px] text-gray-300 font-semibold pt-10 w-[90%]'>Become a Crepz Member for the best
-                    products at amazing prices.</p>
-                    <div className='flex space-x-4 pt-[15px]'>
-                        <button className='text-[15px] w-[40%] h-[30px] rounded-xl bg-gray-200 text-[#333333] hover:bg-gray-400' onClick={()=>redirectUser('/register')}>Join Us</button>
-                        <button className='text-[15px] w-[40%] h-[32px] rounded-xl bg-[#222222] gray-200 hover:bg-[#444444] -mt-[1px]' onClick={()=>redirectUser('/login')}>Sign in</button>
-                    </div>
+                    {
+                        userInfo.id==''?(
+                            <>
+                                <p className='text-[16px] text-gray-300 font-semibold pt-10 w-[90%]'>Become a Crepz Member for the best
+                                products at amazing prices.</p>
+                                <div className='flex space-x-4 pt-[15px]'>
+                                    <button className='text-[15px] w-[40%] h-[30px] rounded-xl bg-gray-200 text-[#333333] hover:bg-gray-400' onClick={()=>redirectUser('/register')}>Join Us</button>
+                                    <button className='text-[15px] w-[40%] h-[32px] rounded-xl bg-[#222222] gray-200 hover:bg-[#444444] -mt-[1px]' onClick={()=>redirectUser('/login')}>Sign in</button>
+                                </div>
+                            </>
+                        ):(
+                            <div>
+                                <p className='text-[16px] text-gray-300 font-semibold pt-10 w-[90%] mb-[15px]'>Go to your account to view your profile informationm your previous orders
+                                and look at your wish list.</p>
+                                <button className='w-[200px] h-[30px] rounded-md bg-gray-200 text-[#333333] text-[16px]' onClick={()=>redirectUser('/profile/user')}>View Account</button>
+                            </div>
+                        )
+                    }
+
                 </div>
         </div>
     )

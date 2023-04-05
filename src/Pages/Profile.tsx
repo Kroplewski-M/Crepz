@@ -1,4 +1,4 @@
-import { ProfileComp } from "../components/ProfileComp"
+import { ProfileCard } from "../components/ProfileCard"
 import { useEffect, useState } from "react";
 import { Orders } from "../components/Orders";
 import { Wishlist } from "../components/Wishlist";
@@ -14,9 +14,6 @@ export const Profile = ()=>{
     const {select} = useParams();
 
     const [selectComp,setSelectComp]= useState<Select>(Select.PROFILE);
-    useEffect(()=>{
-        console.log(selectComp);
-    },[selectComp])
 
     useEffect(()=>{
         if(select !=null){
@@ -24,12 +21,12 @@ export const Profile = ()=>{
                 const value = Select.WISHLIST
                 setSelectComp(value);
             }
-            if(select == 'wishlist'){
-                const value = Select.WISHLIST
+            if(select == 'user'){
+                const value = Select.PROFILE
                 setSelectComp(value);
             }
         }
-    },[])
+    },[select])
     return(
         <>
         <section className="w-[100vw] grid justify-items-center mt-16 mb-16">
@@ -48,9 +45,9 @@ export const Profile = ()=>{
                     </div>
                 </div>
             </div>
-            <div className="md:w-[600px] w-[300px] h-[500px] bg-[#333333] rounded-b-md">
+            <div className="md:w-[600px] w-[300px] min-h-[500px] pb-10 md:pb-0 bg-[#333333] rounded-b-md">
                 {
-                    selectComp == Select.PROFILE?(<ProfileComp />):(<></>)
+                    selectComp == Select.PROFILE?(<ProfileCard />):(<></>)
                 }
                 {
                     selectComp == Select.WISHLIST?(<Wishlist />):(<></>)

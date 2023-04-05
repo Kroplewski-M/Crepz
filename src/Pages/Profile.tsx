@@ -2,17 +2,34 @@ import { ProfileComp } from "../components/ProfileComp"
 import { useEffect, useState } from "react";
 import { Orders } from "../components/Orders";
 import { Wishlist } from "../components/Wishlist";
-enum Select{
+import { useParams } from "react-router-dom";
+
+export enum Select{
     PROFILE='profile',
     ORDERS='orders',
     WISHLIST='wishlist',
 }
 
 export const Profile = ()=>{
+    const {select} = useParams();
+
     const [selectComp,setSelectComp]= useState<Select>(Select.PROFILE);
     useEffect(()=>{
         console.log(selectComp);
     },[selectComp])
+
+    useEffect(()=>{
+        if(select !=null){
+            if(select == 'wishlist'){
+                const value = Select.WISHLIST
+                setSelectComp(value);
+            }
+            if(select == 'wishlist'){
+                const value = Select.WISHLIST
+                setSelectComp(value);
+            }
+        }
+    },[])
     return(
         <>
         <section className="w-[100vw] grid justify-items-center mt-16 mb-16">

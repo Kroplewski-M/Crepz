@@ -68,7 +68,7 @@ export const Nav = ()=>{
                                 <p className='hover:cursor-pointer hover:text-gray-400'>Sale</p>
                             </div>
                             <div className='flex space-x-3 mr-5 self-center -mt-[7px]'>
-                                <img src={favorites} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
+                                <img src={favorites} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50' onClick={()=> navigate('/profile/wishlist')}/>
                                 <img src={userIcon} alt="" onClick={isLoggedIn} className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
                                 <img src={basket} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
                             </div>

@@ -69,10 +69,10 @@ export const Nav = ()=>{
                     !mobileMenu?(
                         <>
                             <div className='flex space-x-5 w-[230px] mx-auto text-gray-200 font-bold self-center'>
-                                <p className='hover:cursor-pointer hover:text-gray-400'>Men</p>
-                                <p className='hover:cursor-pointer hover:text-gray-400'>Women</p>
-                                <p className='hover:cursor-pointer hover:text-gray-400'>Kids</p>
-                                <p className='hover:cursor-pointer hover:text-gray-400'>Sale</p>
+                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Men</p>
+                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Women</p>
+                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Kids</p>
+                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Sale</p>
                             </div>
                             <div className='flex space-x-3 mr-5 self-center -mt-[7px]'>
                                 <img src={favorites} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50' onClick={wishListRedirect}/>

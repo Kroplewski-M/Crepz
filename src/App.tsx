@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { Route, Routes  } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 import {useUserInfo} from './context/UserContext';
-import { Select } from "./Pages/Profile";
+import { Browse } from "./Pages/Browse";
 
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -48,6 +48,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile/:select?" element={<Profile />} />
+            <Route path="/browse" element={<Browse />} />
           </Routes>
           <div className="pt-16">
               <footer className='w-[100vw] h-[80px] bg-[#333333] text-gray-500 grid place-content-center mt-16 text-[12px] md:text-[16px] absolute bottom-0 z-50'>

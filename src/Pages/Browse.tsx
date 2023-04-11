@@ -5,10 +5,14 @@ import { Filter } from '../components/Filter'
 export const Browse = ()=>{
     const [showFilter, setShowFilter] = useState<boolean>(false);
     
+    const closeFilter = ()=>{
+        setShowFilter(false);
+    }
+
     return(
         <section className="w-[100vw] pt-16">
             <div className="w-[200px] mx-auto flex space-x-3">
-                <div className='grid place-content-center w-[95px] h-[40px] bg-[#333333] hover:cursor-pointer'>
+                <div className='grid place-content-center w-[95px] h-[40px] bg-[#333333] hover:cursor-pointer' onClick={()=>setShowFilter(true)}>
                     <div className='flex space-x-2'>
                         <p className='text-gray-200 '>Filter</p>
                         <img src={filterIcon} alt="" className='w-[20px] h-[20px]' />
@@ -21,6 +25,10 @@ export const Browse = ()=>{
                     </div>
                 </div>
             </div>
+            {
+                showFilter?(<Filter closeFilter={closeFilter}/>):(<></>)
+            }
+            
         </section>
     )
 }

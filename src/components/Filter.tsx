@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import close from '../assets/images/close.png'
 
-
 interface FilterProps{
     closeFilter: ()=>void,
 }
@@ -10,9 +9,23 @@ interface FilterProps{
 export const Filter = (props:FilterProps)=>{
     const [minPrice,setMinPrice] = useState<number>(0);
     const [maxPrice,setMaxPrice] = useState<number>(2000);
-    const [brands,setBrands] = useState<string[]>(['New Balance', 'Nike', 'Addiddas', 'Converse', 'Puma', 'Under Armour']);
-    const [gender,setGender] = useState<string[]>(['Male','Female','Kids']);
 
+    const [filterState,setFilterState] = useState({
+        Brands:{
+            NewBalance: false,
+            Nike: false,
+            Addiddas: false,
+            Converse:false,
+            UnderArmour:false,
+        },
+        Gender:{
+            Male: false,
+            Female: false,
+            Kids:false,
+        }
+    });
+
+  
     return(
         <div className="w-[100vw] md:w-[300px] md:h-[900px] pb-10 absolute top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
             <img src={close} alt="" onClick={props.closeFilter} className='absolute w-[30px] h-[30px] right-1 top-1 md:hidden'/>
@@ -22,11 +35,11 @@ export const Filter = (props:FilterProps)=>{
                 <h2 className="text-[30px] md:text-[25px]">Brand:</h2>
                 <div className="mt-5 flex flex-col space-y-5">
                     {
-                        brands.map((brand)=>
-                        <div className="">
+                        Object.entries(filterState.Brands).map(([brand, checked])=>
+                            <div className="">
                             <label htmlFor={brand} className="mr-[10px]">{brand}: </label>
-                            <input type="checkbox" name={brand} className=""/>
-                        </div>
+                            <input type="checkbox" name={brand} className="cursor-pointer" checked={checked} />
+                            </div>
                         )
                     }
                 </div>
@@ -36,11 +49,11 @@ export const Filter = (props:FilterProps)=>{
                     <h2 className="text-[30px]">Gender:</h2>
                     <div className="mt-5 flex flex-col space-y-5">
                     {
-                        gender.map((gender)=>
-                        <div className="">
+                        Object.entries(filterState.Gender).map(([gender, checked])=>
+                            <div className="">
                             <label htmlFor={gender} className="mr-[10px]">{gender}: </label>
-                            <input type="checkbox" name={gender} className=""/>
-                        </div>
+                            <input type="checkbox" name={gender} className="cursor-pointer" checked={checked} />
+                            </div>
                         )
                     }
                     </div> 
@@ -51,12 +64,12 @@ export const Filter = (props:FilterProps)=>{
                     <div className="flex space-x-2 mt-5">
                             <label htmlFor="min" className="mr-[10px]">Min: </label>
                             <input type="range" name="min" min="0" max="2000" step="20" value={minPrice} onChange={(event)=>setMinPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
-                            <p>${minPrice}</p>
+                            <p>£{minPrice}</p>
                     </div>
                     <div className="flex space-x-2 mt-5">
                             <label htmlFor="max" className="mr-[10px]">Max: </label>
                             <input type="range" name="max" min="0" max="2000" step="20" value={maxPrice} onChange={(event)=>setMaxPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
-                            <p>${maxPrice}</p>
+                            <p>£{maxPrice}</p>
                     </div>
                 </div>
                 <div className="mx-auto w-[200px] h-[30px] mt-10 md:hidden">

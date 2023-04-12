@@ -60,7 +60,7 @@ export const Nav = ()=>{
         }
     return(
         <>
-            <nav className="w-[100vw] h-[60px] bg-[#333333] flex z-50">
+            <nav className="w-[100vw] h-[70px] bg-[#444444] flex z-50">
                 <div className="flex space-x-2 ml-5 text-gray-200 hover:cursor-pointer hover:text-gray-400 space-between self-center" onClick={()=> navigate('/')}>
                     <img src={logo} alt="" className='w-[35px] h-[35px]'/>
                     <p className='font-bold text-[25px] font-["Itim"]'>Crepz</p>
@@ -68,7 +68,7 @@ export const Nav = ()=>{
                 {
                     !mobileMenu?(
                         <>
-                            <div className='flex space-x-5 w-[230px] mx-auto text-gray-200 font-bold self-center'>
+                            <div className='flex space-x-7 w-[230px] mx-auto text-gray-200 font-bold self-center text-[20px]'>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Men</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Women</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Kids</p>

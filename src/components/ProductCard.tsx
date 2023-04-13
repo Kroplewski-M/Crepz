@@ -18,7 +18,7 @@ export const ProductCard = ()=>{
         <div className="w-[300px] h-[400px] bg-[#333333] rounded-md relative overflow-hidden ml-5 mt-5 hover:cursor-pointer hover:bg-[#444444]">
             <div className='w-[200px] h-[200px] rounded-full bg-blue-600 absolute -right-10'></div>
             <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer' onClick={changeColor}>
-                <Heart fill={color}/>
+                <Heart fill={color} width={20} height={20} />
             </div>
             <img src={shoe} alt="" className='w-[100%] rounded-t-md relative z-10 -rotate-[20deg]'/>
             <p className='font-bold text-gray-200 text-[20px] text-center mt-10 md:mt-0 z-50 relative'>Nike Air Force 1</p>

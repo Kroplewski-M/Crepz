@@ -1,12 +1,13 @@
 import logo from '../assets/images/logo.png'
-import favorites from '../assets/images/favorites.png'
 import basket from '../assets/images/basket.png'
-import userIcon from '../assets/images/userIcon.png'
 import { useState, useEffect } from 'react'
 import mobileMenuIcon from '../assets/images/mobileMenu.png'
 import  {MobileMenu}  from './MobileMenu'
 import { useNavigate  } from 'react-router-dom';
 import {useUserInfo} from '../context/UserContext';
+import { Heart } from './SVG/Heart'
+import { Basket } from './SVG/Basket'
+import {UserIcon} from './SVG/UserIcon'
 
 export const Nav = ()=>{
     const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -75,9 +76,15 @@ export const Nav = ()=>{
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Sale</p>
                             </div>
                             <div className='flex space-x-3 mr-5 self-center -mt-[7px]'>
-                                <img src={favorites} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50' onClick={wishListRedirect}/>
-                                <img src={userIcon} alt="" onClick={isLoggedIn} className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
-                                <img src={basket} alt="" className='w-[30px] h-[30px] hover:cursor-pointer hover:brightness-50'/>
+                                <div onClick={wishListRedirect} className='hover:cursor-pointer hover:brightness-50'>
+                                    <Heart fill="#FFFFFF" width={30} height={30} />
+                                </div>
+                                <div className='hover:cursor-pointer hover:brightness-50' onClick={isLoggedIn}>
+                                    <UserIcon fill="#FFFFFF" width={35} height={30} />
+                                </div>
+                                <div className='hover:cursor-pointer hover:brightness-50'>
+                                    <Basket fill="#FFFFFF" width={35} height={35}/>
+                                </div>
                             </div>
                         </>
                     ):(

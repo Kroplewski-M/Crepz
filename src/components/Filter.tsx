@@ -4,30 +4,85 @@ import close from '../assets/images/close.png'
 interface FilterProps{
     closeFilter: ()=>void,
 }
-
-
+type Brand = {
+    brand:string;
+    checked:boolean;
+}
+type Gender = {
+    gender: "Male" | "Female" | "Kids";
+    checked:boolean;
+}
+type Shoes = {
+    brand:Brand[];
+    gender:Gender[];
+}
 export const Filter = (props:FilterProps)=>{
     const [minPrice,setMinPrice] = useState<number>(0);
     const [maxPrice,setMaxPrice] = useState<number>(2000);
 
-    const [filterState,setFilterState] = useState({
-        Brands:{
-            NewBalance: false,
-            Nike: false,
-            Addiddas: false,
-            Converse:false,
-            UnderArmour:false,
+    const [filterState,setFilterState] = useState<Shoes>({
+        brand:[
+            {
+                brand:'New Balance',
+                checked: false,
+            },
+            {
+                brand:'Nike',
+                checked: false,
+            },
+            {
+                brand:'Addiddas',
+                checked: false,
+            },
+            {
+                brand:'Puma',
+                checked: false,
+            },
+            {
+                brand:'Converse',
+                checked: false,
+            },
+            {
+                brand:'Under Armour',
+                checked: false,
+            },
+        ],
+        gender:[{
+            gender:'Male',
+            checked:false,
         },
-        Gender:{
-            Male: false,
-            Female: false,
-            Kids:false,
+        {
+            gender:'Female',
+            checked:false,
+        },
+        {
+            gender:'Kids',
+            checked:false,
         }
+    ],
     });
-
-  
+    const updateBrandCheck = (value:string)=>{
+        const newFilter = filterState.brand.map(option =>{
+            if(option.brand == value){
+                return {brand:option.brand, checked: !option.checked};
+            }else{
+                return option;
+            }
+        });
+        setFilterState({brand:newFilter,gender:filterState.gender});
+    }
+    const updateGenderCheck = (value:string)=>{
+        const newFilter = filterState.gender.map(option =>{
+            if(option.gender == value){
+                return {gender:option.gender, checked: !option.checked};
+            }else{
+                return option;
+            }
+        });
+        setFilterState({gender:newFilter,brand:filterState.brand});
+    }
     return(
-        <div className="w-[100vw] md:w-[300px] md:h-[900px] pb-10 absolute top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
+        <div className="w-[100vw] md:w-[300px] md:h-[900px] h-[100vh] pb-10 fixed overflow-y-auto top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
             <img src={close} alt="" onClick={props.closeFilter} className='absolute w-[30px] h-[30px] right-1 top-1 md:hidden'/>
             <h1 className="text-center md:text-left font-bold text-[35px] mt-10 md:ml-5">Filter</h1>
 
@@ -35,10 +90,10 @@ export const Filter = (props:FilterProps)=>{
                 <h2 className="text-[30px] md:text-[25px]">Brand:</h2>
                 <div className="mt-5 flex flex-col space-y-5">
                     {
-                        Object.entries(filterState.Brands).map(([brand, checked])=>
-                            <div className="">
-                            <label htmlFor={brand} className="mr-[10px]">{brand}: </label>
-                            <input type="checkbox" name={brand} className="cursor-pointer" checked={checked} />
+                        filterState.brand.map((option, index)=>
+                            <div className="" key={option.brand} >
+                            <label htmlFor={option.brand} className="mr-[10px]">{option.brand}: </label>
+                            <input type="checkbox" name={option.brand} className="cursor-pointer" checked={option.checked} onChange={()=> updateBrandCheck(option.brand)}/>
                             </div>
                         )
                     }
@@ -49,10 +104,10 @@ export const Filter = (props:FilterProps)=>{
                     <h2 className="text-[30px]">Gender:</h2>
                     <div className="mt-5 flex flex-col space-y-5">
                     {
-                        Object.entries(filterState.Gender).map(([gender, checked])=>
-                            <div className="">
-                            <label htmlFor={gender} className="mr-[10px]">{gender}: </label>
-                            <input type="checkbox" name={gender} className="cursor-pointer" checked={checked} />
+                        filterState.gender.map((option,index)=>
+                            <div className="" key={option.gender} >
+                            <label htmlFor={option.gender} className="mr-[10px]">{option.gender}: </label>
+                            <input type="checkbox" name={option.gender} className="cursor-pointer" checked={option.checked} onChange={()=> updateGenderCheck(option.gender)}/>
                             </div>
                         )
                     }

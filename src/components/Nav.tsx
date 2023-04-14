@@ -80,10 +80,10 @@ export const Nav = ()=>{
                                     <Heart fill="#FFFFFF" width={30} height={30} />
                                 </div>
                                 <div className='hover:cursor-pointer hover:brightness-50' onClick={isLoggedIn}>
-                                    <UserIcon fill="#FFFFFF" width={35} height={30} />
+                                    <UserIcon fill="#FFFFFF" width={30} height={30} />
                                 </div>
                                 <div className='hover:cursor-pointer hover:brightness-50'>
-                                    <Basket fill="#FFFFFF" width={35} height={35}/>
+                                    <Basket fill="#FFFFFF" width={30} height={30}/>
                                 </div>
                             </div>
                         </>

@@ -39,6 +39,18 @@ export const Home = ()=>{
                         ))
                     }
                 </div>
+                <h1 className='font-semibold md:text-[20px] text-[16px] mt-5'>Shop by Gender</h1>
+                <div className='flex flex-wrap pt-[10px] place-content-center md:place-content-start'>
+                    <div className='md:w-[300px] md:h-[200px] w-[200px] h-[100px] bg-blue-600/50 rounded-md mr-5 mt-5 grid place-content-center relative hover:cursor-pointer hover:scale-[1.2] hover:z-50 duration-100 ease-linear'>
+                        <p className='font-bold z-50 md:text-[30px] text-[#333333]'>Men</p>
+                    </div>
+                    <div className='md:w-[300px] md:h-[200px] w-[200px] h-[100px] bg-pink-600/50 rounded-md mr-5 mt-5 grid place-content-center relative hover:cursor-pointer hover:scale-[1.2] hover:z-50 duration-100 ease-linear'>
+                        <p className='font-bold z-50 md:text-[30px] text-[#333333]'>Female</p>
+                    </div>
+                    <div className='md:w-[300px] md:h-[200px] w-[200px] h-[100px] bg-gray-400/50 rounded-md mr-5 mt-5 grid place-content-center relative hover:cursor-pointer hover:scale-[1.2] hover:z-50 duration-100 ease-linear'>
+                        <p className='font-bold z-50 md:text-[30px] text-[#333333]'>Kids</p>
+                    </div>
+                </div>
             </section>
 
         </>

@@ -1,23 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import close from '../assets/images/close.png'
-import { Shoes } from '../Pages/Browse'
+import { Shoes } from '../context/FilterContext'
+import { useFilterInfo } from '../context/FilterContext'
 interface FilterProps{
     closeFilter: ()=>void,
-    updateBrandCheck: (value: string)=>void,
-    updateGenderCheck: (value: string)=>void,
     minPrice:number,
     maxPrice:number,
     setMinFilter: (value:number)=>void,
     setMaxFilter: (value:number)=>void,
-    filterState: Shoes,
+
 }
 
 export const Filter = (props:FilterProps)=>{
-
-
+    const {FilterState,updateBrandState,updateGenderState,ResetFilter} = useFilterInfo();
+    const [Filter,setFilter] = useState<Shoes>(FilterState);
     
+    useEffect(()=>{
+        setFilter(FilterState);
+    },[FilterState])
+
     return(
-        <div className="w-[100vw] md:w-[300px] md:h-[900px] h-[100vh] pb-10 fixed overflow-y-auto top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
+        <div className="w-[100vw] md:w-[300px] md:h-[900px] h-[100vh] pb-10 fixed overflow-y-auto md:overflow-y-hidden top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
             <img src={close} alt="" onClick={props.closeFilter} className='absolute w-[30px] h-[30px] right-1 top-1 md:hidden'/>
             <h1 className="text-center md:text-left font-bold text-[35px] mt-10 md:ml-5">Filter</h1>
 
@@ -25,10 +28,10 @@ export const Filter = (props:FilterProps)=>{
                 <h2 className="text-[30px] md:text-[25px]">Brand:</h2>
                 <div className="mt-5 flex flex-col space-y-5">
                     {
-                        props.filterState.brand.map((option, index)=>
+                        Filter.brand.map((option, index)=>
                             <div className="" key={option.brand} >
                             <label htmlFor={option.brand} className="mr-[10px]">{option.brand}: </label>
-                            <input type="checkbox" name={option.brand} className="cursor-pointer" checked={option.checked} onChange={()=> props.updateBrandCheck(option.brand)}/>
+                            <input type="checkbox" name={option.brand} className="cursor-pointer" checked={option.checked} onChange={()=> updateBrandState(option.brand)}/>
                             </div>
                         )
                     }
@@ -39,10 +42,10 @@ export const Filter = (props:FilterProps)=>{
                     <h2 className="text-[30px]">Gender:</h2>
                     <div className="mt-5 flex flex-col space-y-5">
                     {
-                        props.filterState.gender.map((option,index)=>
+                        Filter.gender.map((option,index)=>
                             <div className="" key={option.gender} >
                             <label htmlFor={option.gender} className="mr-[10px]">{option.gender}: </label>
-                            <input type="checkbox" name={option.gender} className="cursor-pointer" checked={option.checked} onChange={()=> props.updateGenderCheck(option.gender)}/>
+                            <input type="checkbox" name={option.gender} className="cursor-pointer" checked={option.checked} onChange={()=> updateGenderState(option.gender)}/>
                             </div>
                         )
                     }
@@ -64,6 +67,9 @@ export const Filter = (props:FilterProps)=>{
                 </div>
                 <div className="mx-auto w-[200px] h-[30px] mt-10 md:hidden">
                     <button className="w-[100%] h-[100%] bg-gray-200 font-bold text-[#333333]" onClick={props.closeFilter}>Done</button>
+                </div>
+                <div className="mx-auto w-[200px] h-[30px] mt-[20px]" onClick={ResetFilter}>
+                    <button className="w-[100%] h-[100%] bg-[#333333] font-bold text-gray-200">Clear Filter</button>
                 </div>
         </div>
     )

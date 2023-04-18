@@ -3,18 +3,6 @@ import filterIcon from '../assets/images/filter.png'
 import { Filter } from '../components/Filter'
 import { ProductCard } from '../components/ProductCard';
 
-type Brand = {
-    brand:string;
-    checked:boolean;
-}
-type Gender = {
-    gender: "Male" | "Female" | "Kids";
-    checked:boolean;
-}
-export type Shoes = {
-    brand:Brand[];
-    gender:Gender[];
-}
 
 export const Browse = ()=>{
     const [showFilter, setShowFilter] = useState<boolean>(true);
@@ -59,67 +47,6 @@ export const Browse = ()=>{
     //FILTER LOGIC
     const [minPrice,setMinPrice] = useState<number>(0);
     const [maxPrice,setMaxPrice] = useState<number>(2000);
-    const [filterState,setFilterState] = useState<Shoes>({
-        brand:[
-            {
-                brand:'New Balance',
-                checked: false,
-            },
-            {
-                brand:'Nike',
-                checked: false,
-            },
-            {
-                brand:'Addiddas',
-                checked: false,
-            },
-            {
-                brand:'Puma',
-                checked: false,
-            },
-            {
-                brand:'Converse',
-                checked: false,
-            },
-            {
-                brand:'Under Armour',
-                checked: false,
-            },
-        ],
-        gender:[{
-            gender:'Male',
-            checked:false,
-        },
-        {
-            gender:'Female',
-            checked:false,
-        },
-        {
-            gender:'Kids',
-            checked:false,
-        }
-    ],
-    });
-    const updateBrandCheck = (value:string)=>{
-        const newFilter = filterState.brand.map(option =>{
-            if(option.brand == value){
-                return {brand:option.brand, checked: !option.checked};
-            }else{
-                return option;
-            }
-        });
-        setFilterState({brand:newFilter,gender:filterState.gender});
-    }
-    const updateGenderCheck = (value:string)=>{
-        const newFilter = filterState.gender.map(option =>{
-            if(option.gender == value){
-                return {gender:option.gender, checked: !option.checked};
-            }else{
-                return option;
-            }
-        });
-        setFilterState({gender:newFilter,brand:filterState.brand});
-    }
     const setMinFilter = (value:number)=>{
         setMinPrice(value);
     }
@@ -145,8 +72,7 @@ export const Browse = ()=>{
             <div className='flex mt-10'>
                 {
                     showFilter?(
-                    <Filter closeFilter={closeFilter} filterState={filterState} updateGenderCheck={updateGenderCheck} updateBrandCheck={updateBrandCheck}
-                    minPrice={minPrice} maxPrice={maxPrice} setMinFilter={setMinFilter} setMaxFilter={setMaxFilter}/>):(<></>)
+                    <Filter closeFilter={closeFilter} minPrice={minPrice} maxPrice={maxPrice} setMinFilter={setMinFilter} setMaxFilter={setMaxFilter}/>):(<></>)
                 }
                 <section className='w-[70%] ml-16 flex flex-wrap'>
                     <ProductCard /> 

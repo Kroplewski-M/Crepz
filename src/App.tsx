@@ -8,6 +8,7 @@ import { Route, Routes  } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 import {useUserInfo} from './context/UserContext';
 import { Browse } from "./Pages/Browse";
+import { FilterContext } from "./context/FilterContext";
 
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -42,6 +43,7 @@ function App() {
   return (
     <div className="App">
       <div className="min-h-screen relative">
+        <FilterContext>
           <Nav></Nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -57,6 +59,7 @@ function App() {
               </footer>
 
           </div>
+        </FilterContext>
       </div>
     </div>
   )

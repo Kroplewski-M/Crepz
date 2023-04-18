@@ -1,4 +1,4 @@
-import React,{ createContext, ReactNode, useContext, useState } from "react";
+import React,{ createContext, ReactNode, useContext } from "react";
 
 interface userProps{
     id:string,
@@ -14,7 +14,6 @@ interface UserProviderProps{
     children: ReactNode,
 }
 
-// export const UserContext = React.createContext<userType | null>(null);
 const UserProvider = createContext({} as UserProvider);
 
 export const useUserInfo = ()=>{

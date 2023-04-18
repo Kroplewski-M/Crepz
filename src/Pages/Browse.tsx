@@ -65,7 +65,7 @@ export const Browse = ()=>{
                     showFilter?(
                     <Filter closeFilter={closeFilter} />):(<></>)
                 }
-                <section className='w-[70%] ml-16 flex flex-wrap'>
+                <section className='w-[70%] ml-16 flex flex-wrap -mt-5'>
                     <ProductCard /> 
                     <ProductCard /> 
                     <ProductCard /> 

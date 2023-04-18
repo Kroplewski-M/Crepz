@@ -1,7 +1,9 @@
+import './Filter.css'
 import { useEffect, useState } from 'react'
 import close from '../assets/images/close.png'
 import { Shoes } from '../context/FilterContext'
 import { useFilterInfo } from '../context/FilterContext'
+
 interface FilterProps{
     closeFilter: ()=>void,
 }

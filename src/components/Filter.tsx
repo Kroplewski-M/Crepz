@@ -4,15 +4,10 @@ import { Shoes } from '../context/FilterContext'
 import { useFilterInfo } from '../context/FilterContext'
 interface FilterProps{
     closeFilter: ()=>void,
-    minPrice:number,
-    maxPrice:number,
-    setMinFilter: (value:number)=>void,
-    setMaxFilter: (value:number)=>void,
-
 }
 
 export const Filter = (props:FilterProps)=>{
-    const {FilterState,updateBrandState,updateGenderState,ResetFilter} = useFilterInfo();
+    const {FilterState,updateBrandState,updateGenderState,ResetFilter,SetMaxPrice,SetMinPrice,minPrice,maxPrice} = useFilterInfo();
     const [Filter,setFilter] = useState<Shoes>(FilterState);
     
     useEffect(()=>{
@@ -56,13 +51,13 @@ export const Filter = (props:FilterProps)=>{
                     <h2 className="text-[30px]">Price:</h2>
                     <div className="flex space-x-2 mt-5">
                             <label htmlFor="min" className="mr-[10px]">Min: </label>
-                            <input type="range" name="min" min="0" max="2000" step="20" value={props.minPrice} onChange={(event)=>props.setMinFilter(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
-                            <p>£{props.minPrice}</p>
+                            <input type="range" name="min" min="0" max="2000" step="20" value={minPrice} onChange={(event)=>SetMinPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
+                            <p>£{minPrice}</p>
                     </div>
                     <div className="flex space-x-2 mt-5">
                             <label htmlFor="max" className="mr-[10px]">Max: </label>
-                            <input type="range" name="max" min="0" max="2000" step="20" value={props.maxPrice} onChange={(event)=>props.setMaxFilter(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
-                            <p>£{props.maxPrice}</p>
+                            <input type="range" name="max" min="0" max="2000" step="20" value={maxPrice} onChange={(event)=>SetMaxPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
+                            <p>£{maxPrice}</p>
                     </div>
                 </div>
                 <div className="mx-auto w-[200px] h-[30px] mt-10 md:hidden">

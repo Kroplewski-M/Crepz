@@ -1,4 +1,4 @@
-import React,{ createContext, ReactNode, useContext,useState } from "react";
+import { createContext, ReactNode, useContext,useState } from "react";
 
 
 type Brand = {
@@ -19,6 +19,10 @@ interface FilterProvider {
     updateGenderState: (value: string)=>void,
     updateBrandState: (value: string)=>void,
     ResetFilter: ()=>void,
+    minPrice:number,
+    maxPrice:number,
+    SetMaxPrice:(value:number)=>void,
+    SetMinPrice:(value:number)=>void,
 }
 interface FilterProviderProps{
     children: ReactNode,
@@ -72,6 +76,8 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
         }
     ],
     });
+    const [minPrice,setMinPriceValue] = useState<number>(0);
+    const [maxPrice,setMaxPriceValue] = useState<number>(2000);
 
     const FilterState = ()=>{
         return filterState;
@@ -112,10 +118,17 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
             }
         });
         setFilterState({brand:newFilter, gender:newFilter2});
-        console.log(FilterState);
+        setMinPriceValue(0);
+        setMaxPriceValue(2000);
     }
     
-    return  <FilterProvider.Provider value={{FilterState,updateBrandState,updateGenderState,ResetFilter}}>
+    const SetMaxPrice = (value:number)=>{
+        setMaxPriceValue(value);
+    }
+    const SetMinPrice = (value:number)=>{
+        setMinPriceValue(value);
+    }
+    return  <FilterProvider.Provider value={{FilterState,updateBrandState,updateGenderState,ResetFilter,SetMaxPrice,SetMinPrice,minPrice,maxPrice}}>
                 {children}
             </FilterProvider.Provider>
 

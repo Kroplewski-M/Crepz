@@ -44,15 +44,6 @@ export const Browse = ()=>{
             setSortArrow('↑');
         }
     } 
-    //FILTER LOGIC
-    const [minPrice,setMinPrice] = useState<number>(0);
-    const [maxPrice,setMaxPrice] = useState<number>(2000);
-    const setMinFilter = (value:number)=>{
-        setMinPrice(value);
-    }
-    const setMaxFilter = (value:number)=>{
-        setMaxPrice(value);
-    }
     return(
         <section className="w-[100vw] max-w-[2000px]  mx-auto pb-10 pt-16">
             <div className="w-[200px] mx-auto flex space-x-3">
@@ -72,7 +63,7 @@ export const Browse = ()=>{
             <div className='flex mt-10'>
                 {
                     showFilter?(
-                    <Filter closeFilter={closeFilter} minPrice={minPrice} maxPrice={maxPrice} setMinFilter={setMinFilter} setMaxFilter={setMaxFilter}/>):(<></>)
+                    <Filter closeFilter={closeFilter} />):(<></>)
                 }
                 <section className='w-[70%] ml-16 flex flex-wrap'>
                     <ProductCard /> 

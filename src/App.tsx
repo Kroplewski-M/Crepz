@@ -3,6 +3,7 @@ import { Home } from "./Pages/Home"
 import { Register } from "./Pages/Register";
 import { Login } from "./Pages/Login";
 import { Profile } from "./Pages/Profile";
+import {Product} from './Pages/Product';
 import { useEffect } from "react";
 import { Route, Routes  } from 'react-router-dom';
 import { supabase } from './supabaseClient';
@@ -51,6 +52,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile/:select?" element={<Profile />} />
             <Route path="/browse" element={<Browse />} />
+            <Route path="/product" element={<Product />} />
           </Routes>
           <div className="pt-16">
               <footer className='w-[100vw] h-[80px] bg-[#333333] text-gray-500 grid place-content-center mt-16 text-[12px] md:text-[16px] absolute bottom-0 z-50'>

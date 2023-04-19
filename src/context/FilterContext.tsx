@@ -121,7 +121,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
         setMinPriceValue(0);
         setMaxPriceValue(2000);
     }
-    
+
     const SetMaxPrice = (value:number)=>{
         setMaxPriceValue(value);
     }

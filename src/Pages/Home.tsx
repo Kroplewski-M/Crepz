@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react';
+import { useState } from 'react';
 import heroVid from '../assets/heroVideo.mp4';
 import nikeLogo from '../assets/images/NikeLogo.jpg';
 

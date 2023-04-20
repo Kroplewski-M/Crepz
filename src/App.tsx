@@ -5,11 +5,12 @@ import { Login } from "./Pages/Login";
 import { Profile } from "./Pages/Profile";
 import {Product} from './Pages/Product';
 import { useEffect } from "react";
-import { Route, Routes  } from 'react-router-dom';
+import { Route, Routes, Navigate  } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 import {useUserInfo} from './context/UserContext';
 import { Browse } from "./Pages/Browse";
 import { FilterContext } from "./context/FilterContext";
+import { PageNotFound } from "./Pages/PageNotFound";
 
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -53,6 +54,9 @@ function App() {
             <Route path="/profile/:select?" element={<Profile />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/product" element={<Product />} />
+            <Route path="*"  element={<Navigate to="/404" />}/>
+            <Route path="/404"  element={<PageNotFound />}/>
+
           </Routes>
           <div className="pt-16">
               <footer className='w-[100vw] h-[80px] bg-[#333333] text-gray-500 grid place-content-center mt-16 text-[12px] md:text-[16px] absolute bottom-0 z-50'>

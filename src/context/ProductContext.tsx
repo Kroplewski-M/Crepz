@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useContext,useState } from "react";
+import { createContext, ReactNode, useContext,useEffect,useState } from "react";
+import { supabase } from '../supabaseClient';
 
 type Shoe = {
     id:string,
@@ -7,11 +8,11 @@ type Shoe = {
     Desc:string,
     Gender:string
     Price:number,
+    ImgUrl:string,
 }
 
 interface ProductProvider{
     getProducts: ()=> Shoe[]|undefined,
-
 }
 interface ProductProviderProps{
     children: ReactNode,
@@ -24,8 +25,29 @@ export const useProductInfo = ()=>{
 }
 
 export const ProductContext = ({children}: ProductProviderProps)=>{
-    const [products,setProducts] = useState<Shoe[]>([{id:'23425435',Name:'Nike Air Force 1',Brand:'Nike',Desc:'Shoes',Gender:'Male',Price:129.98 },
-    {id:'23425435',Name:'Nike Air Force 1',Brand:'Nike',Desc:'Shoes',Gender:'Male',Price:129.98 }]);
+    const [products,setProducts] = useState<Shoe[]>([]);
+
+    const FetchProducts = async () => {
+        try{
+            const {data,error} = await supabase.from('Shoes').select();
+            if(error) throw error;
+            //not fetching on first load
+            else{
+                if(products.length == 0){
+                    data.map(shoe =>{
+                        setProducts(prevShoes=>[...prevShoes,{id:shoe.id,Name:shoe.Name,Brand:shoe.Brand,Desc:shoe.Desc,Gender:shoe.Gender,Price:shoe.Price,ImgUrl:shoe.ImgUrl}])
+                    });
+                }
+                console.log(products);
+            }
+        }catch(error){
+            console.log(error);
+        }
+    };
+    //HAPPENING TWICE -- FIX
+    useEffect(()=>{
+        FetchProducts();
+    },[]);
 
     const getProducts = () =>{
         return products;

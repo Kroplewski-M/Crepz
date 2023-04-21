@@ -2,14 +2,16 @@ import { useState,useEffect } from 'react'
 import filterIcon from '../assets/images/filter.png'
 import { Filter } from '../components/Filter'
 import { ProductCard } from '../components/ProductCard';
-
+import { useProductInfo } from '../context/ProductContext';
 
 export const Browse = ()=>{
+    const {getProducts} = useProductInfo();
     const [showFilter, setShowFilter] = useState<boolean>(true);
     const [windowSize, setWindowSize] = useState<number>(getWindowSize());
     const [sortArrow, setSortArrow] = useState<string>('↓');
     const mobileLimit:number = 768;
 
+    console.log(getProducts());
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;

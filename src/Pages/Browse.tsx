@@ -11,7 +11,6 @@ export const Browse = ()=>{
     const [sortArrow, setSortArrow] = useState<string>('↓');
     const mobileLimit:number = 768;
 
-    console.log(getProducts());
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;

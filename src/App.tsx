@@ -40,7 +40,6 @@ function App() {
     }else{
       console.log('not found cache');
     }
-
   },[])
 
   return (

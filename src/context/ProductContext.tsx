@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext,useEffect,useState } from "react";
 import { supabase } from '../supabaseClient';
 
-type Shoe = {
+export type Shoe = {
     id:string,
     Name:string,
     Brand:string,
@@ -33,12 +33,9 @@ export const ProductContext = ({children}: ProductProviderProps)=>{
             if(error) throw error;
             //not fetching on first load
             else{
-                if(products.length == 0){
                     data.map(shoe =>{
                         setProducts(prevShoes=>[...prevShoes,{id:shoe.id,Name:shoe.Name,Brand:shoe.Brand,Desc:shoe.Desc,Gender:shoe.Gender,Price:shoe.Price,ImgUrl:shoe.ImgUrl}])
                     });
-                }
-                console.log(products);
             }
         }catch(error){
             console.log(error);

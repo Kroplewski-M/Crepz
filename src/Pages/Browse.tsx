@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react'
 import filterIcon from '../assets/images/filter.png'
 import { Filter } from '../components/Filter'
 import { ProductCard } from '../components/ProductCard';
-import { useProductInfo } from '../context/ProductContext';
+import { Shoe, useProductInfo } from '../context/ProductContext';
 
 export const Browse = ()=>{
     const {getProducts} = useProductInfo();
@@ -10,7 +10,7 @@ export const Browse = ()=>{
     const [windowSize, setWindowSize] = useState<number>(getWindowSize());
     const [sortArrow, setSortArrow] = useState<string>('↓');
     const mobileLimit:number = 768;
-
+    const [products,setProducts] = useState<Shoe[]>();
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;
@@ -34,6 +34,9 @@ export const Browse = ()=>{
         }
     },[windowSize]);
 
+    useEffect(()=>{
+        setProducts(getProducts());
+    },[getProducts()]);
 
     const closeFilter = ()=>{
         setShowFilter(false);
@@ -67,13 +70,13 @@ export const Browse = ()=>{
                     <Filter closeFilter={closeFilter} />):(<></>)
                 }
                 <section className='w-[70%] ml-16 flex flex-wrap -mt-5'>
-                    <ProductCard /> 
-                    <ProductCard /> 
-                    <ProductCard /> 
-                    <ProductCard /> 
-                    <ProductCard /> 
-                    <ProductCard /> 
-                    <ProductCard /> 
+                    {
+                        products?.map(product =>(
+                            <div key={product.id}>
+                                <ProductCard /> 
+                            </div>
+                        ))
+                    }
                 </section>
             </div>
         </section>

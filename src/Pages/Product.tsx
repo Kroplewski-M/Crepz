@@ -3,6 +3,7 @@ import { Basket } from "../components/SVG/Basket";
 import { Heart } from "../components/SVG/Heart";
 import { useParams } from "react-router-dom";
 import { Shoe, useProductInfo } from '../context/ProductContext';
+import './Product.css'
 
 export const Product = ()=>{
     const {id} = useParams();
@@ -19,6 +20,12 @@ export const Product = ()=>{
         })
     },[]);
 
+    const getImg = (url:string)=>{
+        if(url == null){
+            return
+        }
+        return new URL(url, import.meta.url).href;
+    }
     return(
         <section className="w-[100vw] pb-10">
             {
@@ -27,7 +34,9 @@ export const Product = ()=>{
                     <div className="md:flex md:space-x-3">
                         <div className="">
                             <h1 className="font-bold text-[30px] md:text-[40px] text-center md:text-left">{product.Name}</h1>
-                            <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px] bg-gray-400 rounded-md mx-auto md:mx-0 mt-5"></div>
+                            <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px] bg-gray-400 rounded-md mx-auto md:mx-0 mt-5 grid place-content-center imgbg">
+                                <img src={getImg(product.ImgUrl)} alt="" className="w-[300px] -rotate-[15deg]"/>
+                            </div>
                         </div>
                         <div className="pl-5 pt-[5px] mt-[70px] md:flex md:flex-col md:space-y-5">
                             <div className="flex place-content-between pr-5">

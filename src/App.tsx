@@ -54,7 +54,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile/:select?" element={<Profile />} />
             <Route path="/browse" element={<Browse />} />
-            <Route path="/product" element={<Product />} />
+            <Route path="/product/:id" element={<Product />} />
             <Route path="*"  element={<Navigate to="/404" />}/>
             <Route path="/404"  element={<PageNotFound />}/>
 

@@ -3,8 +3,10 @@ import filterIcon from '../assets/images/filter.png'
 import { Filter } from '../components/Filter'
 import { ProductCard } from '../components/ProductCard';
 import { Shoe, useProductInfo } from '../context/ProductContext';
+import { useNavigate  } from 'react-router-dom';
 
 export const Browse = ()=>{
+    const navigate = useNavigate();
     const {getProducts} = useProductInfo();
     const [showFilter, setShowFilter] = useState<boolean>(true);
     const [windowSize, setWindowSize] = useState<number>(getWindowSize());
@@ -72,8 +74,8 @@ export const Browse = ()=>{
                 <section className='w-[70%] ml-16 flex flex-wrap -mt-5'>
                     {
                         products?.map(product =>(
-                            <div key={product.id}>
-                                <ProductCard /> 
+                            <div key={product.id} onClick={()=> navigate(`/product/${product.id}`)}>
+                                <ProductCard  info={product}/> 
                             </div>
                         ))
                     }

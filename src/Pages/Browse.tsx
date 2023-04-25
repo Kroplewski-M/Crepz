@@ -71,10 +71,10 @@ export const Browse = ()=>{
                     showFilter?(
                     <Filter closeFilter={closeFilter} />):(<></>)
                 }
-                <section className='w-[70%] ml-16 flex flex-wrap -mt-5'>
+                <section className='md:w-[70%] w-[100vw] md:ml-16 flex flex-wrap -mt-5'>
                     {
                         products?.map(product =>(
-                            <div key={product.id} onClick={()=> navigate(`/product/${product.id}`)}>
+                            <div key={product.id} onClick={()=> navigate(`/product/${product.id}`)} className='w-[200px] mx-auto md:w-[300px] md:ml-[5px] mt-5'>
                                 <ProductCard  info={product}/> 
                             </div>
                         ))

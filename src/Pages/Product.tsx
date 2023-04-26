@@ -3,21 +3,28 @@ import { Basket } from "../components/SVG/Basket";
 import { Heart } from "../components/SVG/Heart";
 import { useParams } from "react-router-dom";
 import { Shoe, useProductInfo } from '../context/ProductContext';
-import './Product.css'
 
 export const Product = ()=>{
     const {id} = useParams();
     const {getProducts} = useProductInfo();
-    const [sizes,setSizes] = useState<number[]>([6,7,8,9,10,11,12]);
-    const [selectedSize,setSelectedSize] = useState<number>(9);
+    const [adultSizes,setAdultSizes] = useState<number[]>([6,7,8,9,10,11,12]);
+    const [kidsSizes,setKidsSizes] = useState<number[]>([1,2,3,4,5]);
+    const [selectedSize,setSelectedSize] = useState<number>(0);
     const [product,setProduct] = useState<Shoe>();
+    
     useEffect(()=>{
         let products = getProducts();
         products?.map(product =>{
             if(product.id == id){
                 setProduct(product);
+                if(product.Gender == 'Kids'){
+                    setSelectedSize(3);
+                }else{
+                    setSelectedSize(7);
+                }
             }
         })
+
     },[]);
 
     const getImg = (url:string)=>{
@@ -34,8 +41,8 @@ export const Product = ()=>{
                     <div className="md:flex md:space-x-3">
                         <div className="">
                             <h1 className="font-bold text-[30px] md:text-[40px] text-center md:text-left">{product.Name}</h1>
-                            <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px] bg-gray-400 rounded-md mx-auto md:mx-0 mt-5 grid place-content-center imgbg">
-                                <img src={getImg(product.ImgUrl)} alt="" className="w-[300px] -rotate-[15deg]"/>
+                            <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px] bg-gray-400/50 rounded-md mx-auto md:mx-0 mt-5 grid place-content-center ">
+                                <img src={getImg(product.ImgUrl)} alt="" className="w-[320px] -rotate-[15deg]"/>
                             </div>
                         </div>
                         <div className="pl-5 pt-[5px] mt-[70px] md:flex md:flex-col md:space-y-5">
@@ -46,11 +53,28 @@ export const Product = ()=>{
                             <p className="mt-[10px] font-semibold text-[20px]">Sizes:</p>
                             <div className="flex flex-wrap mt-[10px]">
                                 {
-                                    sizes.map((size) =>
-                                    <div className="w-[60px] h-[30px] bg-gray-300 hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black" key={size} onClick={()=> setSelectedSize(size)}>
-                                            <p className="font-bold">UK: {size}</p>
-                                        </div>
-                                    )
+                                    product.Gender == 'Kids'?(
+                                    <>
+                                        {
+                                            kidsSizes.map((size) =>
+                                            <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`} 
+                                            key={size} onClick={()=> setSelectedSize(size)}>
+                                                    <p className="font-bold">UK: {size}</p>
+                                                </div>
+                                            )
+                                        }
+                                    </>
+                                    ):(
+                                    <>
+                                        {
+                                            adultSizes.map((size) =>
+                                                <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                key={size} onClick={()=> setSelectedSize(size)}>
+                                                    <p className="font-bold">UK: {size}</p>
+                                                </div>
+                                                )
+                                        }
+                                    </>)
                                 }
                             </div>
                             <h1 className="font-bold text-[30px] mt-[10px]">£{product.Price}</h1>
@@ -68,7 +92,7 @@ export const Product = ()=>{
                                     <Basket fill="#FFFFFF" width={25} height={25}/>
                                 </div>
                             </div>
-                            <div className="w-[250px] h-[35px] bg-gray-400 hover:bg-gray-500 text-[#333333] font-bold grid place-content-center hover:cursor-pointer">
+                            <div className="w-[250px] h-[35px] bg-red-400 hover:bg-red-500 text-[#333333] font-bold grid place-content-center hover:cursor-pointer">
                                 <div className="flex space-x-2">
                                     <p>Add to Favorites</p>
                                     <Heart fill="#444444" width={25} height={25}/>

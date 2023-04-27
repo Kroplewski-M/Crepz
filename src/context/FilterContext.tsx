@@ -79,7 +79,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
     ],
     });
     const [minPrice,setMinPriceValue] = useState<number>(0);
-    const [maxPrice,setMaxPriceValue] = useState<number>(2000);
+    const [maxPrice,setMaxPriceValue] = useState<number>(300);
 
     const FilterState = ()=>{
         return filterState;

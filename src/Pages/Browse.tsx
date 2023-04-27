@@ -5,10 +5,12 @@ import { ProductCard } from '../components/ProductCard';
 import { Shoe, useProductInfo } from '../context/ProductContext';
 import { useNavigate  } from 'react-router-dom';
 import { useFilterInfo } from '../context/FilterContext';
+import { Heart } from '../components/SVG/Heart';
+import { useWishListInfo } from '../context/WishListContext';
 
 export const Browse = ()=>{
-    const {FilterState} = useFilterInfo();
-    // console.log(FilterState());
+    const {FilterState,maxPrice,minPrice} = useFilterInfo();
+    const {wishList,toggleFromWishList} = useWishListInfo();
     const navigate = useNavigate();
     const {getProducts} = useProductInfo();
     const [showFilter, setShowFilter] = useState<boolean>(true);
@@ -16,6 +18,7 @@ export const Browse = ()=>{
     const [sortArrow, setSortArrow] = useState<string>('↓');
     const mobileLimit:number = 768;
     const [products,setProducts] = useState<Shoe[]>();
+    const [filteredProducts, setFilteredProducts] = useState<Shoe[]>([]);
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;
@@ -43,6 +46,11 @@ export const Browse = ()=>{
         setProducts(getProducts());
     },[getProducts()]);
 
+    useEffect(()=>{
+        setFilteredProducts([]);
+        getFilteredProducts();
+    },[FilterState(),products,maxPrice,minPrice])
+
     useEffect(() => {
         window.scrollTo(0, 0)
       }, []);
@@ -61,25 +69,39 @@ export const Browse = ()=>{
     const getFilteredProducts = ()=>{
         const filterBrands:string[] = [];
         const filterGender:string[] = [];
-
         FilterState().brand.map(brand =>{
             if(brand.checked == true){
-                filterBrands.push(brand.brand);
+                if(brand.brand == 'New-Balance'){
+                    filterBrands.push('New Balance');
+                }
+                else if(brand.brand == 'Under-Armour'){
+                    filterBrands.push('Under Armour');
+                }
+                else{
+                    filterBrands.push(brand.brand);
+                }
             }
         });
         FilterState().gender.map(brand =>{
             if(brand.checked == true){
                 filterGender.push(brand.gender);
             }
-        })
+        });
         products?.map((product)=>{
-            if(product.Brand == filterBrands[0]){
-                console.log(product);
+            if((filterBrands.includes(product.Brand) || filterBrands.length == 0) && (filterGender.includes(product.Gender) || filterGender.length == 0)
+                && product.Price >= minPrice && product.Price <= maxPrice){
+                setFilteredProducts((prevProducts) => [...prevProducts,product]);
             }
 
         })
     }
-    getFilteredProducts();
+    const isWishListed = (value:string)=>{
+        if(wishList.includes(value)){
+            return '#ff0000';
+        }else{
+            return '#FFFFFF';
+        }
+    }
     return(
         <section className="w-[100vw] max-w-[2000px]  mx-auto pb-10 pt-16">
             <div className="w-[200px] mx-auto flex space-x-3">
@@ -103,10 +125,17 @@ export const Browse = ()=>{
                 }
                 <section className='md:w-[70%] w-[100vw] md:ml-16 flex flex-wrap -mt-5'>
                     {
-                        products?.map(product =>(
-                            <div key={product.id} onClick={()=> navigate(`/product/${product.id}`)} className='w-[200px] mx-auto md:w-[300px] md:ml-[5px] mt-5'>
-                                <ProductCard  info={product}/> 
+                        filteredProducts?.map(product =>(
+                            <div key={product.id} className='w-[200px] mx-auto md:w-[300px] md:ml-[5px] mt-5'>
+                                <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
+                                onClick={()=> toggleFromWishList(product.id)}>
+                                    <Heart fill={isWishListed(product.id)} width={20} height={20} />
+                                </div>
+                                <div onClick={()=> navigate(`/product/${product.id}`)}>
+                                    <ProductCard  info={product}/> 
+                                </div>
                             </div>
+
                         ))
                     }
                 </section>

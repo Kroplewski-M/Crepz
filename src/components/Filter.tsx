@@ -53,12 +53,12 @@ export const Filter = (props:FilterProps)=>{
                     <h2 className="text-[30px]">Price:</h2>
                     <div className="flex space-x-2 mt-5">
                             <label htmlFor="min" className="mr-[10px]">Min: </label>
-                            <input type="range" name="min" min="0" max="2000" step="20" value={minPrice} onChange={(event)=>SetMinPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
+                            <input type="range" name="min" min="0" max="300" step="10" value={minPrice} onChange={(event)=>SetMinPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
                             <p>£{minPrice}</p>
                     </div>
                     <div className="flex space-x-2 mt-5">
                             <label htmlFor="max" className="mr-[10px]">Max: </label>
-                            <input type="range" name="max" min="0" max="2000" step="20" value={maxPrice} onChange={(event)=>SetMaxPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
+                            <input type="range" name="max" min="0" max="300" step="10" value={maxPrice} onChange={(event)=>SetMaxPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
                             <p>£{maxPrice}</p>
                     </div>
                 </div>

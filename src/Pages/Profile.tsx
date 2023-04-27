@@ -45,7 +45,7 @@ export const Profile = ()=>{
                     </div>
                 </div>
             </div>
-            <div className="md:w-[600px] w-[300px] min-h-[500px] pb-10 md:pb-0 bg-[#333333] rounded-b-md">
+            <div className="md:w-[600px] w-[300px] h-[500px] pb-10 md:pb-0 bg-[#333333] rounded-b-md overflow-auto">
                 {
                     selectComp == Select.PROFILE?(<ProfileCard />):(<></>)
                 }

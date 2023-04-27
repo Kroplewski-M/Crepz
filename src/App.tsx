@@ -12,6 +12,7 @@ import { Browse } from "./Pages/Browse";
 import { FilterContext } from "./context/FilterContext";
 import {ProductContext} from './context/ProductContext';
 import { PageNotFound } from "./Pages/PageNotFound";
+import { WishListContext } from "./context/WishListContext";
 
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -47,6 +48,7 @@ function App() {
       <div className="min-h-screen relative">
         <FilterContext>
         <ProductContext>
+        <WishListContext>
           <Nav></Nav>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -59,6 +61,7 @@ function App() {
             <Route path="/404"  element={<PageNotFound />}/>
 
           </Routes>
+        </WishListContext>
         </ProductContext>
           <div className="pt-16">
               <footer className='w-[100vw] h-[80px] bg-[#333333] text-gray-500 grid place-content-center mt-16 text-[12px] md:text-[16px] absolute bottom-0 z-50'>

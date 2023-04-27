@@ -41,8 +41,8 @@ export const Product = ()=>{
                     <div className="md:flex md:space-x-3">
                         <div className="">
                             <h1 className="font-bold text-[30px] md:text-[40px] text-center md:text-left">{product.Name}</h1>
-                            <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px] bg-gray-400/50 rounded-md mx-auto md:mx-0 mt-5 grid place-content-center ">
-                                <img src={getImg(product.ImgUrl)} alt="" className="w-[320px] -rotate-[15deg]"/>
+                            <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px]  rounded-md mx-auto md:mx-0 mt-5 grid place-content-center ">
+                                <img src={getImg(product.ImgUrl)} alt="" className="w-[350px] -rotate-[15deg]"/>
                             </div>
                         </div>
                         <div className="pl-5 pt-[5px] mt-[70px] md:flex md:flex-col md:space-y-5">
@@ -92,7 +92,7 @@ export const Product = ()=>{
                                     <Basket fill="#FFFFFF" width={25} height={25}/>
                                 </div>
                             </div>
-                            <div className="w-[250px] h-[35px] bg-red-400 hover:bg-red-500 text-[#333333] font-bold grid place-content-center hover:cursor-pointer">
+                            <div className="w-[250px] h-[35px] bg-red-500 hover:bg-red-600 text-[#333333] font-bold grid place-content-center hover:cursor-pointer">
                                 <div className="flex space-x-2">
                                     <p>Add to Favorites</p>
                                     <Heart fill="#444444" width={25} height={25}/>

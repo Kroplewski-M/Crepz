@@ -18,6 +18,8 @@ interface FilterProvider {
     FilterState:()=>Shoes,
     updateGenderState: (value: string)=>void,
     updateBrandState: (value: string)=>void,
+    SetGenderTrue: (value:string)=>void,
+    SetBrandTrue: (value:string)=>void,
     ResetFilter: ()=>void,
     minPrice:number,
     maxPrice:number,
@@ -38,7 +40,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
     const [filterState,setFilterState] = useState<Shoes>({
         brand:[
             {
-                brand:'New Balance',
+                brand:'New-Balance',
                 checked: false,
             },
             {
@@ -46,7 +48,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
                 checked: false,
             },
             {
-                brand:'Addiddas',
+                brand:'Adidas',
                 checked: false,
             },
             {
@@ -58,7 +60,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
                 checked: false,
             },
             {
-                brand:'Under Armour',
+                brand:'Under-Armour',
                 checked: false,
             },
         ],
@@ -102,6 +104,26 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
         });
         setFilterState({brand:newFilter,gender:filterState.gender});
     }
+    const SetGenderTrue = (value: string)=>{
+        const newFilter = filterState.gender.map(option =>{
+            if(option.gender == value){
+                return {gender:option.gender, checked: true};
+            }else{
+                return {gender:option.gender, checked: false};
+            }
+        });
+        setFilterState({brand:filterState.brand,gender:newFilter});
+    }
+    const SetBrandTrue = (value: string)=>{
+        const newFilter = filterState.brand.map(option =>{
+            if(option.brand == value){
+                return {brand:option.brand, checked: true};
+            }else{
+                return {brand:option.brand, checked: false};
+            }
+        });
+        setFilterState({brand:newFilter,gender:filterState.gender});
+    }
     const ResetFilter = ()=>{
         const newFilter = filterState.brand.map(option =>{
             if(option.checked == true){
@@ -128,7 +150,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
     const SetMinPrice = (value:number)=>{
         setMinPriceValue(value);
     }
-    return  <FilterProvider.Provider value={{FilterState,updateBrandState,updateGenderState,ResetFilter,SetMaxPrice,SetMinPrice,minPrice,maxPrice}}>
+    return  <FilterProvider.Provider value={{FilterState,SetGenderTrue,SetBrandTrue,updateBrandState,updateGenderState,ResetFilter,SetMaxPrice,SetMinPrice,minPrice,maxPrice}}>
                 {children}
             </FilterProvider.Provider>
 

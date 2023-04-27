@@ -22,9 +22,7 @@ export const MobileMenu = (props:Props)=>{
                 <div className='mt-10 flex flex-col w-[250px] pl-5 mx-auto text-gray-200 font-bold space-y-5 text-[30px] relative '>
                     <p className='hover:cursor-pointer hover:text-gray-400'>Men <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>
                     <p className='hover:cursor-pointer hover:text-gray-400'>Women <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>
-                    <p className='hover:cursor-pointer hover:text-gray-400'>Kids <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>
-                    <p className='hover:cursor-pointer hover:text-gray-400'>Sale <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>
-                    
+                    <p className='hover:cursor-pointer hover:text-gray-400'>Kids <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>                    
                     {
                         userInfo.id==''?(
                             <>

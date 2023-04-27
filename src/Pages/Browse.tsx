@@ -4,8 +4,11 @@ import { Filter } from '../components/Filter'
 import { ProductCard } from '../components/ProductCard';
 import { Shoe, useProductInfo } from '../context/ProductContext';
 import { useNavigate  } from 'react-router-dom';
+import { useFilterInfo } from '../context/FilterContext';
 
 export const Browse = ()=>{
+    const {FilterState} = useFilterInfo();
+    // console.log(FilterState());
     const navigate = useNavigate();
     const {getProducts} = useProductInfo();
     const [showFilter, setShowFilter] = useState<boolean>(true);
@@ -40,6 +43,10 @@ export const Browse = ()=>{
         setProducts(getProducts());
     },[getProducts()]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, []);
+
     const closeFilter = ()=>{
         setShowFilter(false);
     }
@@ -50,6 +57,29 @@ export const Browse = ()=>{
             setSortArrow('↑');
         }
     } 
+    
+    const getFilteredProducts = ()=>{
+        const filterBrands:string[] = [];
+        const filterGender:string[] = [];
+
+        FilterState().brand.map(brand =>{
+            if(brand.checked == true){
+                filterBrands.push(brand.brand);
+            }
+        });
+        FilterState().gender.map(brand =>{
+            if(brand.checked == true){
+                filterGender.push(brand.gender);
+            }
+        })
+        products?.map((product)=>{
+            if(product.Brand == filterBrands[0]){
+                console.log(product);
+            }
+
+        })
+    }
+    getFilteredProducts();
     return(
         <section className="w-[100vw] max-w-[2000px]  mx-auto pb-10 pt-16">
             <div className="w-[200px] mx-auto flex space-x-3">

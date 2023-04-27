@@ -11,7 +11,7 @@ import {UserIcon} from './SVG/UserIcon'
 import { useFilterInfo } from '../context/FilterContext'
 
 export const Nav = ()=>{
-    const {updateGenderState,ResetFilter} = useFilterInfo();
+    const {SetGenderTrue,ResetFilter} = useFilterInfo();
     const {loginUser,logoutUser,userInfo} = useUserInfo();
     const navigate = useNavigate();
     const [windowSize, setWindowSize] = useState<number>(getWindowSize());
@@ -63,10 +63,10 @@ export const Nav = ()=>{
         }
         //FIX -- DOESNT WORK
         const redirectAndFilter = (value:string) =>{
-            ResetFilter();
-            updateGenderState(value);
+            SetGenderTrue(value);
             navigate('/browse');
         }   
+ 
     return(
         <>
             <nav className="w-[100vw] h-[70px] bg-[#444444] flex z-50">
@@ -81,7 +81,6 @@ export const Nav = ()=>{
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Male')}>Male</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Female')}>Female</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Kids')}>Kids</p>
-                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2'>Sale</p>
                             </div>
                             <div className='flex space-x-3 mr-5 self-center -mt-[7px]'>
                                 <div onClick={wishListRedirect} className='hover:cursor-pointer hover:brightness-50'>

@@ -141,7 +141,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
         });
         setFilterState({brand:newFilter, gender:newFilter2});
         setMinPriceValue(0);
-        setMaxPriceValue(2000);
+        setMaxPriceValue(300);
     }
 
     const SetMaxPrice = (value:number)=>{

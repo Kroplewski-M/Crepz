@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import close from '../assets/images/close.png'
 import { Shoes } from '../context/FilterContext'
 import { useFilterInfo } from '../context/FilterContext'
+import { Close } from './SVG/Close'
 
 interface FilterProps{
     closeFilter: ()=>void,
@@ -18,7 +19,9 @@ export const Filter = (props:FilterProps)=>{
 
     return(
         <div className="w-[100vw] md:w-[300px] md:h-[900px] h-[100vh] pb-10 fixed overflow-y-auto md:overflow-y-hidden top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
-            <img src={close} alt="" onClick={props.closeFilter} className='absolute w-[30px] h-[30px] right-1 top-1 md:hidden'/>
+            <div onClick={props.closeFilter} className='absolute w-[30px] h-[30px] right-1 top-1 md:hidden'>
+                <Close width={30} height={30}/>
+            </div>
             <h1 className="text-center md:text-left font-bold text-[35px] mt-10 md:ml-5">Filter</h1>
 
             <div className="ml-5 mt-10 md:mt-5 font-bold text-[20px] md:text-[16px]">

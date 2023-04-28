@@ -1,6 +1,6 @@
-import close from '../assets/images/close.png'
 import { useNavigate } from 'react-router-dom';
 import {useUserInfo} from '../context/UserContext';
+import { Close } from './SVG/Close';
 
 interface Props{
     closeMenu: ()=>void,
@@ -16,8 +16,8 @@ export const MobileMenu = (props:Props)=>{
 
     return(
         <div className="w-[100vw] h-[100vh] fixed top-0 right-0 bg-[#333333] z-[100]">
-            <div className='w-[100%] h-[35px]'>
-                <img src={close} alt="" className='w-[35px] absolute right-5 top-2 hover:cursor-pointer'  onClick={props.closeMenu}/>
+            <div onClick={props.closeMenu} className='w-[35px] h-[35px] absolute right-5 top-2 hover:cursor-pointer'>
+                <Close width={35} height={35}/>
             </div>
                 <div className='mt-10 flex flex-col w-[250px] pl-5 mx-auto text-gray-200 font-bold space-y-5 text-[30px] relative '>
                     <p className='hover:cursor-pointer hover:text-gray-400'>Men <span className='absolute right-10 text-[35px] leading-[40px]'>&gt;</span></p>

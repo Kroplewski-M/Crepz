@@ -3,9 +3,11 @@ import { Basket } from "../components/SVG/Basket";
 import { Heart } from "../components/SVG/Heart";
 import { useParams } from "react-router-dom";
 import { Shoe, useProductInfo } from '../context/ProductContext';
+import { useWishListInfo } from '../context/WishListContext';
 
 export const Product = ()=>{
     const {id} = useParams();
+    const {wishList,toggleFromWishList} = useWishListInfo();
     const {getProducts} = useProductInfo();
     const [adultSizes,setAdultSizes] = useState<number[]>([6,7,8,9,10,11,12]);
     const [kidsSizes,setKidsSizes] = useState<number[]>([1,2,3,4,5]);
@@ -92,11 +94,22 @@ export const Product = ()=>{
                                     <Basket fill="#FFFFFF" width={25} height={25}/>
                                 </div>
                             </div>
-                            <div className="w-[250px] h-[35px] bg-red-500 hover:bg-red-600 text-[#333333] font-bold grid place-content-center hover:cursor-pointer">
-                                <div className="flex space-x-2">
-                                    <p>Add to Favorites</p>
-                                    <Heart fill="#444444" width={25} height={25}/>
-                                </div>
+                            <div className="w-[250px] h-[35px] bg-red-500 hover:bg-red-600 text-[#333333] font-bold grid place-content-center hover:cursor-pointer"
+                            onClick={()=>toggleFromWishList(product.id)}>
+                                {
+                                    wishList.includes(product.id)?(
+                                        <div className="flex space-x-2">
+                                            <p className="text-gray-200">Favorited!</p>
+                                            <Heart fill="#FFFFFF" width={25} height={25}/>
+                                        </div>
+                                    ):(
+                                        <div className="flex space-x-2">
+                                            <p>Add to Favorites</p>
+                                            <Heart fill="#444444" width={25} height={25}/>
+                                        </div>
+                                    )
+                                }
+
                             </div>
                         </div>
                         <div className="mt-10 w-[80%] ml-5 md:hidden">

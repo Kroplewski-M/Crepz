@@ -9,7 +9,7 @@ import { Heart } from './SVG/Heart'
 import { Basket } from './SVG/Basket'
 import {UserIcon} from './SVG/UserIcon'
 import { useFilterInfo } from '../context/FilterContext'
-
+import {BasketMenu} from '../components/BasketMenu'
 export const Nav = ()=>{
     const {SetGenderTrue,ResetFilter} = useFilterInfo();
     const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -17,6 +17,7 @@ export const Nav = ()=>{
     const [windowSize, setWindowSize] = useState<number>(getWindowSize());
     const [mobileMenu, setMobileMenu] = useState<boolean>(false);
     const [showMobileMenu,setShowMobileMenu] = useState<boolean>(false);
+    const [showBasket, setShowBasket] = useState<boolean>(false);
     const mobileLimit:number = 768;
 
     function getWindowSize() {
@@ -46,6 +47,9 @@ export const Nav = ()=>{
         
         const closeMobileMenu =():void=>{
             setShowMobileMenu(false);
+        }
+        const closeBasketMenu=():void=>{
+            setShowBasket(false)
         }
         const isLoggedIn = ()=>{
             if(userInfo.id == ""){
@@ -96,7 +100,7 @@ export const Nav = ()=>{
                         </>
                     ):(
                         <div className='w-[100%] flex place-content-end	self-center -mt-[5px]'>
-                            <img src={basket} alt="" className='w-[40px] h-[40px] hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px]'/>
+                            <img src={basket} alt="" onClick={()=> setShowBasket(true)} className='w-[40px] h-[40px] hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px]'/>
                             <img src={mobileMenuIcon} alt="" onClick={()=> setShowMobileMenu(true)} className='w-[30px] h-[30px] mr-5 mt-[10px] hover:cursor-pointer'/>
                         </div>
                     )
@@ -107,6 +111,9 @@ export const Nav = ()=>{
                     ):(
                         <></>
                     )
+                }
+                {
+                    showBasket?(<BasketMenu closeMenu={closeBasketMenu} />):(<></>)
                 }
             </nav>
         </>

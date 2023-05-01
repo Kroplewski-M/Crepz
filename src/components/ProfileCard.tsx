@@ -3,6 +3,7 @@ import {useUserInfo} from '../context/UserContext';
 import { supabase } from '../supabaseClient';
 import { useNavigate  } from 'react-router-dom';
 import { useState } from 'react';
+import { UserIcon } from './SVG/UserIcon';
 
 
 export const ProfileCard = ()=>{
@@ -31,7 +32,7 @@ export const ProfileCard = ()=>{
     return(
         <div className='pt-16 '>
             <div className='w-[70px] h-[70px] rounded-full bg-[#444444] grid place-content-center mx-auto'>
-                <img src={userIcon} alt="" className='w-[60px]'/>
+                <UserIcon width={50} height={50} fill='#FFFFFF' />
             </div>
             <div className='px-10 flex flex-col space-y-2 mt-5 md:w-[300px] md:px-0 md:mx-auto'>
                 <p className='text-gray-400 bg-[#444444] rounded-md p-[5px]'>ID: <span className='text-gray-200 font-bold'>{userInfo.id}</span></p>

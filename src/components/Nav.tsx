@@ -10,6 +10,7 @@ import { Basket } from './SVG/Basket'
 import {UserIcon} from './SVG/UserIcon'
 import { useFilterInfo } from '../context/FilterContext'
 import {BasketMenu} from '../components/BasketMenu'
+import { BurgerMenu } from './SVG/BugerMenu'
 export const Nav = ()=>{
     const {SetGenderTrue,ResetFilter} = useFilterInfo();
     const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -100,8 +101,12 @@ export const Nav = ()=>{
                         </>
                     ):(
                         <div className='w-[100%] flex place-content-end	self-center -mt-[5px]'>
-                            <img src={basket} alt="" onClick={()=> setShowBasket(true)} className='w-[40px] h-[40px] hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px]'/>
-                            <img src={mobileMenuIcon} alt="" onClick={()=> setShowMobileMenu(true)} className='w-[30px] h-[30px] mr-5 mt-[10px] hover:cursor-pointer'/>
+                            <div className='hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px]' onClick={()=> setShowBasket(true)}>
+                                <Basket width={35} height={35} fill='#FFFFFF' />
+                            </div>
+                            <div onClick={()=> setShowMobileMenu(true)} className='w-[30px] h-[30px] mr-5 mt-[5px] hover:cursor-pointer'>
+                                <BurgerMenu width={35} height={35} fill='#FFFFFF'/>
+                            </div>
                         </div>
                     )
                 }

@@ -111,7 +111,7 @@ export const Browse = ()=>{
                 <section className='md:w-[70%] w-[100vw] md:ml-16 flex flex-wrap -mt-5'>
                     {
                         filteredProducts?.map(product =>(
-                            <div key={product.id} className='md:w-[200px] w-[150px] mx-auto md:w-[300px] md:ml-[5px] mt-5'>
+                            <div key={product.id} className='w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5'>
                                 <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
                                 onClick={()=> toggleFromWishList(product.id)}>
                                     <Heart fill={isWishListed(product.id)} width={20} height={20} />

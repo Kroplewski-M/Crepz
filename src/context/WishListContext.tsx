@@ -6,6 +6,7 @@ interface WishListProvider{
     removeFromWishlist: (value:string)=>void,
     addToWishList:(value:string)=>void,
     toggleFromWishList:(value:string)=>void,
+    clearWishList: ()=>void,
 }
 interface WishListProviderProps{
     children:ReactNode,
@@ -33,7 +34,11 @@ export const WishListContext = ({children}:WishListProviderProps)=>{
             addToWishList(value);
         }
     }
-    return <WishListProvider.Provider value={{wishList,addToWishList,removeFromWishlist,toggleFromWishList}}>
+    const clearWishList = ()=>{
+        setWishList([]);
+    }
+
+    return <WishListProvider.Provider value={{wishList,addToWishList,removeFromWishlist,toggleFromWishList,clearWishList}}>
         {children}
     </WishListProvider.Provider>
 }

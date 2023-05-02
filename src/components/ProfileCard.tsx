@@ -1,19 +1,17 @@
-import userIcon from '../assets/images/userIcon.png'
 import {useUserInfo} from '../context/UserContext';
 import { supabase } from '../supabaseClient';
 import { useNavigate  } from 'react-router-dom';
 import { useState } from 'react';
 import { UserIcon } from './SVG/UserIcon';
-
+import { useWishListInfo } from '../context/WishListContext';
 
 export const ProfileCard = ()=>{
     const {loginUser,logoutUser,userInfo} = useUserInfo();
     const [logOutPromt,setLogOutPromt] = useState(false);
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
-
+    const {clearWishList} = useWishListInfo();
     async function logOut(){
-        console.log("logging out");
         setLoading(true);
         try{
             const { error } = await supabase.auth.signOut();
@@ -27,6 +25,7 @@ export const ProfileCard = ()=>{
         }
         finally{
             setLoading(false);
+            clearWishList();
         }
     }
     return(

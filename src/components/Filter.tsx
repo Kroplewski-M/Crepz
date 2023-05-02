@@ -1,6 +1,4 @@
-import './Filter.css'
 import { useEffect, useState } from 'react'
-import close from '../assets/images/close.png'
 import { Shoes } from '../context/FilterContext'
 import { useFilterInfo } from '../context/FilterContext'
 import { Close } from './SVG/Close'
@@ -18,7 +16,7 @@ export const Filter = (props:FilterProps)=>{
     },[FilterState])
 
     return(
-        <div className="w-[100vw] md:w-[300px] md:h-[900px] h-[100vh] md:pb-10 pb-[60px] fixed overflow-y-auto md:overflow-y-hidden top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
+        <div className="w-[100vw] md:w-[300px] md:h-[900px] h-[100vh] md:pb-10 pb-[160px] fixed overflow-y-auto md:overflow-y-hidden top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
             <div onClick={props.closeFilter} className='absolute w-[30px] h-[30px] right-1 top-1 md:hidden'>
                 <Close width={30} height={30}/>
             </div>
@@ -28,10 +26,10 @@ export const Filter = (props:FilterProps)=>{
                 <h2 className="text-[30px] md:text-[25px]">Brand:</h2>
                 <div className="mt-5 flex flex-col space-y-5">
                     {
-                        Filter.brand.map((option, index)=>
+                        Filter.brand.map((option)=>
                             <div className="" key={option.brand} >
-                            <label htmlFor={option.brand} className="mr-[10px]">{option.brand}: </label>
-                            <input type="checkbox" name={option.brand} className="cursor-pointer" checked={option.checked} onChange={()=> updateBrandState(option.brand)}/>
+                                <label htmlFor={option.brand} className="mr-[10px]">{option.brand}: </label>
+                                <input type="checkbox" name={option.brand} className="cursor-pointer w-[30px] h-[30px] ml-[10px] mt-[3px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]" checked={option.checked} onChange={()=> updateBrandState(option.brand)}/>
                             </div>
                         )
                     }
@@ -42,10 +40,10 @@ export const Filter = (props:FilterProps)=>{
                     <h2 className="text-[30px]">Gender:</h2>
                     <div className="mt-5 flex flex-col space-y-5">
                     {
-                        Filter.gender.map((option,index)=>
+                        Filter.gender.map((option)=>
                             <div className="" key={option.gender} >
-                            <label htmlFor={option.gender} className="mr-[10px]">{option.gender}: </label>
-                            <input type="checkbox" name={option.gender} className="cursor-pointer" checked={option.checked} onChange={()=> updateGenderState(option.gender)}/>
+                                <label htmlFor={option.gender} className="mr-[10px]">{option.gender}: </label>
+                                <input type="checkbox" name={option.gender} className="cursor-pointer w-[30px] h-[30px] ml-[10px] mt-[3px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]" checked={option.checked} onChange={()=> updateGenderState(option.gender)}/>
                             </div>
                         )
                     }

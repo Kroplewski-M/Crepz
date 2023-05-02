@@ -7,7 +7,7 @@ interface BasketMenuProps{
 
 export const BasketMenu = (props:BasketMenuProps)=>{
     return(
-    <div className="w-[100vw] md:w-[500px] h-[100vh] bg-[#444444] fixed top-0 right-0 z-[100] overflow-y-scroll pb-16">
+    <div className="w-[100vw] md:w-[500px] h-[100vh] bg-[#444444] fixed top-0 right-0 z-[100] overflow-y-scroll pb-[100px]">
         <div onClick={props.closeMenu} className='w-[30px] float-right mt-[5px] mr-[5px] hover:cursor-pointer'>
             <Close width={30} height={30}/>
         </div>

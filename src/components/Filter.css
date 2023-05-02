@@ -1,9 +1,0 @@
-input[type='checkbox'] { 
-    width: 20px;
-    height: 20px;
-    position: absolute;
-}
-input[type='checkbox']:checked { 
-    rotate: 30deg;
-    accent-color: #333333;
-}

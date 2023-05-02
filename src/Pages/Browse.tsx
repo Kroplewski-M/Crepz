@@ -7,9 +7,11 @@ import { useNavigate  } from 'react-router-dom';
 import { useFilterInfo } from '../context/FilterContext';
 import { Heart } from '../components/SVG/Heart';
 import { useWishListInfo } from '../context/WishListContext';
-
+import { LogInMessage } from '../components/LogInMessage';
+import { useUserInfo } from '../context/UserContext';
 export const Browse = ()=>{
     const {FilterState,maxPrice,minPrice} = useFilterInfo();
+    const {userInfo} = useUserInfo();
     const {wishList,toggleFromWishList} = useWishListInfo();
     const navigate = useNavigate();
     const {getProducts} = useProductInfo();
@@ -18,6 +20,7 @@ export const Browse = ()=>{
     const mobileLimit:number = 768;
     const [products,setProducts] = useState<Shoe[]>();
     const [filteredProducts, setFilteredProducts] = useState<Shoe[]>([]);
+    const [showLogInMessage,setShowLogInMessage] = useState<boolean>(false);
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;
@@ -93,6 +96,18 @@ export const Browse = ()=>{
             return '#FFFFFF';
         }
     }
+    const WishListItem = (value:string)=>{
+        if(userInfo.id !== ''){
+            toggleFromWishList(value);
+        }else{
+            setShowLogInMessage(true);
+        }
+    }
+    useEffect(()=>{
+        setTimeout(() => {
+            setShowLogInMessage(false);
+        }, 3000);
+    },[showLogInMessage])
     return(
         <section className="w-[100vw] max-w-[2000px]  mx-auto pb-10 pt-16">
             <div className="w-[95px] mx-auto">
@@ -113,7 +128,7 @@ export const Browse = ()=>{
                         filteredProducts?.map(product =>(
                             <div key={product.id} className='w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5'>
                                 <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
-                                onClick={()=> toggleFromWishList(product.id)}>
+                                onClick={()=> WishListItem(product.id)}>
                                     <Heart fill={isWishListed(product.id)} width={20} height={20} />
                                 </div>
                                 <div onClick={()=> navigate(`/product/${product.id}`)}>
@@ -125,6 +140,9 @@ export const Browse = ()=>{
                     }
                 </section>
             </div>
+            {
+                showLogInMessage?(<LogInMessage />):(<></>)
+            }
         </section>
     )
 }

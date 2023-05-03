@@ -1,4 +1,3 @@
-import loginBg from '../assets/images/loginBg.jpg';
 import { LoginForm } from '../components/LoginForm';
 import { useNavigate  } from 'react-router-dom';
 import { useState } from 'react';

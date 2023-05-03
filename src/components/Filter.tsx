@@ -29,7 +29,7 @@ export const Filter = (props:FilterProps)=>{
                         Filter.brand.map((option)=>
                             <div className="" key={option.brand} >
                                 <label htmlFor={option.brand} className="mr-[10px]">{option.brand}: </label>
-                                <input type="checkbox" name={option.brand} className="cursor-pointer md:w-[30px] w-[20px] h-[20px]  md:h-[30px] ml-[10px] md:mt-[5px] mt-[7px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]" checked={option.checked} onChange={()=> updateBrandState(option.brand)}/>
+                                <input type="checkbox" name={option.brand} className="cursor-pointer w-[20px] h-[20px] ml-[20px] md:ml-0 md:mt-[5px] mt-[7px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]" checked={option.checked} onChange={()=> updateBrandState(option.brand)}/>
                             </div>
                         )
                     }
@@ -43,7 +43,7 @@ export const Filter = (props:FilterProps)=>{
                         Filter.gender.map((option)=>
                             <div className="" key={option.gender} >
                                 <label htmlFor={option.gender} className="mr-[10px]">{option.gender}: </label>
-                                <input type="checkbox" name={option.gender} className="cursor-pointer md:w-[30px] w-[20px] h-[20px]  md:h-[30px] ml-[10px] md:mt-[7px] mt-[7px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]"  checked={option.checked} onChange={()=> updateGenderState(option.gender)}/>
+                                <input type="checkbox" name={option.gender} className="cursor-pointer w-[20px] h-[20px] ml-[10px] md:ml-0 md:mt-[7px] mt-[7px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]"  checked={option.checked} onChange={()=> updateGenderState(option.gender)}/>
                             </div>
                         )
                     }

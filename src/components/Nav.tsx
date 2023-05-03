@@ -1,7 +1,5 @@
 import logo from '../assets/images/logo.png'
-import basket from '../assets/images/basket.png'
 import { useState, useEffect } from 'react'
-import mobileMenuIcon from '../assets/images/mobileMenu.png'
 import  {MobileMenu}  from './MobileMenu'
 import { useNavigate  } from 'react-router-dom';
 import {useUserInfo} from '../context/UserContext';
@@ -11,6 +9,7 @@ import {UserIcon} from './SVG/UserIcon'
 import { useFilterInfo } from '../context/FilterContext'
 import {BasketMenu} from '../components/BasketMenu'
 import { BurgerMenu } from './SVG/BugerMenu'
+
 export const Nav = ()=>{
     const {SetGenderTrue,ResetFilter} = useFilterInfo();
     const {loginUser,logoutUser,userInfo} = useUserInfo();

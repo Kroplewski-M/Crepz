@@ -44,7 +44,7 @@ export const ProfileCard = ()=>{
             {
                 logOutPromt?(
                 <section className='absolute w-[100vw] h-[100vh] top-0 left-0 backdrop-blur-md grid place-content-center'>
-                    <div className='w-[300px] md:w-[400px] h-[200px] md:h-[300px] rounded-md bg-[#222222] grid place-content-center'>
+                    <div className='w-[300px] md:w-[400px] h-[200px] md:h-[300px] rounded-md bg-[#333333] grid place-content-center'>
                         <p className='text-gray-200 font-bold text-center'>Are you sure you want to log out?</p>
                         <div className='flex space-x-2 w-[205px] mx-auto mt-5'>
                             <button className='w-[100px] h-[30px] rounded-md bg-gray-200 hover:bg-gray-300 hover:font-bold'

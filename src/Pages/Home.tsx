@@ -37,7 +37,7 @@ export const Home = ()=>{
                 <video src={heroVid} autoPlay loop muted className='w-[100%] mx-auto rounded-md' poster={nikeLogo}></video>
             </section>
             <section className='w-[100%] md:pl-[86px] pl-[20px] pt-5 mb-10'>
-                <h1 className='font-semibold md:text-[20px] text-[16px]'>Shop by brand</h1>
+                <h1 className='font-bold md:text-[20px] text-[16px]'>Shop by brand:</h1>
                 <div className='flex flex-wrap pt-[10px] place-content-center md:place-content-start'>
                     {
                         brands.map((brand)=>(
@@ -45,13 +45,13 @@ export const Home = ()=>{
                             className='md:w-[300px] md:h-[200px] w-[200px] h-[100px] rounded-md mr-5 mt-5 grid place-content-center relative hover:cursor-pointer hover:scale-[1.2] hover:z-50 duration-100 ease-linear'>
                                 <img src={getImg(brand)} alt="" className='absolute rounded-md w-[100%] h-[100%]'/>
                                 <div className='md:w-[200px] w-[100px] md:h-[50px] h-[30px] pt-[2px] md:pt-0 z-50 text-center rounded-md backdrop-blur-md'>
-                                    <p className='font-bold z-50 md:text-[25px] text-gray-200'>{brand}</p>
+                                    <p className='font-bold z-50 md:text-[25px] text-[13px] text-gray-200'>{brand}</p>
                                 </div>
                             </div>
                         ))
                     }
                 </div>
-                <h1 className='font-semibold md:text-[20px] text-[16px] mt-5'>Shop by Gender</h1>
+                <h1 className='font-bold md:text-[20px] text-[16px] mt-5'>Shop by Gender:</h1>
                 <div className='flex flex-wrap pt-[10px] place-content-center md:place-content-start'>
                     <div className='md:w-[300px] md:h-[200px] w-[200px] h-[100px] bg-blue-600 rounded-md mr-5 mt-5 grid place-content-center relative hover:cursor-pointer hover:scale-[1.2] hover:z-50 duration-100 ease-linear' onClick={()=>setGenderRedirect('Male')}>
                         <p className='font-bold z-50 md:text-[30px] text-[#333333]'>Male</p>

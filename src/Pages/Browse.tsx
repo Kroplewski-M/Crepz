@@ -21,6 +21,7 @@ export const Browse = ()=>{
     const [products,setProducts] = useState<Shoe[]>();
     const [filteredProducts, setFilteredProducts] = useState<Shoe[]>([]);
     const [showLogInMessage,setShowLogInMessage] = useState<boolean>(false);
+    const [logInMessage,setLogInMessage] = useState<string>('');
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;
@@ -100,14 +101,24 @@ export const Browse = ()=>{
         if(userInfo.id !== ''){
             toggleFromWishList(value);
         }else{
+            setLogInMessage('You have to log in to favorite items!');
             setShowLogInMessage(true);
         }
     }
     useEffect(()=>{
         setTimeout(() => {
             setShowLogInMessage(false);
-        }, 3000);
+        }, 5000);
     },[showLogInMessage])
+
+    const addToBasket = (value:string)=>{
+        if(userInfo.id !== ''){
+            //add to basket
+        }else{
+            setLogInMessage('You have to log in to add items to basket!');
+            setShowLogInMessage(true);
+        }
+    }
     return(
         <section className="w-[100vw] max-w-[2000px]  mx-auto pb-10 pt-16">
             <div className="w-[95px] mx-auto">
@@ -123,25 +134,33 @@ export const Browse = ()=>{
                     showFilter?(
                     <Filter closeFilter={closeFilter} />):(<></>)
                 }
-                <section className='md:w-[70%] w-[100vw] md:ml-16 flex flex-wrap -mt-5'>
-                    {
-                        filteredProducts?.map(product =>(
-                            <div key={product.id} className='w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5'>
-                                <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
-                                onClick={()=> WishListItem(product.id)}>
-                                    <Heart fill={isWishListed(product.id)} width={20} height={20} />
+                <section className='md:w-[70%] w-[100vw] md:ml-16 -mt-5'>
+                    <h1 className='font-bold text-[40px] text-[#222222] mt-[5px] text-center md:text-left'>Browse</h1>
+                    <div className='flex flex-wrap w-[100%]'>
+                        {
+                            filteredProducts?.map(product =>(
+                                <div key={product.id} className='w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5 relative'>
+                                    <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
+                                    onClick={()=> WishListItem(product.id)}>
+                                        <Heart fill={isWishListed(product.id)} width={20} height={20} />
+                                    </div>
+                                    <div onClick={()=> navigate(`/product/${product.id}`)}>
+                                        <ProductCard  info={product} /> 
+                                    </div>
+                                    <div className='w-[100%] absolute z-50 bottom-5'>
+                                        <div className='md:w-[200px] w-[130px] mx-auto ' onClick={()=> addToBasket(product.id)}>
+                                            <button className='w-[100%] h-[30px] rounded-md bg-gray-200 hover:bg-gray-300 text-[#333333] font-bold mt-[10px]'>Add to basket</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div onClick={()=> navigate(`/product/${product.id}`)}>
-                                    <ProductCard  info={product} /> 
-                                </div>
-                            </div>
 
-                        ))
-                    }
+                            ))
+                        }
+                    </div>
                 </section>
             </div>
             {
-                showLogInMessage?(<LogInMessage />):(<></>)
+                showLogInMessage?(<LogInMessage message={logInMessage}/>):(<></>)
             }
         </section>
     )

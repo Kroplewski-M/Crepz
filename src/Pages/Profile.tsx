@@ -28,9 +28,9 @@ export const Profile = ()=>{
         }
     },[select])
     return(
-        <>
-        <section className="w-[100vw] grid justify-items-center mt-16 mb-16">
-            <div className="md:w-[600px] w-[300px] h-[50px] bg-[#333333] rounded-t-md ">
+        <div className="w-[100vw] h-[100vh] bg-[#222222]">
+        <section className="w-[100vw] grid justify-items-center pt-16 mb-16">
+            <div className="md:w-[600px] w-[300px] h-[50px] rounded-t-md  ">
                 <div className="font-bold text-gray-200 grid space-y-[10px] space-x-5 justify-items-center">
                     <div className="flex space-x-5 mt-[10px]">
                         <p className={`hover:text-gray-400 hover:cursor-pointer
@@ -45,7 +45,7 @@ export const Profile = ()=>{
                     </div>
                 </div>
             </div>
-            <div className="md:w-[600px] w-[300px] h-[500px] pb-10 md:pb-0 bg-[#333333] rounded-b-md overflow-auto">
+            <div className="md:w-[600px] w-[300px] h-[500px] pb-10 md:pb-0 rounded-b-md overflow-auto">
                 {
                     selectComp == Select.PROFILE?(<ProfileCard />):(<></>)
                 }
@@ -57,6 +57,6 @@ export const Profile = ()=>{
                 }
             </div>
         </section>
-        </>
+        </div>
     )
 }

@@ -37,9 +37,6 @@ export const ProductCard = (Props:ProductsProps)=>{
                 <p className='text-gray-400 '>{Props.info.Brand}</p>
                 <p className='text-gray-200 font-bold pt-[5px] md:text-[25px] text-[20px]'>£{Props.info.Price}</p>
             </div>
-            <div className='md:w-[200px] w-[130px] mx-auto'>
-                <button className='w-[100%] h-[30px] rounded-md bg-gray-200 hover:bg-gray-300 text-[#333333] font-bold mt-[10px]'>Add to basket</button>
-            </div>
         </div>
     )
 }

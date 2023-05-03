@@ -65,7 +65,6 @@ export const Nav = ()=>{
                 navigate('/profile/wishlist')
             }
         }
-        //FIX -- DOESNT WORK
         const redirectAndFilter = (value:string) =>{
             SetGenderTrue(value);
             navigate('/browse');
@@ -82,6 +81,7 @@ export const Nav = ()=>{
                     !mobileMenu?(
                         <>
                             <div className='flex space-x-7 w-[230px] mx-auto text-gray-200 font-bold self-center text-[20px]'>
+                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>navigate('/browse')}>All</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Male')}>Male</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Female')}>Female</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Kids')}>Kids</p>

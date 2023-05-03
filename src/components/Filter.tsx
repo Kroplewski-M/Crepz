@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Shoes } from '../context/FilterContext'
 import { useFilterInfo } from '../context/FilterContext'
 import { Close } from './SVG/Close'
-
+import './Filter.css'
 interface FilterProps{
     closeFilter: ()=>void,
 }
@@ -29,7 +29,7 @@ export const Filter = (props:FilterProps)=>{
                         Filter.brand.map((option)=>
                             <div className="" key={option.brand} >
                                 <label htmlFor={option.brand} className="mr-[10px]">{option.brand}: </label>
-                                <input type="checkbox" name={option.brand} className="cursor-pointer w-[30px] h-[30px] ml-[10px] mt-[3px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]" checked={option.checked} onChange={()=> updateBrandState(option.brand)}/>
+                                <input type="checkbox" name={option.brand} className="cursor-pointer md:w-[30px] w-[20px] h-[20px]  md:h-[30px] ml-[10px] md:mt-[5px] mt-[7px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]" checked={option.checked} onChange={()=> updateBrandState(option.brand)}/>
                             </div>
                         )
                     }
@@ -43,7 +43,7 @@ export const Filter = (props:FilterProps)=>{
                         Filter.gender.map((option)=>
                             <div className="" key={option.gender} >
                                 <label htmlFor={option.gender} className="mr-[10px]">{option.gender}: </label>
-                                <input type="checkbox" name={option.gender} className="cursor-pointer w-[30px] h-[30px] ml-[10px] mt-[3px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]" checked={option.checked} onChange={()=> updateGenderState(option.gender)}/>
+                                <input type="checkbox" name={option.gender} className="cursor-pointer md:w-[30px] w-[20px] h-[20px]  md:h-[30px] ml-[10px] md:mt-[7px] mt-[7px] absolute md:accent-[#333333] accent-gray-300 checked:rotate-[30deg]"  checked={option.checked} onChange={()=> updateGenderState(option.gender)}/>
                             </div>
                         )
                     }
@@ -59,7 +59,7 @@ export const Filter = (props:FilterProps)=>{
                     </div>
                     <div className="flex space-x-2 mt-5">
                             <label htmlFor="max" className="mr-[10px]">Max: </label>
-                            <input type="range" name="max" min="0" max="300" step="10" value={maxPrice} onChange={(event)=>SetMaxPrice(parseInt(event.target.value))}  className="hover:cursor-ew-resize"/>
+                            <input type="range" name="max" min="0" max="300" step="10" value={maxPrice} onChange={(event)=>SetMaxPrice(parseInt(event.target.value))}  className="slider hover:cursor-ew-resize"/>
                             <p>£{maxPrice}</p>
                     </div>
                 </div>

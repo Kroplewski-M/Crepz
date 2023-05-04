@@ -13,8 +13,9 @@ type BasketItem = {
 interface BasketProvider{
     basketItems:BasketItem[],
     addToBasket:(value:string, size:number)=>void,
-    removeFromBasket:(value:string)=>void,
+    removeFromBasket:(value:string,size:number)=>void,
     totalPrice:()=>number,
+    clearBasket: ()=>void,
 }
 
 interface BasketProviderProps{
@@ -37,16 +38,17 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
 
     const addToBasket = (value:string,selectedSize:number)=>{
         
-
-
     }
-    const removeFromBasket = (value:string)=>{
+    const removeFromBasket = (value:string,selectedSize:number)=>{
 
     }
     const totalPrice = ()=>{
         return 0;
     }
-    return <BasketProvider.Provider value={{basketItems,addToBasket,removeFromBasket,totalPrice}} >
+    const clearBasket = ()=>{
+        setBasketItems([]);
+    }
+    return <BasketProvider.Provider value={{basketItems,addToBasket,removeFromBasket,totalPrice,clearBasket}} >
         {children}
     </BasketProvider.Provider>
 }

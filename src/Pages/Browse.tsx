@@ -9,8 +9,11 @@ import { Heart } from '../components/SVG/Heart';
 import { useWishListInfo } from '../context/WishListContext';
 import { LogInMessage } from '../components/LogInMessage';
 import { useUserInfo } from '../context/UserContext';
+import { useBasketInfo } from '../context/BasketContext';
+
 export const Browse = ()=>{
     const {FilterState,maxPrice,minPrice} = useFilterInfo();
+    const {addToBasket} = useBasketInfo();
     const {userInfo} = useUserInfo();
     const {wishList,toggleFromWishList} = useWishListInfo();
     const navigate = useNavigate();
@@ -111,7 +114,7 @@ export const Browse = ()=>{
         }, 5000);
     },[showLogInMessage])
 
-    const addToBasket = (value:string)=>{
+    const addToBasketCheck = (value:string)=>{
         if(userInfo.id !== ''){
             //add to basket
         }else{
@@ -148,7 +151,7 @@ export const Browse = ()=>{
                                         <ProductCard  info={product} /> 
                                     </div>
                                     <div className='w-[100%] absolute z-50 bottom-5'>
-                                        <div className='md:w-[200px] w-[130px] mx-auto ' onClick={()=> addToBasket(product.id)}>
+                                        <div className='md:w-[200px] w-[130px] mx-auto ' onClick={()=> addToBasketCheck(product.id)}>
                                             <button className='w-[100%] h-[30px] rounded-md bg-gray-200 hover:bg-gray-300 text-[#333333] font-bold mt-[10px]'>Add to basket</button>
                                         </div>
                                     </div>

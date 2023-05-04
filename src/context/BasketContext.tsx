@@ -37,10 +37,28 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
     },[getProducts()])
 
     const addToBasket = (value:string,selectedSize:number)=>{
-        
+        let selectedItem:Shoe = {id:'',Name:'',Brand:'',Desc:'',Gender:'',Price:0,ImgUrl:''};
+        products?.map((item) =>{
+            if(item.id == value){
+                selectedItem = item;
+            }
+        })
+
+        if(!basketItems.find(item => item.id == value && item.size == selectedSize)){
+            if(selectedItem !== undefined){
+                setBasketItems(currItems=> [...currItems, 
+                {id:selectedItem.id,name:selectedItem.Name,imageUrl:selectedItem.ImgUrl,size:selectedSize,price:selectedItem.Price,quantity:1}])
+            }
+        }else{
+            basketItems.map((item)=>{
+                if(item.id == value && item.size == selectedSize){
+                    item.quantity++
+                }
+            });
+        }
     }
     const removeFromBasket = (value:string,selectedSize:number)=>{
-
+        
     }
     const totalPrice = ()=>{
         return 0;

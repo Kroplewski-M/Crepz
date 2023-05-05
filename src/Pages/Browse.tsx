@@ -9,11 +9,10 @@ import { Heart } from '../components/SVG/Heart';
 import { useWishListInfo } from '../context/WishListContext';
 import { LogInMessage } from '../components/LogInMessage';
 import { useUserInfo } from '../context/UserContext';
-import { useBasketInfo } from '../context/BasketContext';
+import { ViewProductCard } from '../components/ViewProductCard';
 
 export const Browse = ()=>{
     const {FilterState,maxPrice,minPrice} = useFilterInfo();
-    const {addToBasket} = useBasketInfo();
     const {userInfo} = useUserInfo();
     const {wishList,toggleFromWishList} = useWishListInfo();
     const navigate = useNavigate();
@@ -25,6 +24,8 @@ export const Browse = ()=>{
     const [filteredProducts, setFilteredProducts] = useState<Shoe[]>([]);
     const [showLogInMessage,setShowLogInMessage] = useState<boolean>(false);
     const [logInMessage,setLogInMessage] = useState<string>('');
+    const [selectedItem,setSelectedItem] = useState<string>('');
+    const [showViewProductCard,setViewShowProductCard] = useState<boolean>(true);
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;
@@ -164,6 +165,9 @@ export const Browse = ()=>{
             </div>
             {
                 showLogInMessage?(<LogInMessage message={logInMessage}/>):(<></>)
+            }
+            {
+                showViewProductCard?(<ViewProductCard id={selectedItem}/>):(<></>)
             }
         </section>
     )

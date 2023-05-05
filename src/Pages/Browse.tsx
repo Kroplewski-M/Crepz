@@ -65,6 +65,9 @@ export const Browse = ()=>{
     const closeFilter = ()=>{
         setShowFilter(false);
     }
+    const closeViewProductItem=()=>{
+        setViewShowProductCard(false);
+    }
     const getFilteredProducts = ()=>{
         const filterBrands:string[] = [];
         const filterGender:string[] = [];
@@ -117,7 +120,8 @@ export const Browse = ()=>{
 
     const addToBasketCheck = (value:string)=>{
         if(userInfo.id !== ''){
-            //add to basket
+            setSelectedItem(value);
+            setViewShowProductCard(true);
         }else{
             setLogInMessage('You have to log in to add items to basket!');
             setShowLogInMessage(true);
@@ -167,7 +171,7 @@ export const Browse = ()=>{
                 showLogInMessage?(<LogInMessage message={logInMessage}/>):(<></>)
             }
             {
-                showViewProductCard?(<ViewProductCard id={selectedItem}/>):(<></>)
+                showViewProductCard?(<ViewProductCard close={closeViewProductItem} id={selectedItem}/>):(<></>)
             }
         </section>
     )

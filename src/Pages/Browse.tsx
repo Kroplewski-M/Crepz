@@ -25,7 +25,7 @@ export const Browse = ()=>{
     const [showLogInMessage,setShowLogInMessage] = useState<boolean>(false);
     const [logInMessage,setLogInMessage] = useState<string>('');
     const [selectedItem,setSelectedItem] = useState<string>('');
-    const [showViewProductCard,setViewShowProductCard] = useState<boolean>(true);
+    const [showViewProductCard,setViewShowProductCard] = useState<boolean>(false);
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;

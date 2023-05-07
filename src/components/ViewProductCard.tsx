@@ -8,7 +8,6 @@ interface ViewProductCardProps{
 }
 
 export const ViewProductCard = (props:ViewProductCardProps)=>{
-    const [sizes,setSizes] = useState([1,2,3,4,5]);
     const [selectedProduct,setSelectedProduct] = useState<Shoe>();
     const [adultSizes,setAdultSizes] = useState<number[]>([6,7,8,9,10,11,12]);
     const [kidsSizes,setKidsSizes] = useState<number[]>([1,2,3,4,5]);
@@ -22,6 +21,14 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
             }
         })
     },[]);
+    useEffect(()=>{
+        if(selectedProduct?.Gender == 'kids'){
+            setSelectedSize(4);
+        }else{
+            setSelectedSize(9);
+        }
+    },[selectedProduct])
+ 
     return(
         <section className="w-[100vw] h-[100vh] z-[100] fixed top-0 backdrop-blur-md grid place-content-center">
             <div className="w-[300px] md:w-[500px] pb-10 bg-[#333333] rounded-md relative">
@@ -40,17 +47,17 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                             {
                                 selectedProduct?.Gender == 'Kids'?(<>
                                     {
-                                        kidsSizes.map(item =>(
-                                            <div key={item} className="w-[40px] h-[40px] bg-gray-300 hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60">
-                                                <p className="font-semibold">{item}</p>
+                                        kidsSizes.map(size =>(
+                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
+                                                <p className="font-semibold">{size}</p>
                                             </div>
                                         ))
                                     }
                                 </>):(<>
                                     {
-                                        adultSizes.map(item =>(
-                                            <div key={item} className="w-[40px] h-[40px] bg-gray-300 hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60">
-                                                <p className="font-semibold">{item}</p>
+                                        adultSizes.map(size =>(
+                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
+                                                <p className="font-semibold">{size}</p>
                                             </div>
                                         ))
                                     }

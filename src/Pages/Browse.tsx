@@ -31,12 +31,13 @@ export const Browse = ()=>{
     const [loadedImgs,setLoadedImgs] = useState<number>(0);
     const [allImgsLoaded,setAllImgsLoaded] = useState<boolean>(false);
     const imgLoaded = ()=>{
-        setLoadedImgs(loadedImgs + 1);
+        setLoadedImgs((prevState)=> prevState+1);
     }
     useEffect(()=>{
-        if(loadedImgs == getProducts()?.length){
+        if(loadedImgs === getProducts()?.length){
             setAllImgsLoaded(true);
         }
+        console.log(`Loaded Imgs: ${loadedImgs} || products: ${getProducts()?.length} `)
     },[loadedImgs])
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
@@ -157,12 +158,9 @@ export const Browse = ()=>{
                 <section className='md:w-[70%] w-[100vw] md:ml-16 -mt-5'>
                     <h1 className='font-bold text-[40px] text-[#222222] mt-[5px] text-center md:text-left'>Browse</h1>
                     <div className='flex flex-wrap w-[100%]'>
-                        {
-                            allImgsLoaded?(
-                            <>
                             {
                                 filteredProducts?.map(product =>(
-                                    <div key={product.id} className='w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5 relative'>
+                                    <div key={product.id} className={`w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5 relative ${allImgsLoaded?(''):('hidden')}`}>
                                         <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
                                         onClick={()=> WishListItem(product.id)}>
                                             <Heart fill={isWishListed(product.id)} width={20} height={20} />
@@ -179,18 +177,13 @@ export const Browse = ()=>{
 
                                 ))
                             }
-                            </>
-                            ):(<> 
-                                <div className='flex flex-wrap w-[100%]'>
+                                <div className={`flex flex-wrap w-[100%] ${!allImgsLoaded?(''):('hidden')}`}>
                                     <div className='w-[165px] md:w-[300px] h-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
                                     <div className='w-[165px] md:w-[300px] h-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
                                     <div className='w-[165px] h-[300px] md:w-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
                                     <div className='w-[165px] h-[300px] md:w-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
                                     <div className='w-[165px] h-[300px] md:w-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
                                 </div>
-                            </>)
-                        }
-
                     </div>
                 </section>
             </div>

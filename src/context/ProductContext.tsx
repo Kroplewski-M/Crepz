@@ -41,7 +41,6 @@ export const ProductContext = ({children}: ProductProviderProps)=>{
             console.log(error);
         }
     };
-    //HAPPENING TWICE -- FIX
     useEffect(()=>{
         FetchProducts();
     },[]);

@@ -26,6 +26,18 @@ export const Browse = ()=>{
     const [logInMessage,setLogInMessage] = useState<string>('');
     const [selectedItem,setSelectedItem] = useState<string>('');
     const [showViewProductCard,setViewShowProductCard] = useState<boolean>(false);
+
+    //WAIT FOR ALL IMGS TO LOAD
+    const [loadedImgs,setLoadedImgs] = useState<number>(0);
+    const [allImgsLoaded,setAllImgsLoaded] = useState<boolean>(false);
+    const imgLoaded = ()=>{
+        setLoadedImgs(loadedImgs + 1);
+    }
+    useEffect(()=>{
+        if(loadedImgs == getProducts()?.length){
+            setAllImgsLoaded(true);
+        }
+    },[loadedImgs])
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {
         const innerWidth:number = window.innerWidth;
@@ -146,24 +158,39 @@ export const Browse = ()=>{
                     <h1 className='font-bold text-[40px] text-[#222222] mt-[5px] text-center md:text-left'>Browse</h1>
                     <div className='flex flex-wrap w-[100%]'>
                         {
-                            filteredProducts?.map(product =>(
-                                <div key={product.id} className='w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5 relative'>
-                                    <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
-                                    onClick={()=> WishListItem(product.id)}>
-                                        <Heart fill={isWishListed(product.id)} width={20} height={20} />
-                                    </div>
-                                    <div onClick={()=> navigate(`/product/${product.id}`)}>
-                                        <ProductCard  info={product} /> 
-                                    </div>
-                                    <div className='w-[100%] absolute z-50 bottom-5'>
-                                        <div className='md:w-[200px] w-[130px] mx-auto ' onClick={()=> addToBasketCheck(product.id)}>
-                                            <button className='w-[100%] h-[30px] rounded-md bg-gray-200 hover:bg-gray-300 text-[#333333] font-bold mt-[10px]'>Add to basket</button>
+                            allImgsLoaded?(
+                            <>
+                            {
+                                filteredProducts?.map(product =>(
+                                    <div key={product.id} className='w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5 relative'>
+                                        <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
+                                        onClick={()=> WishListItem(product.id)}>
+                                            <Heart fill={isWishListed(product.id)} width={20} height={20} />
+                                        </div>
+                                        <div onClick={()=> navigate(`/product/${product.id}`)}>
+                                            <ProductCard  info={product} imgLoaded={imgLoaded}/> 
+                                        </div>
+                                        <div className='w-[100%] absolute z-50 bottom-5'>
+                                            <div className='md:w-[200px] w-[130px] mx-auto ' onClick={()=> addToBasketCheck(product.id)}>
+                                                <button className='w-[100%] h-[30px] rounded-md bg-gray-200 hover:bg-gray-300 text-[#333333] font-bold mt-[10px]'>Add to basket</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            ))
+                                ))
+                            }
+                            </>
+                            ):(<> 
+                                <div className='flex flex-wrap w-[100%]'>
+                                    <div className='w-[165px] md:w-[300px] h-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] md:w-[300px] h-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] h-[300px] md:w-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] h-[300px] md:w-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] h-[300px] md:w-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                </div>
+                            </>)
                         }
+
                     </div>
                 </section>
             </div>

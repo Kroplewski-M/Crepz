@@ -29,8 +29,8 @@ export const Home = ()=>{
                 <h1 id='headline' className=" font-bold md:text-[48px] text-[20px] text-[#222222] text-center mb-5">Feel next level comfort</h1>
                 <p className="md:w-[700px] w-[250px] text-center font-semibold text-gray-600 md:text-[16px] text-[13px]">Make some waves in the Nike Air Max Plus, a Tuned Air experience that offers premium stability and cushioning.</p>
                 <div className="flex space-x-5 mx-auto mt-[20px]">
-                    <button className="md:w-[110px] w-[90px] text-[13px] h-[30px] rounded-xl bg-[#222222] text-gray-200 hover:bg-gray-200 hover:text-[#222222] font-semibold px-[7px]" onClick={()=>setGenderRedirect('Male')}>Shop Mens</button>
-                    <button className="md:w-[110px] w-[100px]  text-[13px] h-[30px] rounded-xl bg-[#222222] hover:bg-gray-200 hover:text-[#222222] text-gray-200 font-semibold" onClick={()=>setGenderRedirect('Female')}>Shop Womens</button>   
+                    <button className="md:w-[110px] w-[90px] text-[13px] h-[30px] rounded-md bg-[#222222] text-gray-200 hover:bg-gray-200 hover:text-[#222222] font-semibold px-[7px]" onClick={()=>setGenderRedirect('Male')}>Shop Mens</button>
+                    <button className="md:w-[110px] w-[100px]  text-[13px] h-[30px] rounded-md bg-[#222222] hover:bg-gray-200 hover:text-[#222222] text-gray-200 font-semibold" onClick={()=>setGenderRedirect('Female')}>Shop Womens</button>   
                 </div>
             </section>
             <section className='md:w-[95vw] w-[90vw] mx-auto'>

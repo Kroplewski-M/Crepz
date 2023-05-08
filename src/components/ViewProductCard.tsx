@@ -12,7 +12,6 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
     const [adultSizes,setAdultSizes] = useState<number[]>([6,7,8,9,10,11,12]);
     const [kidsSizes,setKidsSizes] = useState<number[]>([1,2,3,4,5]);
     const [selectedSize,setSelectedSize] = useState<number>(0);
-
     const {getProducts} = useProductInfo();
     useEffect(()=>{
         getProducts()?.map((item)=>{
@@ -48,7 +47,7 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                                 selectedProduct?.Gender == 'Kids'?(<>
                                     {
                                         kidsSizes.map(size =>(
-                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
+                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-[#555555] text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
                                                 <p className="font-semibold">{size}</p>
                                             </div>
                                         ))
@@ -56,7 +55,7 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                                 </>):(<>
                                     {
                                         adultSizes.map(size =>(
-                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
+                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-[#555555] text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
                                                 <p className="font-semibold">{size}</p>
                                             </div>
                                         ))

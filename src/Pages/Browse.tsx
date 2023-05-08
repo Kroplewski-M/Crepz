@@ -182,11 +182,11 @@ export const Browse = ()=>{
                             </>
                             ):(<> 
                                 <div className='flex flex-wrap w-[100%]'>
-                                    <div className='w-[165px] md:w-[300px] h-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
-                                    <div className='w-[165px] md:w-[300px] h-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
-                                    <div className='w-[165px] h-[300px] md:w-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
-                                    <div className='w-[165px] h-[300px] md:w-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
-                                    <div className='w-[165px] h-[300px] md:w-[300px] md:ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] md:w-[300px] h-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] md:w-[300px] h-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] h-[300px] md:w-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] h-[300px] md:w-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
+                                    <div className='w-[165px] h-[300px] md:w-[300px] ml-[5px] mt-5 bg-gray-400 animate-pulse rounded-md'></div>
                                 </div>
                             </>)
                         }

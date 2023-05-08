@@ -34,10 +34,9 @@ export const Browse = ()=>{
         setLoadedImgs((prevState)=> prevState+1);
     }
     useEffect(()=>{
-        if(loadedImgs === getProducts()?.length){
+        if(loadedImgs == filteredProducts.length ){
             setAllImgsLoaded(true);
         }
-        console.log(`Loaded Imgs: ${loadedImgs} || products: ${getProducts()?.length} `)
     },[loadedImgs])
     //SET FILTER DISPLAY DEPENDING ON SCREEN SIZE
     function getWindowSize() {

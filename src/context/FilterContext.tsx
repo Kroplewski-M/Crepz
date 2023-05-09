@@ -112,7 +112,14 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
                 return {gender:option.gender, checked: false};
             }
         });
-        setFilterState({brand:filterState.brand,gender:newFilter});
+        const newFilter2 = filterState.brand.map(option =>{
+            if(option.checked == true){
+                return {brand:option.brand, checked: false};
+            }else{
+                return option;
+            }
+        });
+        setFilterState({brand:newFilter2,gender:newFilter});
     }
     const SetBrandTrue = (value: string)=>{
         const newFilter = filterState.brand.map(option =>{
@@ -122,6 +129,7 @@ export const FilterContext = ({children}: FilterProviderProps)=>{
                 return {brand:option.brand, checked: false};
             }
         });
+        
         setFilterState({brand:newFilter,gender:filterState.gender});
     }
     const ResetFilter = ()=>{

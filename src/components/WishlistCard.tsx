@@ -22,6 +22,8 @@ export const WishlistCard = (Props:WishListProps)=>{
         })
     },[]);
 
+    const [loadedImg,setLoadedImg] = useState<boolean>(false);
+
     return(
         <div className="w-[80%] md:h-[70px] rounded-md bg-gray-200 hover:cursor-pointer hover:bg-gray-300 flex flex-col md:flex-row mt-5 space-x-5 pr-5">
             {
@@ -31,7 +33,10 @@ export const WishlistCard = (Props:WishListProps)=>{
                             <p className="font-bold">{(product.Name)?.substring(0,15)}</p>
                         </div>
                         <div className='flex self-center bg-gray-400 rounded-md w-[80px] h-[60px]'>
-                                <img src={product.ImgUrl} alt="" className='w-[70px] h-[70px] rounded-md mx-[5px] md:-mt-[5px]'/>
+                                <img src={product.ImgUrl} alt="" className={`w-[70px] h-[70px] rounded-md mx-[5px] md:-mt-[5px] ${loadedImg?(''):('hidden')}`} onLoad={()=>setLoadedImg(true)}/>
+                                <div className={`w-[70px] h-[70px] ${loadedImg?('hidden'):('')} animate-pulse`}>
+                                    <p className='font-bold text-gray-200'>Loading...</p>
+                                </div>
                         </div>
                         <div className='flex flex-col md:flex-row self-center pb-[5px] md:pb-0'>
                             <p className="font-bold">£{product.Price}</p>

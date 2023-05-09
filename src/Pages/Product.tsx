@@ -14,6 +14,7 @@ export const Product = ()=>{
     const [selectedSize,setSelectedSize] = useState<number>(0);
     const [product,setProduct] = useState<Shoe>();
     
+    const [loadedImg,setLoadedImg] = useState<boolean>(false);
     useEffect(()=>{
         let products = getProducts();
         products?.map(product =>{
@@ -44,7 +45,10 @@ export const Product = ()=>{
                         <div className="">
                             <h1 className="font-bold text-[30px] md:text-[40px] text-center md:text-left">{product.Name}</h1>
                             <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px]  rounded-md mx-auto md:mx-0 mt-5 grid place-content-center ">
-                                <img src={getImg(product.ImgUrl)} alt="" className="w-[350px] -rotate-[15deg]"/>
+                                <img src={getImg(product.ImgUrl)} alt="" className={`w-[350px] -rotate-[15deg] ${loadedImg?(''):('hidden')}`} onLoad={()=>setLoadedImg(true)}/>
+                                <div className={`w-[350px] h-[350px] grid place-content-center bg-gray-300 ${loadedImg?('hidden'):('')} animate-pulse`}>
+                                    <p className="font-bold text-[#333333] rounded-md">Loading...</p>
+                                </div>
                             </div>
                         </div>
                         <div className="pl-5 pt-[5px] mt-[70px] md:flex md:flex-col md:space-y-5">

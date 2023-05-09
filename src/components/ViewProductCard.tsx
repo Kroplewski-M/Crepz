@@ -27,7 +27,8 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
             setSelectedSize(9);
         }
     },[selectedProduct])
- 
+    
+    const [loadedImg,setLoadedImg] = useState<boolean>(false);
     return(
         <section className="w-[100vw] h-[100vh] z-[100] fixed top-0 backdrop-blur-md grid place-content-center">
             <div className="w-[300px] md:w-[500px] pb-10 bg-[#333333] rounded-md relative">
@@ -37,7 +38,10 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                 <div className="mt-16">
                     <h1 className="font-bold text-gray-200 text-[20px] text-center">{selectedProduct?.Name}</h1>
                     <div className="w-[100px] md:w-[150px] md:h-[150px] h-[100px] mx-auto">
-                        <img className="w-[100%] h-[100%]" src={selectedProduct?.ImgUrl} alt="" />
+                        <img className={`w-[100%] h-[100%] ${loadedImg?(''):('hidden')}`} src={selectedProduct?.ImgUrl} alt="" onLoad={()=> setLoadedImg(true)}/>
+                        <div className={`w-[100%] h-[100%] bg-gray-200 grid place-content-center ${loadedImg?('hidden'):('')} animate-pulse rounded-md`}>
+                            <p className="font-bold text-[#333333] ">Loading...</p>
+                        </div>
                     </div>
                     <div className="pl-10 pt-5 md:w-[80%] md:mx-auto">
                     <h1 className="text-gray-200 font-bold text-[18px] md:text-[25px] pb-[10px]">£{selectedProduct?.Price}</h1>

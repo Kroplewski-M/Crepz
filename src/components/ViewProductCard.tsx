@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Close } from "./SVG/Close"
 import { Shoe } from "../context/ProductContext";
 import { useProductInfo } from "../context/ProductContext";
+import { kidsSizes,femaleSizes,mensSizes } from "../context/ProductContext";
 interface ViewProductCardProps{
     id:string,
     close:()=>void,
@@ -9,8 +10,6 @@ interface ViewProductCardProps{
 
 export const ViewProductCard = (props:ViewProductCardProps)=>{
     const [selectedProduct,setSelectedProduct] = useState<Shoe>();
-    const [adultSizes,setAdultSizes] = useState<number[]>([6,7,8,9,10,11,12]);
-    const [kidsSizes,setKidsSizes] = useState<number[]>([1,2,3,4,5]);
     const [selectedSize,setSelectedSize] = useState<number>(0);
     const {getProducts} = useProductInfo();
     useEffect(()=>{
@@ -58,13 +57,26 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                                     }
                                 </>):(<>
                                     {
-                                        adultSizes.map(size =>(
-                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-[#555555] text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
-                                                <p className="font-semibold">{size}</p>
-                                            </div>
-                                        ))
-                                    }
-                                
+                                            selectedProduct?.Gender == 'Male'?(<>
+                                            {
+                                                mensSizes.map((size) =>
+                                                    <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                    key={size} onClick={()=> setSelectedSize(size)}>
+                                                        <p className="font-bold">UK: {size}</p>
+                                                    </div>
+                                                    )
+                                            }
+                                            </>):(<>
+                                            {
+                                                 femaleSizes.map((size) =>
+                                                 <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                 key={size} onClick={()=> setSelectedSize(size)}>
+                                                     <p className="font-bold">UK: {size}</p>
+                                                 </div>
+                                                 )
+                                            }
+                                            </>)
+                                        }
                                 </>)
                             }
                         </div>

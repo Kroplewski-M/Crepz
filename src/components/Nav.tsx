@@ -69,7 +69,10 @@ export const Nav = ()=>{
             SetGenderTrue(value);
             navigate('/browse');
         }   
- 
+        const resetFilterAndRedirect = ()=>{
+            ResetFilter();
+            navigate('/browse');
+        }
     return(
         <>
             <nav className="w-[100vw] h-[70px] bg-[#444444] flex z-50">
@@ -81,7 +84,7 @@ export const Nav = ()=>{
                     !mobileMenu?(
                         <>
                             <div className='flex space-x-7 w-[230px] mx-auto text-gray-200 font-bold self-center text-[20px]'>
-                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>navigate('/browse')}>All</p>
+                                <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={resetFilterAndRedirect}>All</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Male')}>Male</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Female')}>Female</p>
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Kids')}>Kids</p>

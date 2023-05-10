@@ -1,6 +1,10 @@
 import { createContext, ReactNode, useContext,useEffect,useState } from "react";
 import { supabase } from '../supabaseClient';
 
+export const femaleSizes = [4,5,6,7,8,9,10]; 
+export const mensSizes = [6,7,8,9,10,11,12];
+export const kidsSizes = [1,2,3,4,5];
+
 export type Shoe = {
     id:string,
     Name:string,

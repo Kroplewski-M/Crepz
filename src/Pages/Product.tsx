@@ -4,13 +4,11 @@ import { Heart } from "../components/SVG/Heart";
 import { useParams } from "react-router-dom";
 import { Shoe, useProductInfo } from '../context/ProductContext';
 import { useWishListInfo } from '../context/WishListContext';
-
+import { kidsSizes, femaleSizes, mensSizes } from "../context/ProductContext";
 export const Product = ()=>{
     const {id} = useParams();
     const {wishList,toggleFromWishList} = useWishListInfo();
     const {getProducts} = useProductInfo();
-    const [adultSizes,setAdultSizes] = useState<number[]>([6,7,8,9,10,11,12]);
-    const [kidsSizes,setKidsSizes] = useState<number[]>([1,2,3,4,5]);
     const [selectedSize,setSelectedSize] = useState<number>(0);
     const [product,setProduct] = useState<Shoe>();
     
@@ -73,12 +71,25 @@ export const Product = ()=>{
                                     ):(
                                     <>
                                         {
-                                            adultSizes.map((size) =>
-                                                <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
-                                                key={size} onClick={()=> setSelectedSize(size)}>
-                                                    <p className="font-bold">UK: {size}</p>
-                                                </div>
-                                                )
+                                            product.Gender == 'Male'?(<>
+                                            {
+                                                mensSizes.map((size) =>
+                                                    <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                    key={size} onClick={()=> setSelectedSize(size)}>
+                                                        <p className="font-bold">UK: {size}</p>
+                                                    </div>
+                                                    )
+                                            }
+                                            </>):(<>
+                                            {
+                                                 femaleSizes.map((size) =>
+                                                 <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                 key={size} onClick={()=> setSelectedSize(size)}>
+                                                     <p className="font-bold">UK: {size}</p>
+                                                 </div>
+                                                 )
+                                            }
+                                            </>)
                                         }
                                     </>)
                                 }

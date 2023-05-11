@@ -5,8 +5,12 @@ import { useParams } from "react-router-dom";
 import { Shoe, useProductInfo } from '../context/ProductContext';
 import { useWishListInfo } from '../context/WishListContext';
 import { kidsSizes, femaleSizes, mensSizes } from "../context/ProductContext";
+import { useErrorInfo } from "../context/ErrorContext";
+import { useUserInfo } from "../context/UserContext";
 export const Product = ()=>{
     const {id} = useParams();
+    const {PushErrorMessage} = useErrorInfo();
+    const {userInfo} = useUserInfo();
     const {wishList,toggleFromWishList} = useWishListInfo();
     const {getProducts} = useProductInfo();
     const [selectedSize,setSelectedSize] = useState<number>(0);
@@ -33,6 +37,13 @@ export const Product = ()=>{
             return
         }
         return new URL(url, import.meta.url).href;
+    }
+    const toggleWishlist = (id:string)=>{
+        if(userInfo.id !== ''){
+            toggleFromWishList(id);
+        }else{
+            PushErrorMessage('You have to log in to favorite items!');
+        }
     }
     return(
         <section className="w-[100vw] pb-10">
@@ -110,7 +121,7 @@ export const Product = ()=>{
                                 </div>
                             </div>
                             <div className="w-[250px] h-[35px] bg-red-500 hover:bg-red-600 text-[#333333] font-bold grid place-content-center hover:cursor-pointer"
-                            onClick={()=>toggleFromWishList(product.id)}>
+                            onClick={()=>toggleWishlist(product.id)}>
                                 {
                                     wishList.includes(product.id)?(
                                         <div className="flex space-x-2">

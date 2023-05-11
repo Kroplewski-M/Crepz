@@ -10,9 +10,10 @@ import { useWishListInfo } from '../context/WishListContext';
 import { LogInMessage } from '../components/LogInMessage';
 import { useUserInfo } from '../context/UserContext';
 import { ViewProductCard } from '../components/ViewProductCard';
-
+import { useErrorInfo } from '../context/ErrorContext';
 export const Browse = ()=>{
     const {FilterState,maxPrice,minPrice} = useFilterInfo();
+    const {PushErrorMessage,RemoveFirstElement} = useErrorInfo();
     const {userInfo} = useUserInfo();
     const {wishList,toggleFromWishList} = useWishListInfo();
     const navigate = useNavigate();
@@ -22,8 +23,6 @@ export const Browse = ()=>{
     const mobileLimit:number = 768;
     const [products,setProducts] = useState<Shoe[]>();
     const [filteredProducts, setFilteredProducts] = useState<Shoe[]>([]);
-    const [showLogInMessage,setShowLogInMessage] = useState<boolean>(false);
-    const [logInMessage,setLogInMessage] = useState<string>('');
     const [selectedItem,setSelectedItem] = useState<string>('');
     const [showViewProductCard,setViewShowProductCard] = useState<boolean>(false);
 
@@ -109,23 +108,16 @@ export const Browse = ()=>{
         if(userInfo.id !== ''){
             toggleFromWishList(value);
         }else{
-            setLogInMessage('You have to log in to favorite items!');
-            setShowLogInMessage(true);
+            PushErrorMessage('You have to log in to favorite items!');
         }
     }
-    useEffect(()=>{
-        setTimeout(() => {
-            setShowLogInMessage(false);
-        }, 5000);
-    },[showLogInMessage])
 
     const addToBasketCheck = (value:string)=>{
         if(userInfo.id !== ''){
             setSelectedItem(value);
             setViewShowProductCard(true);
         }else{
-            setLogInMessage('You have to log in to add items to basket!');
-            setShowLogInMessage(true);
+            PushErrorMessage('You have to log in to add items to basket!');
         }
     }
     return(
@@ -168,9 +160,6 @@ export const Browse = ()=>{
                     </div>
                 </section>
             </div>
-            {
-                showLogInMessage?(<LogInMessage message={logInMessage}/>):(<></>)
-            }
             {
                 showViewProductCard?(<ViewProductCard close={closeViewProductItem} id={selectedItem}/>):(<></>)
             }

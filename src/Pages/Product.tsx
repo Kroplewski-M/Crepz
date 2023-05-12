@@ -7,7 +7,10 @@ import { useWishListInfo } from '../context/WishListContext';
 import { kidsSizes, femaleSizes, mensSizes } from "../context/ProductContext";
 import { useErrorInfo } from "../context/ErrorContext";
 import { useUserInfo } from "../context/UserContext";
+import { useNavigate  } from 'react-router-dom';
+
 export const Product = ()=>{
+    const navigate = useNavigate();
     const {id} = useParams();
     const {PushErrorMessage} = useErrorInfo();
     const {userInfo} = useUserInfo();
@@ -52,6 +55,10 @@ export const Product = ()=>{
                     <div className="mt-10 md:w-[70%] max-w-[2000px]  mx-auto md:pl-5 ">
                     <div className="md:flex md:space-x-3">
                         <div className="">
+                        <div onClick={()=>navigate('/browse')}
+                        className="w-[80px] h-[30px] bg-[#333333] ml-5 md:ml-0 -mt-5 md:mt-0 grid place-content-center mb-5 hover:bg-[#444444] hover:cursor-pointer">
+                                <p className="text-gray-200">Go back</p>
+                        </div>
                             <h1 className="font-bold text-[30px] md:text-[40px] text-center md:text-left">{product.Name}</h1>
                             <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px]  rounded-md mx-auto md:mx-0 mt-5 grid place-content-center ">
                                 <img src={getImg(product.ImgUrl)} alt="" className={`w-[350px] -rotate-[15deg] ${loadedImg?(''):('hidden')}`} onLoad={()=>setLoadedImg(true)}/>

@@ -13,12 +13,11 @@ import { useBasketInfo } from '../context/BasketContext';
 export const Nav = ()=>{
     const {SetGenderTrue,ResetFilter} = useFilterInfo();
     const {loginUser,logoutUser,userInfo} = useUserInfo();
-    const {basketItems} = useBasketInfo();
+    const {basketItems,basketQuantity,setState,basketState} = useBasketInfo();
     const navigate = useNavigate();
     const [windowSize, setWindowSize] = useState<number>(getWindowSize());
     const [mobileMenu, setMobileMenu] = useState<boolean>(false);
     const [showMobileMenu,setShowMobileMenu] = useState<boolean>(false);
-    const [showBasket, setShowBasket] = useState<boolean>(false);
     const mobileLimit:number = 768;
 
     function getWindowSize() {
@@ -49,9 +48,7 @@ export const Nav = ()=>{
         const closeMobileMenu =():void=>{
             setShowMobileMenu(false);
         }
-        const closeBasketMenu=():void=>{
-            setShowBasket(false)
-        }
+
         const isLoggedIn = ()=>{
             if(userInfo.id == ""){
                 navigate('/register');
@@ -74,9 +71,8 @@ export const Nav = ()=>{
             ResetFilter();
             navigate('/browse');
         }
-        const getBasketCount = ()=>{
-            return basketItems.length;
-        }
+
+
     return(
         <>
             <nav className="w-[100vw] h-[70px] bg-[#333333] flex z-50">
@@ -100,9 +96,9 @@ export const Nav = ()=>{
                                 <div className='hover:cursor-pointer hover:brightness-50' onClick={isLoggedIn}>
                                     <UserIcon fill="#FFFFFF" width={30} height={30} />
                                 </div>
-                                <div className='hover:cursor-pointer hover:brightness-50 relative' onClick={()=> setShowBasket(true)}>
+                                <div className='hover:cursor-pointer hover:brightness-50 relative' onClick={()=> setState(true)}>
                                     <div className='w-[20px] h-[20px] rounded-full bg-red-600 grid place-content-center absolute -top-1 -left-1'>
-                                        <p className='font-bold text-gray-300'>{getBasketCount()}</p>
+                                        <p className='font-bold text-gray-300'>{basketQuantity}</p>
                                     </div>
                                         <Basket fill="#FFFFFF" width={30} height={30}/>
                                 </div>
@@ -110,9 +106,9 @@ export const Nav = ()=>{
                         </>
                     ):(
                         <div className='w-[100%] flex place-content-end	self-center -mt-[5px]'>
-                            <div className='hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px] relative' onClick={()=> setShowBasket(true)}>
+                            <div className='hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px] relative' onClick={()=> setState(true)}>
                                 <div className='w-[20px] h-[20px] rounded-full bg-red-600 grid place-content-center absolute -top-1 -left-1'>
-                                    <p className='font-bold text-gray-300'>{getBasketCount()}</p>
+                                    <p className='font-bold text-gray-300'>{basketQuantity}</p>
                                 </div>
                                 <Basket width={35} height={35} fill='#FFFFFF' />
                             </div>
@@ -130,7 +126,7 @@ export const Nav = ()=>{
                     )
                 }
                 {
-                    showBasket?(<BasketMenu closeMenu={closeBasketMenu} />):(<></>)
+                    basketState?(<BasketMenu />):(<></>)
                 }
             </nav>
         </>

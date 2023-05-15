@@ -26,7 +26,7 @@ export const BasketCard = (props:BasketCardProps)=>{
                 <p className='text-gray-300 md:text-[18px]'>Price: <span className='text-gray-200 font-bold'> £{props.price} </span></p>
                 <div className='flex space-x-2'>
                     <label htmlFor="quantity" className='text-gray-300'>Quantity:</label>
-                        <select name="quantity" id="quantity" value={props.quantity} className='w-[40px] bg-gray-200 font-semibold hover:cursor-pointer'>
+                        <select name="quantity" id="quantity" value={props.quantity} className='w-[40px] bg-gray-200 font-semibold hover:cursor-pointer rounded-sm bg-gray-200'>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

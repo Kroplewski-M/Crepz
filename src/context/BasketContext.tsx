@@ -17,7 +17,9 @@ interface BasketProvider{
     totalPrice:()=>number,
     clearBasket: ()=>void,
     updateQuantity: (quantity:number, id:number)=>void,
-    getTotalItemCount:()=>number,
+    basketQuantity:number,
+    basketState:boolean,
+    setState:(state:boolean)=>void,
 }
 
 interface BasketProviderProps{
@@ -33,10 +35,15 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
     const [basketItems,setBasketItems] = useState<BasketItem[]>([]);
     const [products,setProducts] = useState<Shoe[]>();
     const {getProducts} = useProductInfo();
-
+    const [basketQuantity,setBasketQuantity] = useState<number>(0);
+    const [basketState,setBasketState]= useState<boolean>(false);
     useEffect(()=>{
         setProducts(getProducts());
     },[getProducts()])
+
+    const setState = (state:boolean)=>{
+        setBasketState(state);
+    }
 
     const addToBasket = (id:string,selectedSize:number)=>{
         let selectedItem:Shoe = {id:'',Name:'',Brand:'',Desc:'',Gender:'',Price:0,ImgUrl:''};
@@ -58,6 +65,8 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
                 }
             });
         }
+        setBasketQuantity(basketQuantity + 1);
+        setState(true);
     }
     const removeFromBasket = (value:string,selectedSize:number)=>{
         
@@ -66,15 +75,26 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
 
     }
     const totalPrice = ()=>{
-        return 0;
+        let total = 0;
+        basketItems.map(product =>{
+            total = total + (product.price * product.quantity);
+        })
+        return total;
     }
     const clearBasket = ()=>{
         setBasketItems([]);
     }
+
     const getTotalItemCount = ()=>{
-        return 0;
+        let count = 0;
+        basketItems.map(product=>{
+            count = count + product.quantity;
+        })
+        return count;
     }
-    return <BasketProvider.Provider value={{basketItems,addToBasket,removeFromBasket,totalPrice,clearBasket,updateQuantity,getTotalItemCount}} >
+
+
+    return <BasketProvider.Provider value={{basketItems,addToBasket,removeFromBasket,totalPrice,clearBasket,updateQuantity,basketQuantity,basketState,setState}} >
         {children}
     </BasketProvider.Provider>
 }

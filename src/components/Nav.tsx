@@ -96,14 +96,20 @@ export const Nav = ()=>{
                                 <div className='hover:cursor-pointer hover:brightness-50' onClick={isLoggedIn}>
                                     <UserIcon fill="#FFFFFF" width={30} height={30} />
                                 </div>
-                                <div className='hover:cursor-pointer hover:brightness-50' onClick={()=> setShowBasket(true)}>
-                                    <Basket fill="#FFFFFF" width={30} height={30}/>
+                                <div className='hover:cursor-pointer hover:brightness-50 relative' onClick={()=> setShowBasket(true)}>
+                                    <div className='w-[20px] h-[20px] rounded-full bg-red-600 grid place-content-center absolute -top-1 -left-1'>
+                                        <p className='font-bold text-gray-300'>0</p>
+                                    </div>
+                                        <Basket fill="#FFFFFF" width={30} height={30}/>
                                 </div>
                             </div>
                         </>
                     ):(
                         <div className='w-[100%] flex place-content-end	self-center -mt-[5px]'>
-                            <div className='hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px]' onClick={()=> setShowBasket(true)}>
+                            <div className='hover:cursor-pointer hover:brightness-50 mr-5 mt-[3px] relative' onClick={()=> setShowBasket(true)}>
+                                <div className='w-[20px] h-[20px] rounded-full bg-red-600 grid place-content-center absolute -top-1 -left-1'>
+                                    <p className='font-bold text-gray-300'>0</p>
+                                </div>
                                 <Basket width={35} height={35} fill='#FFFFFF' />
                             </div>
                             <div onClick={()=> setShowMobileMenu(true)} className='w-[30px] h-[30px] mr-5 mt-[5px] hover:cursor-pointer'>

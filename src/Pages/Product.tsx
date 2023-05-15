@@ -8,9 +8,10 @@ import { kidsSizes, femaleSizes, mensSizes } from "../context/ProductContext";
 import { useErrorInfo } from "../context/ErrorContext";
 import { useUserInfo } from "../context/UserContext";
 import { useNavigate  } from 'react-router-dom';
-
+import { useBasketInfo } from "../context/BasketContext";
 export const Product = ()=>{
     const navigate = useNavigate();
+    const {addToBasket} = useBasketInfo();
     const {id} = useParams();
     const {PushErrorMessage} = useErrorInfo();
     const {userInfo} = useUserInfo();
@@ -57,7 +58,7 @@ export const Product = ()=>{
                         <div className="">
                         <div onClick={()=>navigate('/browse')}
                         className="w-[80px] h-[30px] bg-[#333333] ml-5 md:ml-0 -mt-5 md:mt-0 grid place-content-center mb-5 hover:bg-[#444444] hover:cursor-pointer">
-                                <p className="text-gray-200">Go back</p>
+                                <p className="text-gray-200 font-bold">Go back</p>
                         </div>
                             <h1 className="font-bold text-[30px] md:text-[40px] text-center md:text-left">{product.Name}</h1>
                             <div className="w-[300px] md:w-[500px] h-[200px] md:h-[300px]  rounded-md mx-auto md:mx-0 mt-5 grid place-content-center ">
@@ -79,7 +80,7 @@ export const Product = ()=>{
                                     <>
                                         {
                                             kidsSizes.map((size) =>
-                                            <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`} 
+                                            <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] md:hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`} 
                                             key={size} onClick={()=> setSelectedSize(size)}>
                                                     <p className="font-bold">UK: {size}</p>
                                                 </div>
@@ -92,7 +93,7 @@ export const Product = ()=>{
                                             product.Gender == 'Male'?(<>
                                             {
                                                 mensSizes.map((size) =>
-                                                    <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                    <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] md:hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
                                                     key={size} onClick={()=> setSelectedSize(size)}>
                                                         <p className="font-bold">UK: {size}</p>
                                                     </div>
@@ -101,7 +102,7 @@ export const Product = ()=>{
                                             </>):(<>
                                             {
                                                  femaleSizes.map((size) =>
-                                                 <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                 <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] md:hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
                                                  key={size} onClick={()=> setSelectedSize(size)}>
                                                      <p className="font-bold">UK: {size}</p>
                                                  </div>
@@ -121,7 +122,7 @@ export const Product = ()=>{
     
                     </div>
                         <div className="flex flex-col md:flex-row-reverse w-[300px] md:w-[100%] mx-auto md:mx-0 mt-5 md:mt-10 md:mr-10">
-                            <div className="w-[250px] h-[35px] bg-[#333333] hover:bg-[#444444] text-gray-200 font-bold grid place-content-center hover:cursor-pointer md:ml-5 mb-5 md:mb-0">
+                            <div className="w-[250px] h-[35px] bg-[#333333] hover:bg-[#444444] text-gray-200 font-bold grid place-content-center hover:cursor-pointer md:ml-5 mb-5 md:mb-0" onClick={()=> addToBasket(product.id,selectedSize)}>
                                 <div className="flex space-x-2">
                                     <p>Add to Basket</p>
                                     <Basket fill="#FFFFFF" width={25} height={25}/>

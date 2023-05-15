@@ -80,7 +80,6 @@ function App() {
                   <p>© 2023 Crepz, Inc. All Rights Reserved</p>
                   <p>Web app made by Mateusz Kroplewski</p>
               </footer>
-
           </div>
         </FilterContext>
       </div>

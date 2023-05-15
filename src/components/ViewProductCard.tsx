@@ -50,7 +50,7 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                                 selectedProduct?.Gender == 'Kids'?(<>
                                     {
                                         kidsSizes.map(size =>(
-                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-[#555555] text-gray-200':'bg-gray-300'} hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
+                                            <div key={size} className={`w-[40px] h-[40px] ${selectedSize === size?'bg-[#555555] text-gray-200':'bg-gray-300'} md:hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[2px] border-solid border-black/60`} onClick={()=>setSelectedSize(size)}>
                                                 <p className="font-semibold">{size}</p>
                                             </div>
                                         ))
@@ -60,7 +60,7 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                                             selectedProduct?.Gender == 'Male'?(<>
                                             {
                                                 mensSizes.map((size) =>
-                                                    <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                    <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] md:hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
                                                     key={size} onClick={()=> setSelectedSize(size)}>
                                                         <p className="font-bold">UK: {size}</p>
                                                     </div>
@@ -69,7 +69,7 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                                             </>):(<>
                                             {
                                                  femaleSizes.map((size) =>
-                                                 <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
+                                                 <div className={`${selectedSize === size?'bg-gray-700 text-gray-200':'bg-gray-300'} w-[60px] h-[30px] md:hover:bg-gray-400 hover:cursor-pointer mr-[10px] mb-[10px] grid place-content-center border-[1px] border-solid border-black`}
                                                  key={size} onClick={()=> setSelectedSize(size)}>
                                                      <p className="font-bold">UK: {size}</p>
                                                  </div>

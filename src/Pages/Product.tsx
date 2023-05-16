@@ -35,7 +35,13 @@ export const Product = ()=>{
         })
 
     },[]);
-
+    const checkAddToBasket = (id:string,size:number) =>{
+        if(userInfo.id !== ''){
+            addToBasket(id,size)
+        }else{
+            PushErrorMessage('You have to log in to add to basket!');
+        }
+    }
     const getImg = (url:string)=>{
         if(url == null){
             return
@@ -122,7 +128,7 @@ export const Product = ()=>{
     
                     </div>
                         <div className="flex flex-col md:flex-row-reverse w-[300px] md:w-[100%] mx-auto md:mx-0 mt-5 md:mt-10 md:mr-10">
-                            <div className="w-[250px] h-[35px] bg-[#333333] hover:bg-[#444444] text-gray-200 font-bold grid place-content-center hover:cursor-pointer md:ml-5 mb-5 md:mb-0" onClick={()=> addToBasket(product.id,selectedSize)}>
+                            <div className="w-[250px] h-[35px] bg-[#333333] hover:bg-[#444444] text-gray-200 font-bold grid place-content-center hover:cursor-pointer md:ml-5 mb-5 md:mb-0" onClick={()=> checkAddToBasket(product.id,selectedSize)}>
                                 <div className="flex space-x-2">
                                     <p>Add to Basket</p>
                                     <Basket fill="#FFFFFF" width={25} height={25}/>

@@ -25,7 +25,7 @@ export const ErrorContext = ({children}:ErrorProviderProps)=>{
         while(ErrorMessages.length != 0){
             const interval = setInterval(() => {
                 RemoveFirstElement();
-            }, 2000);
+            }, 500);
             return () => clearInterval(interval);
         }
     },[size])

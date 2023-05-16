@@ -3,13 +3,20 @@ import { Close } from "./SVG/Close"
 import { Shoe } from "../context/ProductContext";
 import { useProductInfo } from "../context/ProductContext";
 import { kidsSizes,femaleSizes,mensSizes } from "../context/ProductContext";
+import { useErrorInfo } from "../context/ErrorContext";
+import { useBasketInfo } from "../context/BasketContext";
+import { useUserInfo } from "../context/UserContext";
 interface ViewProductCardProps{
     id:string,
     close:()=>void,
 }
 
 export const ViewProductCard = (props:ViewProductCardProps)=>{
-    const [selectedProduct,setSelectedProduct] = useState<Shoe>();
+    const {PushErrorMessage} = useErrorInfo();
+    const {userInfo} = useUserInfo();
+    const {addToBasket} = useBasketInfo();
+
+    const [selectedProduct,setSelectedProduct] = useState<Shoe>({id:'',Name:'',Brand:'',Desc:'',Gender:'',ImgUrl:'',Price:0});
     const [selectedSize,setSelectedSize] = useState<number>(0);
     const {getProducts} = useProductInfo();
     useEffect(()=>{
@@ -28,6 +35,15 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
     },[selectedProduct])
     
     const [loadedImg,setLoadedImg] = useState<boolean>(false);
+
+    const checkAddToBasket = (id:string,size:number) =>{
+        if(userInfo.id !== ''){
+            addToBasket(id,size);
+            props.close();
+        }else{
+            PushErrorMessage('You have to log in to add to basket!');
+        }
+    }
     return(
         <section className="w-[100vw] h-[100vh] z-[100] fixed top-0 backdrop-blur-md grid place-content-center">
             <div className="w-[300px] md:w-[500px] pb-10 bg-[#333333] rounded-md relative">
@@ -81,7 +97,7 @@ export const ViewProductCard = (props:ViewProductCardProps)=>{
                             }
                         </div>
                     </div>
-                        <div className="w-[200px] h-[30px] mx-auto mt-5">
+                        <div className="w-[200px] h-[30px] mx-auto mt-5" onClick={()=> checkAddToBasket(selectedProduct.id,selectedSize)}>
                             <button className="w-[100%] h-[100%] bg-gray-200 hover:bg-gray-300 hover:font-bold">Add To Basket</button>
                         </div>
                 </div>

@@ -4,9 +4,10 @@ import { useNavigate  } from 'react-router-dom';
 import { useState } from 'react';
 import { UserIcon } from './SVG/UserIcon';
 import { useWishListInfo } from '../context/WishListContext';
-
+import { useBasketInfo } from '../context/BasketContext';
 export const ProfileCard = ()=>{
     const {loginUser,logoutUser,userInfo} = useUserInfo();
+    const {clearBasket} = useBasketInfo();
     const [logOutPromt,setLogOutPromt] = useState(false);
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
@@ -26,6 +27,7 @@ export const ProfileCard = ()=>{
         finally{
             setLoading(false);
             clearWishList();
+            clearBasket();
         }
     }
     return(

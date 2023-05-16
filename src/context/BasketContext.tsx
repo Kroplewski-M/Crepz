@@ -16,7 +16,7 @@ interface BasketProvider{
     removeFromBasket:(value:string,size:number)=>void,
     totalPrice:()=>number,
     clearBasket: ()=>void,
-    updateQuantity: (quantity:number, id:number)=>void,
+    updateQuantity: (quantity:number, id:string,size:number)=>void,
     basketQuantity:number,
     basketState:boolean,
     setState:(state:boolean)=>void,
@@ -41,10 +41,19 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
         setProducts(getProducts());
     },[getProducts()])
 
+    useEffect(()=>{
+        updateBasketQuantity();
+    },[basketItems])
     const setState = (state:boolean)=>{
         setBasketState(state);
     }
-
+    const updateBasketQuantity = ()=>{
+        let quantity = 0;
+        basketItems.map((item)=>{
+            quantity = quantity + (item.quantity);
+        })
+        setBasketQuantity(quantity);
+    }
     const addToBasket = (id:string,selectedSize:number)=>{
         let selectedItem:Shoe = {id:'',Name:'',Brand:'',Desc:'',Gender:'',Price:0,ImgUrl:''};
         products?.map((item) =>{
@@ -61,18 +70,31 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
         }else{
             basketItems.map((item)=>{
                 if(item.id == id && item.size == selectedSize){
-                    item.quantity++
+                    if(item.quantity < 10){
+                        item.quantity++
+                    }
                 }
             });
         }
-        setBasketQuantity(basketQuantity + 1);
         setState(true);
+        updateBasketQuantity();
     }
-    const removeFromBasket = (value:string,selectedSize:number)=>{
-        
+    const removeFromBasket = (id:string,size:number)=>{
+        let tempBasket = basketItems.filter(function(currItems){
+            return currItems.id !== id && currItems.size !== size;
+        })
+        setBasketItems(tempBasket);
     }
-    const updateQuantity = (quantity:number,id:number)=>{
-
+    const updateQuantity = (quantity:number,id:string, size:number)=>{
+        let tempBasket:BasketItem[] =[];
+        basketItems.map((item)=>{
+            if(item.id == id && item.size == size){
+                tempBasket.push({id:item.id,name:item.name,imageUrl:item.imageUrl,size:item.size,price:item.price,quantity:quantity});
+            }else{
+                tempBasket.push(item);
+            }
+        }) 
+        setBasketItems(tempBasket);
     }
     const totalPrice = ()=>{
         let total = 0;
@@ -83,14 +105,6 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
     }
     const clearBasket = ()=>{
         setBasketItems([]);
-    }
-
-    const getTotalItemCount = ()=>{
-        let count = 0;
-        basketItems.map(product=>{
-            count = count + product.quantity;
-        })
-        return count;
     }
 
 

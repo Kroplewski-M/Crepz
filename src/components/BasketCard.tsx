@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import nikeShoe from '../assets/images/nikeShoe.png'
-
+import { useBasketInfo } from '../context/BasketContext'
 interface BasketCardProps{
     id:string,
     name:string,
@@ -12,6 +11,7 @@ interface BasketCardProps{
 
 export const BasketCard = (props:BasketCardProps)=>{
     const [loadedImg,setLoadedImg] = useState<boolean>(false);
+    const {removeFromBasket,updateQuantity} = useBasketInfo();
     return(
         <div className="w-[100%] h-[230px] md:h-[255px] bg-[#333333] rounded-md flex mt-5">
             <div className='w-[120px] md:w-[150px] h-[100%] bg-[#222222] grid place-content-center rounded-l-md'>
@@ -26,7 +26,7 @@ export const BasketCard = (props:BasketCardProps)=>{
                 <p className='text-gray-300 md:text-[18px]'>Price: <span className='text-gray-200 font-bold'> £{props.price} </span></p>
                 <div className='flex space-x-2'>
                     <label htmlFor="quantity" className='text-gray-300'>Quantity:</label>
-                        <select name="quantity" id="quantity" value={props.quantity} className='w-[40px] bg-gray-200 font-semibold hover:cursor-pointer rounded-sm bg-gray-200'>
+                        <select name="quantity" id="quantity" value={props.quantity} onChange={(event)=>updateQuantity(parseInt(event.target.value),props.id,props.size)} className='w-[40px] bg-gray-200 font-semibold hover:cursor-pointer rounded-sm bg-gray-200'>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -40,7 +40,7 @@ export const BasketCard = (props:BasketCardProps)=>{
                         </select>
                 </div>
                 <p className='text-gray-200 font-bold text-[20px] md:text-[24px]'>Total: £{(props.price * props.quantity).toFixed(2)}</p>
-                <div className='w-[80%] md:w-[170px] h-[30px] mx-auto'>
+                <div className='w-[80%] md:w-[170px] h-[30px] mx-auto' onClick={()=>removeFromBasket(props.id,props.size)}>
                     <button className='w-[100%] h-[100%] font-bold bg-red-600 hover:bg-red-800 rounded-md mt-5'>Remove</button>
                 </div>
             </div>

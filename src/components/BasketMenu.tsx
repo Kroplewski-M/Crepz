@@ -21,7 +21,7 @@ export const BasketMenu = ()=>{
                         {
                             basketItems.map((item) =>(
                                 <div key={item.id}>
-                                <BasketCard id={item.id} name={item.name} imageUrl={item.imageUrl} size={item.size} price={item.price} quantity={item.quantity} />
+                                    <BasketCard id={item.id} name={item.name} imageUrl={item.imageUrl} size={item.size} price={item.price} quantity={item.quantity} />
                                 </div>
                             ))
                         }

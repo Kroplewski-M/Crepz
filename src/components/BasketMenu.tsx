@@ -19,8 +19,8 @@ export const BasketMenu = ()=>{
                         <p className='text-gray-300 font-semibold mt-10 text-center md:text-left'>it's looking empty in here... </p>
                     </>):(<>
                         {
-                            basketItems.map((item) =>(
-                                <div key={item.id}>
+                            basketItems.map((item,index) =>(
+                                <div key={item.id+index}>
                                     <BasketCard id={item.id} name={item.name} imageUrl={item.imageUrl} size={item.size} price={item.price} quantity={item.quantity} />
                                 </div>
                             ))

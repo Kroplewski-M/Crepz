@@ -71,7 +71,7 @@ export const Product = ()=>{
                         <div className="pl-5 pt-[5px] mt-[70px] md:flex md:flex-col md:space-y-5">
                             <div className="flex place-content-between pr-5">
                                 <p>{product.Gender} shoes</p>
-                                <p className="">Brand: {product.Brand}</p>
+                                <p className="">Brand: <span className="font-semibold">{product.Brand}</span></p>
                             </div>
                             <p className="mt-[10px] font-semibold text-[20px]">Sizes:</p>
                             <div className="flex flex-wrap mt-[10px]">

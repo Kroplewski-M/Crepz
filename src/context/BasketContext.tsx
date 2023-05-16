@@ -81,7 +81,11 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
     }
     const removeFromBasket = (id:string,size:number)=>{
         let tempBasket = basketItems.filter(function(currItems){
-            return currItems.id !== id && currItems.size !== size;
+            if(currItems.id === id && currItems.size === size){
+                return false;
+            }else{
+                return currItems;
+            }
         })
         setBasketItems(tempBasket);
     }

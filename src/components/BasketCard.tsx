@@ -21,7 +21,8 @@ export const BasketCard = (props:BasketCardProps)=>{
                 </div>
             </div>
             <div className='mt-[10px] pl-[10px] md:pl-10 flex flex-col space-y-[7px] w-[80%]'>
-                <h1 className={`text-center md:text-left font-bold text-gray-200 ${props.name.length > 17? ('md:text-[16px]'):('md:text-[20px]')}`}>{props.name}</h1>
+                <h1 className={`text-center md:text-left font-bold text-gray-200 hidden md:block ${props.name.length > 17? ('md:text-[16px]'):('md:text-[20px]')}`}>{props.name}</h1>
+                <h1 className={`text-center md:text-left font-bold text-gray-200 md:hidden ${props.name.length > 17? ('md:text-[16px]'):('md:text-[20px]')}`}>{(props.name)?.substring(0,15)}...</h1>
                 <p className='text-gray-300 md:text-[18px]'>Size: <span className='text-gray-200 font-bold'> {props.size} </span></p>
                 <p className='text-gray-300 md:text-[18px]'>Price: <span className='text-gray-200 font-bold'> £{props.price} </span></p>
                 <div className='flex space-x-2'>

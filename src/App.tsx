@@ -15,6 +15,7 @@ import { PageNotFound } from "./Pages/PageNotFound";
 import { WishListContext } from "./context/WishListContext";
 import { BasketContext } from "./context/BasketContext";
 import { useErrorInfo } from "./context/ErrorContext";
+import { CheckOut } from "./Pages/CheckOut";
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
   const {ErrorMessages} = useErrorInfo();
@@ -70,6 +71,7 @@ function App() {
                   <Route path="/browse" element={<Browse />} />
                   <Route path="/product/:id" element={<Product />} />
                   <Route path="*"  element={<Navigate to="/404" />}/>
+                  <Route path="/checkout" element={<CheckOut />}/>
                   <Route path="/404"  element={<PageNotFound />}/>
                 </Routes>
               </BasketContext>

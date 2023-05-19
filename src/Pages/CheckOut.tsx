@@ -1,11 +1,10 @@
-import shoe from '../assets/images/NikeLogo.jpg';
-import { Heart } from '../components/SVG/Heart';
+import { Bin } from '../components/SVG/Bin';
 import { useBasketInfo } from '../context/BasketContext';
 export const CheckOut = ()=>{
     const {basketItems,updateQuantity,totalPrice} = useBasketInfo();
 
     return(
-        <section className="w-[100vw] grid place-content-center">
+        <section className="w-[100vw] grid place-content-center pb-10">
             <h1 className="font-bold text-[30px] mt-10 text-center text-[#333333]">My basket</h1>
             <table className="table-auto mt-5 ">
                 <thead className="bg-[#333333] text-gray-200">
@@ -29,7 +28,8 @@ export const CheckOut = ()=>{
                                     </td>
                                     <td>
                                         <div className='w-[65px] mx-auto'>
-                                            <select name="quantity" id="quantity" value={product.quantity} className=''>
+                                            <select name="quantity" id="quantity" value={product.quantity} onChange={(event)=>updateQuantity(parseInt(event.target.value),product.id,product.size)}
+                                             className='w-[50px] bg-gray-200 font-semibold hover:cursor-pointer rounded-sm '>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -46,8 +46,8 @@ export const CheckOut = ()=>{
                                     <td>
                                         <div className='grid place-content-center'>
                                             <div className='flex'>
-                                                <p className='text-center mr-5'>£{(product.price * product.quantity).toFixed(2)}</p>
-                                                <Heart width={20} height={20} fill='#333333'/>
+                                                <p className='text-center mr-5 font-semibold'>£{(product.price * product.quantity).toFixed(2)}</p>
+                                                <Bin width={20} height={20} fill='#CC2222'/>
                                             </div>
                                         </div>
                                     </td>
@@ -57,15 +57,20 @@ export const CheckOut = ()=>{
                 </tbody>
             </table>
             <div>
-                    <div className=''>
-                        <button>Back To Shopping</button>
+                    <div className='w-[170px] h-[30px] mt-5'>
+                        <button className='w-[100%] h-[100%] bg-[#333333] hover:bg-[#444444] text-gray-200 rounded-sm'> ← Back To Shopping</button>
                     </div>
-                    <div className='flex flex-row-reverse -mt-[25px]'>
-                        <button>Clear All</button>
+                    <div className='flex flex-row-reverse -mt-[30px]'>
+                        <div className='flex w-[100px] h-[30px] bg-[#FF1111] hover:bg-[#FF5555] hover:cursor-pointer pt-[3px] rounded-sm'>
+                            <p className='pl-[5px] pr-[10px]'>Clear All</p>
+                            <Bin width={20} height={20} fill='#222222'/>
+                        </div>
                     </div>
 
                 <p className='font-bold text-[#333333] text-[30px] mt-5'>Total: £{totalPrice()}</p>
-                <button>Continue to checkout</button>
+                <div className='w-[220px] h-[40px] mt-5 '>
+                    <button className='w-[100%] h-[100%] bg-[#333333] hover:bg-[#444444] font-bold text-gray-200 rounded-sm text-[19px]'>Continue to checkout</button>
+                </div>
 
             </div>
         </section>

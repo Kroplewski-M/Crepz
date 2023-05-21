@@ -30,16 +30,16 @@ export const CheckOut = ()=>{
                                 basketItems.map(product =>(
                                         <tr className='bg-gray-200 h-[70px] border-b border-black'>
                                             <td className='flex pt-[10px]'>
-                                                <img src={product.imageUrl} alt="" className='w-[70px] ml-[5px] -rotate-[15deg]'/>
-                                                <p className='ml-[10px]'>{product.name}</p>
+                                                <img src={product.imageUrl} alt="" className='w-[70px] ml-[5px] -rotate-[15deg] hidden md:block'/>
+                                                <p className='ml-[10px] font-semibold text-[12px] md:text-[16px]'>{product.name}</p>
                                             </td>
                                             <td>
-                                                <p className='text-center'>£{product.price}</p>
+                                                <p className='text-center font-semibold'>£{product.price}</p>
                                             </td>
                                             <td>
                                                 <div className='w-[65px] mx-auto'>
                                                     <select name="quantity" id="quantity" value={product.quantity} onChange={(event)=>updateQuantity(parseInt(event.target.value),product.id,product.size)}
-                                                    className='w-[50px] bg-gray-200 font-semibold hover:cursor-pointer rounded-sm '>
+                                                    className='w-[50px] bg-gray-300 font-semibold hover:cursor-pointer rounded-sm '>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
@@ -69,20 +69,20 @@ export const CheckOut = ()=>{
                         </tbody>
                     </table>
                     <div>
-                        <div className='w-[170px] h-[30px] mt-5' onClick={()=> navigate('/browse')}>
+                        <div className='w-[170px] h-[30px] mt-5 ml-[5px] md:ml-0' onClick={()=> navigate('/browse')}>
                             <button className='w-[100%] h-[100%] bg-[#333333] hover:bg-[#444444] text-gray-200 rounded-sm'> ← Back To Shopping</button>
                         </div>
-                        <div className='flex flex-row-reverse -mt-[33px]' onClick={()=> clearBasket()}>
-                            <div className='grid place-content-center w-[120px] h-[30px] bg-[#D10000] hover:bg-[#FF5555] hover:cursor-pointer rounded-sm'>
+                        <div className='flex flex-row-reverse -mt-[30px]' onClick={()=> clearBasket()}>
+                            <div className='grid place-content-center w-[120px] h-[30px] bg-[#D10000] hover:bg-[#FF5555] hover:cursor-pointer rounded-sm mr-[5px] md:mr-0'>
                                 <div className='flex'>
                                     <p className='pl-[5px] pr-[10px] text-gray-100 font-semibold'>Clear All</p>
                                     <Bin width={20} height={20} fill='#FFFFFF'/>
-                                </div>
                             </div>
+                        </div>
                     </div>
 
-                    <p className='font-bold text-[#333333] text-[30px] mt-5'>Total: £{totalPrice().toFixed(2)}</p>
-                    <div className='w-[220px] h-[40px] mt-5 '>
+                    <p className='font-bold text-[#333333] text-[30px] mt-5 text-center md:text-left'>Total: £{totalPrice().toFixed(2)}</p>
+                    <div className='w-[220px] h-[40px] mt-5 mx-auto md:mx-0'>
                         <button className='w-[100%] h-[100%] bg-[#333333] hover:bg-[#444444] font-bold text-gray-200 rounded-sm text-[19px]'>Continue to checkout</button>
                     </div>
                     </div>

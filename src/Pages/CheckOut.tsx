@@ -16,7 +16,7 @@ export const CheckOut = ()=>{
                         <EmptyBox width={100} height={100}/>
                     </div>
                     <p className='text-[20px] font-semibold mt-5'>Your basket is empty!</p>
-                    <p className='text-[20px] font-semibold mb-5'>Return to browse products and start shopping!</p>
+                    <p className='text-[20px] font-semibold mb-5 w-[100vw] mx-auto md:mx-auto md:w-[500px]'>Return to browse products and start shopping!</p>
                     <div className='w-[200px] h-[35px] mx-auto' onClick={()=>navigate('/browse')}>
                         <button className='w-[100%] h-[100%] bg-[#333333] hover:bg-[#444444] font-bold text-gray-200'>Browse items</button>
                     </div>

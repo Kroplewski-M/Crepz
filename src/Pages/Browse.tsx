@@ -11,6 +11,7 @@ import { LogInMessage } from '../components/LogInMessage';
 import { useUserInfo } from '../context/UserContext';
 import { ViewProductCard } from '../components/ViewProductCard';
 import { useErrorInfo } from '../context/ErrorContext';
+import { Search } from '../components/SVG/Search';
 export const Browse = ()=>{
     const {FilterState,maxPrice,minPrice} = useFilterInfo();
     const {PushErrorMessage,RemoveFirstElement} = useErrorInfo();
@@ -53,10 +54,14 @@ export const Browse = ()=>{
         setProducts(getProducts());
     },[getProducts()]);
 
+    const [searchProduct,setSearchProduct] = useState<string>('');
+    function setSearchValue(event:any){
+        setSearchProduct(event.target.value);
+    }
     useEffect(()=>{
         setFilteredProducts([]);
         getFilteredProducts();
-    },[FilterState(),products,maxPrice,minPrice])
+    },[FilterState(),products,maxPrice,minPrice,searchProduct])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -68,6 +73,7 @@ export const Browse = ()=>{
     const closeViewProductItem=()=>{
         setViewShowProductCard(false);
     }
+
     const getFilteredProducts = ()=>{
         const filterBrands:string[] = [];
         const filterGender:string[] = [];
@@ -91,7 +97,7 @@ export const Browse = ()=>{
         });
         products?.map((product)=>{
             if((filterBrands.includes(product.Brand) || filterBrands.length == 0) && (filterGender.includes(product.Gender) || filterGender.length == 0)
-                && product.Price >= minPrice && product.Price <= maxPrice){
+                && product.Price >= minPrice && product.Price <= maxPrice && (searchProduct !=''? product.Brand.includes(searchProduct) || product.Name.includes(searchProduct):product)){
                 setFilteredProducts((prevProducts) => [...prevProducts,product]);
             }
 
@@ -136,7 +142,16 @@ export const Browse = ()=>{
                     <Filter closeFilter={closeFilter} />):(<></>)
                 }
                 <section className='md:w-[70%] w-[100vw] md:ml-16 -mt-5'>
-                    <h1 className='font-bold text-[40px] text-[#222222] mt-[5px] text-center md:text-left'>Browse</h1>
+                    <div className='flex flex-col md:flex-row mt-[5px]'>
+                        <h1 className='font-bold text-[40px] text-[#222222] text-center md:text-left'>Browse</h1>
+                        <div className='w-[300px] mx-auto md:mx-0 flex relative'>
+                            <input type="text" className='w-[300px] h-[35px] bg-gray-300 md:ml-16 rounded-md pl-[5px] mt-[14px] focus:outline-none font-semibold text-[#222222]' onChange={setSearchValue}
+                            placeholder='Search for product...'/>
+                            <div className='w-[30px] absolute -right-1 top-5 hover:cursor-pointer'>
+                                <Search width={20} height={20} fill='#333333' />
+                            </div>
+                        </div>
+                    </div>
                     <div className='flex flex-wrap w-[100%]'>
                             {
                                 filteredProducts?.map(product =>(

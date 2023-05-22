@@ -1,6 +1,8 @@
 import { Bin } from '../components/SVG/Bin';
+import { EmptyBox } from '../components/SVG/EmptyBox';
 import { useBasketInfo } from '../context/BasketContext';
 import { useNavigate } from 'react-router-dom';
+
 export const CheckOut = ()=>{
     const {basketItems,updateQuantity,totalPrice,removeFromBasket,clearBasket} = useBasketInfo();
     const navigate = useNavigate();
@@ -9,9 +11,13 @@ export const CheckOut = ()=>{
             <h1 className="font-bold text-[30px] mt-10 text-center text-[#333333]">My basket</h1>
             {
                 basketItems.length == 0?(<>
-                <div className='mt-10'>
-                    <p className='text-[20px] font-semibold mb-5'>Your basket is empty!</p>
-                    <div className='w-[200px] h-[35px]' onClick={()=>navigate('/browse')}>
+                <div className='mt-10 w-[500px] text-center'>
+                    <div className='w-[100px] mx-auto'>
+                        <EmptyBox width={100} height={100}/>
+                    </div>
+                    <p className='text-[20px] font-semibold mt-5'>Your basket is empty!</p>
+                    <p className='text-[20px] font-semibold mb-5'>Return to browse products and start shopping!</p>
+                    <div className='w-[200px] h-[35px] mx-auto' onClick={()=>navigate('/browse')}>
                         <button className='w-[100%] h-[100%] bg-[#333333] hover:bg-[#444444] font-bold text-gray-200'>Browse items</button>
                     </div>
                 </div>

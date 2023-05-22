@@ -145,10 +145,19 @@ export const Browse = ()=>{
                     <div className='flex flex-col md:flex-row mt-[5px]'>
                         <h1 className='font-bold text-[40px] text-[#222222] text-center md:text-left'>Browse</h1>
                         <div className='w-[300px] mx-auto md:mx-0 flex relative'>
-                            <input type="text" className='w-[300px] h-[35px] bg-gray-300 md:ml-16 rounded-md pl-[5px] mt-[14px] focus:outline-none font-semibold text-[#222222]' onChange={setSearchValue}
+                            <input type="text" className='w-[300px] h-[35px] bg-gray-300 md:ml-16 rounded-md pl-[5px] mt-[14px] focus:outline-none font-semibold text-[#222222]' onChange={setSearchValue} value={searchProduct}
                             placeholder='Search for product...'/>
                             <div className='w-[30px] absolute -right-1 top-5 hover:cursor-pointer'>
-                                <Search width={20} height={20} fill='#333333' />
+                                {
+                                    searchProduct.length == 0?(<>
+                                        <Search width={20} height={20} fill='#333333' />
+
+                                    </>):(<>
+                                        <div className='w-[20px] h-[20px] rounded-full bg-gray-400 ' onClick={()=> setSearchProduct('')}>
+                                            <p className='font-bold text-[12px] text-red-600 text-center pr-[1px]'>X</p>
+                                        </div>
+                                    </>)
+                                }
                             </div>
                         </div>
                     </div>

@@ -73,15 +73,15 @@ export const LoginForm = (props:LoginForm)=>{
     return(
         <>
             <section className="mt-10">
-                <form action="" onSubmit={login} className="bg-[#444444] md:w-[100%] w-[300px] rounded-md pb-5">
+                <form action="" onSubmit={login} className="bg-[#444444]/50 md:w-[100%] w-[300px] rounded-md pb-5">
                     <div className="w-[250px] mx-auto">
                         <h1 className="text-[50px] font-bold mb-10">Login</h1>
                         <label htmlFor="Email" className="block">Email:</label>
                         <input type="email" name="Email" id="Email" placeholder="JohnDoe@email.com" value={Email} onChange={setEmailValue}
-                        className="bg-transparent border-b-2 border-b-solid border-b-gray-400 mt-[5px] text-[18px] focus:outline-0 mb-5" />
+                        className="bg-transparent border-b-2 border-b-solid border-b-gray-400 mt-[5px] text-[18px] focus:outline-none focus:border-b-gray-200 pl-[5px] mb-5" />
                         <label htmlFor="Password" className="block">Password:</label>
                         <input type="password" name="Password" id="Password" placeholder="Password"  value={Password} onChange={setPasswordValue}
-                        className="block bg-transparent border-b-2 border-b-solid border-b-gray-400 mt-[5px] text-[18px] focus:outline-0 mb-5" />
+                        className="block bg-transparent border-b-2 border-b-solid border-b-gray-400 mt-[5px] text-[18px] focus:outline-none focus:border-b-gray-200 pl-[5px] mb-5" />
                         <div className="w-[100px] h-[30px] rounded-md bg-gray-300 hover:bg-gray-500 text-[#333333] font-bold text-center mx-auto mt-5 hover:cursor-pointer">
                             <button type="submit" disabled={loading}>Login</button>
                         </div>

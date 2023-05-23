@@ -12,6 +12,7 @@ import { useUserInfo } from '../context/UserContext';
 import { ViewProductCard } from '../components/ViewProductCard';
 import { useErrorInfo } from '../context/ErrorContext';
 import { Search } from '../components/SVG/Search';
+import { Close } from '../components/SVG/Close';
 export const Browse = ()=>{
     const {FilterState,maxPrice,minPrice} = useFilterInfo();
     const {PushErrorMessage,RemoveFirstElement} = useErrorInfo();
@@ -153,8 +154,8 @@ export const Browse = ()=>{
                                         <Search width={20} height={20} fill='#333333' />
 
                                     </>):(<>
-                                        <div className='w-[20px] h-[20px] rounded-full bg-gray-400 ' onClick={()=> setSearchProduct('')}>
-                                            <p className='font-bold text-[12px] text-red-600 text-center pr-[1px]'>X</p>
+                                        <div className='w-[20px] h-[20px] rounded-full bg-gray-400 grid place-content-center' onClick={()=> setSearchProduct('')}>
+                                            <Close width={12} height={12}/>
                                         </div>
                                     </>)
                                 }

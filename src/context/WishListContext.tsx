@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext,useState } from "react";
-
-
+import { supabase } from "../supabaseClient";
+import { useUserInfo } from "./UserContext";
 interface WishListProvider{
     wishList: string[],
     removeFromWishlist: (value:string)=>void,
@@ -17,15 +17,42 @@ export const useWishListInfo = ()=>{
     return useContext(WishListProvider);
 }
 export const WishListContext = ({children}:WishListProviderProps)=>{
-    const [wishList,setWishList] = useState<string[]>([]);
 
-    const addToWishList = (value:string)=>{
-        setWishList(prevItems=>[...prevItems,value])
+    const [wishList,setWishList] = useState<string[]>([]);
+    const {userInfo} = useUserInfo();
+
+    const addToWishList = async(id:string)=>{
+        setWishList(prevItems=>[...prevItems,id]);
+        try{
+            const { error } = await supabase
+            .from('Wishlist')
+            .insert({ UserID:userInfo.id,ShoeID: id});
+            if(error) throw error;
+            else{
+                console.log('added to table');
+            }
+        }catch(error){
+
+        }
     }
-    const removeFromWishlist = (value:string)=>{
+    const removeFromWishlist = async(id:string)=>{
+
         setWishList(wishList.filter(function (item){
-            return item !== value;
-        }))
+            return item !== id;
+        }));
+
+        try{
+            const { error } = await supabase
+            .from('Wishlist')
+            .delete()
+            .eq('UserID', userInfo.id).eq('ShoeID',id);
+            if(error) throw error;
+            else{
+                console.log('item removed');
+            }
+        }catch(error){
+
+        }
     }
     const toggleFromWishList = (value:string)=>{
         if(wishList.includes(value)){

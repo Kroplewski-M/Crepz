@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext,useState } from "react";
+import { createContext, ReactNode, useContext,useEffect,useState } from "react";
 import { supabase } from "../supabaseClient";
 import { useUserInfo } from "./UserContext";
 interface WishListProvider{
@@ -20,6 +20,27 @@ export const WishListContext = ({children}:WishListProviderProps)=>{
 
     const [wishList,setWishList] = useState<string[]>([]);
     const {userInfo} = useUserInfo();
+
+    const fetchWishlist = async()=>{
+        try{
+            const { data, error } = await supabase
+            .from('Wishlist')
+            .select().eq('UserID',userInfo.id);
+            if(error)throw error;
+            else{
+                data.map((product)=>{
+                    setWishList(prevItems=>[...prevItems,product.ShoeID]);
+                })
+            }
+        }catch(error){
+
+        }
+    }
+    useEffect(()=>{
+        if(userInfo.id != ''){
+            fetchWishlist();
+        }
+    },[userInfo.id])
 
     const addToWishList = async(id:string)=>{
         setWishList(prevItems=>[...prevItems,id]);

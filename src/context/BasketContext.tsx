@@ -49,7 +49,31 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
     },[basketItems])
 
     const fetchBasket = async()=>{
-
+        let shoe:Shoe = {id:'',Name:'',Brand:'',Desc:'',Gender:'',Price:0,ImgUrl:''};
+        try{
+            const { data, error } = await supabase
+            .from('Basket')
+            .select().eq('UserID',userInfo.id);
+            if(error)throw error;
+            else{
+                if(data.length > 0){
+                    data.map((product)=>{
+                        products?.map((item) =>{
+                            if(item.id == product.id){
+                                shoe = item;
+                            }
+                        })
+                       if(shoe.id != ''){
+                           setBasketItems(currItems=> [...currItems, 
+                            {id:shoe.id,name:shoe.Name,imageUrl:shoe.ImgUrl,size:product.ShoeSize,price:shoe.Price,
+                            quantity:product.ProductQuantity}])
+                       }
+                    })
+                }
+            }
+        }catch(error){
+            console.log(error);
+        }
     }
     const addtoSupabaseBasket = async(id:string,size:number)=>{
         try{

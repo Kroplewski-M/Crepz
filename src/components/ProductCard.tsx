@@ -32,7 +32,7 @@ export const ProductCard = (Props:ProductsProps)=>{
     return(
         <div className="md:w-[300px] md:h-[425px] w-[165px] pb-5 md:pb-5 bg-[#333333] rounded-md relative overflow-hidden hover:cursor-pointer hover:bg-[#444444]">
             <div className={`md:w-[200px] md:h-[200px] w-[150px] h-[150px] rounded-full absolute -right-10 ${getGenderColor()}`}></div>
-            <img src={getImg(Props.info.ImgUrl)} alt="" className={`md:w-[200px] w-[130px] rounded-t-md relative z-10 -rotate-[20deg] md:ml-16 ml-5 ${imgLoaded?(''):('hidden')}`} onLoad={()=>setImgLoaded(true)} />
+            <img src={getImg(Props.info.ImgUrl)} alt={Props.info.Name} className={`md:w-[200px] w-[130px] rounded-t-md relative z-10 -rotate-[20deg] md:ml-16 ml-5 ${imgLoaded?(''):('hidden')}`} onLoad={()=>setImgLoaded(true)} />
             <div className={`md:w-[200px] md:h-[200px] h-[130px] w-[130px] rounded-md relative z-10 md:ml-16 ml-5 grid place-content-center ${imgLoaded?('hidden'):('')} animate-pulse`}>
                 <p className='font-bold text-gray-200'>Img loading...</p>
             </div>

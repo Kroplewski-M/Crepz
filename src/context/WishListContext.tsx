@@ -28,12 +28,14 @@ export const WishListContext = ({children}:WishListProviderProps)=>{
             .select().eq('UserID',userInfo.id);
             if(error)throw error;
             else{
-                data.map((product)=>{
-                    setWishList(prevItems=>[...prevItems,product.ShoeID]);
-                })
+                if(data.length > 0){
+                    data.map((product)=>{
+                        setWishList(prevItems=>[...prevItems,product.ShoeID]);
+                    })
+                }
             }
         }catch(error){
-
+            console.log(error);
         }
     }
     useEffect(()=>{
@@ -53,7 +55,7 @@ export const WishListContext = ({children}:WishListProviderProps)=>{
                 console.log('added to table');
             }
         }catch(error){
-
+            console.log(error);
         }
     }
     const removeFromWishlist = async(id:string)=>{
@@ -72,7 +74,7 @@ export const WishListContext = ({children}:WishListProviderProps)=>{
                 console.log('item removed');
             }
         }catch(error){
-
+            console.log(error);
         }
     }
     const toggleFromWishList = (value:string)=>{

@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useContext,useEffect,useState } from "react";
 import { useProductInfo } from "./ProductContext";
 import { Shoe } from "./ProductContext";
+import { supabase } from "../supabaseClient";
+import { useUserInfo } from "./UserContext";
 type BasketItem = {
     id:string,
     name:string,
@@ -32,6 +34,7 @@ export const useBasketInfo = ()=>{
 }
 
 export const BasketContext = ({children}:BasketProviderProps)=>{
+    const {userInfo} = useUserInfo();
     const [basketItems,setBasketItems] = useState<BasketItem[]>([]);
     const [products,setProducts] = useState<Shoe[]>();
     const {getProducts} = useProductInfo();
@@ -44,6 +47,49 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
     useEffect(()=>{
         updateBasketQuantity();
     },[basketItems])
+
+    const fetchBasket = async()=>{
+
+    }
+    const addtoSupabaseBasket = async(id:string,size:number)=>{
+        try{
+            const { error } = await supabase
+            .from('Basket')
+            .insert({ UserID:userInfo.id,ShoeID: id,ShoeSize:size,ProductQuantity:1});
+            if(error) throw error;
+            else{
+                console.log('added to table');
+            }
+        }catch(error){
+
+        }
+    }
+    const removeFromSupabaseBasket = async(id:string,size:number)=>{
+        try{
+            const { error } = await supabase
+            .from('Basket')
+            .delete()
+            .eq('UserID', userInfo.id).eq('ShoeID',id).eq('ShoeSize',size);
+            if(error) throw error;
+            else{
+                console.log('item removed');
+            }
+        }catch(error){
+            console.log(error);
+        }
+    }
+    const updateSupabaseBasket = async(id:string,quantity:number,size:number)=>{
+        try{
+            const { error } = await supabase
+            .from('basket')
+            .update({ ProductQuantity: quantity+1 })
+            .eq('UserID', userInfo.id).eq('ShoeID',id).eq('ShoeSize',size);
+            if(error) throw error;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     const setState = (state:boolean)=>{
         setBasketState(state);
     }

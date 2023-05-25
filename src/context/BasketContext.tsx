@@ -59,15 +59,12 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
                 if(data.length > 0){
                     data.map((product)=>{
                         products?.map((item) =>{
-                            if(item.id == product.id){
-                                shoe = item;
+                            if(item.id == product.ShoeID){
+                                setBasketItems(currItems=> [...currItems, 
+                                 {id:item.id,name:item.Name,imageUrl:item.ImgUrl,size:product.ShoeSize,price:item.Price,
+                                 quantity:product.ProductQuantity}])
                             }
                         })
-                       if(shoe.id != ''){
-                           setBasketItems(currItems=> [...currItems, 
-                            {id:shoe.id,name:shoe.Name,imageUrl:shoe.ImgUrl,size:product.ShoeSize,price:shoe.Price,
-                            quantity:product.ProductQuantity}])
-                       }
                     })
                 }
             }
@@ -75,6 +72,11 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
             console.log(error);
         }
     }
+    useEffect(()=>{
+        if(userInfo.id !=''){
+            fetchBasket();
+        }
+    },[userInfo.id])
     const addtoSupabaseBasket = async(id:string,size:number)=>{
         try{
             const { error } = await supabase
@@ -105,10 +107,13 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
     const updateSupabaseBasket = async(id:string,quantity:number,size:number)=>{
         try{
             const { error } = await supabase
-            .from('basket')
-            .update({ ProductQuantity: quantity+1 })
+            .from('Basket')
+            .update({ ProductQuantity: quantity })
             .eq('UserID', userInfo.id).eq('ShoeID',id).eq('ShoeSize',size);
             if(error) throw error;
+            else{
+                console.log('item updated!');
+            }
         }catch(error){
             console.log(error);
         }
@@ -136,12 +141,14 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
             if(selectedItem !== undefined){
                 setBasketItems(currItems=> [...currItems, 
                 {id:selectedItem.id,name:selectedItem.Name,imageUrl:selectedItem.ImgUrl,size:selectedSize,price:selectedItem.Price,quantity:1}])
+                addtoSupabaseBasket(selectedItem.id,selectedSize);
             }
         }else{
             basketItems.map((item)=>{
                 if(item.id == id && item.size == selectedSize){
                     if(item.quantity < 10){
                         item.quantity++
+                        updateSupabaseBasket(id,item.quantity,item.size);
                     }
                 }
             });
@@ -158,17 +165,20 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
             }
         })
         setBasketItems(tempBasket);
+        removeFromSupabaseBasket(id,size);
     }
     const updateQuantity = (quantity:number,id:string, size:number)=>{
         let tempBasket:BasketItem[] =[];
         basketItems.map((item)=>{
             if(item.id == id && item.size == size){
                 tempBasket.push({id:item.id,name:item.name,imageUrl:item.imageUrl,size:item.size,price:item.price,quantity:quantity});
+                updateSupabaseBasket(id,quantity,item.size);
             }else{
                 tempBasket.push(item);
             }
         }) 
         setBasketItems(tempBasket);
+        
     }
     const totalPrice = ()=>{
         let total = 0;

@@ -36,9 +36,9 @@ export const ProductCard = (Props:ProductsProps)=>{
             <div className={`md:w-[200px] md:h-[200px] h-[130px] w-[130px] rounded-md relative z-10 md:ml-16 ml-5 grid place-content-center ${imgLoaded?('hidden'):('')} animate-pulse`}>
                 <p className='font-bold text-gray-200'>Img loading...</p>
             </div>
-            <p className={`font-bold text-gray-200 ${Props.info.Name.length > 35?('text-[13px]'):('text-[16px]')}  h-[40px] text-center md:mt-0 z-50 relative w-[90%] mx-auto`}>{Props.info.Name}</p>
+            <p className={`font-bold text-gray-200 ${Props.info.Name.length > 35?('text-[13px]'):('text-[12px] lg:text-[18px]')}  h-[40px] text-center md:mt-0  z-50 relative w-[90%] mx-auto`}>{Props.info.Name}</p>
             <div className='pl-5 md:mt-5 mt-[5px] text-[15px] md:text-[16px]'>
-                <p className='text-gray-400 '>{Props.info.Gender} Shoes</p>
+                <p className='text-gray-400 pt-[5px] lg:pt-0'>{Props.info.Gender} Shoes</p>
                 <p className='text-gray-400 '>{Props.info.Brand}</p>
                 <p className='text-gray-200 font-bold pt-[5px] md:text-[25px] text-[20px]'>£{Props.info.Price}</p>
             </div>

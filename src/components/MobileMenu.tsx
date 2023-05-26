@@ -30,7 +30,7 @@ export const MobileMenu = (props:Props)=>{
             <div onClick={props.closeMenu} className='w-[35px] h-[35px] absolute right-5 top-2 hover:cursor-pointer'>
                 <Close width={35} height={35}/>
             </div>
-            <div className='absolute -top-[30px] right-[10px] w-[500px] h-[500px]'>
+            <div className='absolute -top-[30px] right-[10px] w-[500px] h-[500px] pointer-events-none'>
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#AAAAAA" d="M44.9,-13.3C51.5,5.8,45.7,30.3,30.8,40.7C15.9,51.1,-8,47.5,-28.3,34C-48.5,20.4,-65.2,-3.1,-59.8,-20.4C-54.5,-37.8,-27.3,-49,-4.1,-47.7C19.1,-46.4,38.3,-32.5,44.9,-13.3Z" transform="translate(100 100)" />
                 </svg>

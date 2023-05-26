@@ -98,7 +98,7 @@ export const Browse = ()=>{
         });
         products?.map((product)=>{
             if((filterBrands.includes(product.Brand) || filterBrands.length == 0) && (filterGender.includes(product.Gender) || filterGender.length == 0)
-                && product.Price >= minPrice && product.Price <= maxPrice && (searchProduct !=''? product.Brand.includes(searchProduct) || product.Name.includes(searchProduct):product)){
+                && product.Price >= minPrice && product.Price <= maxPrice && (searchProduct !=''? product.Brand.toUpperCase().includes(searchProduct.toUpperCase()) || product.Name.toUpperCase().includes(searchProduct.toUpperCase()):product)){
                 setFilteredProducts((prevProducts) => [...prevProducts,product]);
             }
 
@@ -143,10 +143,10 @@ export const Browse = ()=>{
                     <Filter closeFilter={closeFilter} />):(<></>)
                 }
                 <section className='md:w-[70%] w-[100vw] md:ml-16 -mt-5'>
-                    <div className='flex flex-col md:flex-row mt-[5px]'>
+                    <div className='flex flex-col lg:flex-row mt-[5px]'>
                         <h1 className='font-bold text-[40px] text-[#222222] text-center md:text-left'>Browse</h1>
                         <div className='w-[300px] mx-auto md:mx-0 flex relative'>
-                            <input type="text" className='w-[300px] h-[35px] bg-gray-300 md:ml-16 rounded-md pl-[5px] mt-[14px] focus:outline-none font-semibold text-[#222222]' onChange={setSearchValue} value={searchProduct}
+                            <input type="text" className='w-[300px] h-[35px] bg-gray-300 lg:ml-16 rounded-md pl-[5px] mt-[14px] focus:outline-none font-semibold text-[#222222]' onChange={setSearchValue} value={searchProduct}
                             placeholder='Search for product...'/>
                             <div className='w-[30px] absolute -right-1 top-5 hover:cursor-pointer'>
                                 {
@@ -162,10 +162,10 @@ export const Browse = ()=>{
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-wrap w-[100%]'>
+                    <div className='flex flex-wrap w-[100%] '>
                             {
                                 filteredProducts?.map(product =>(
-                                    <div key={product.id} className={`w-[165px] mx-auto md:w-[300px] md:ml-[5px] mt-5 relative`}>
+                                    <div key={product.id} className={`w-[165px] mx-auto md:w-[250px] md:ml-[5px] xl:mr-[40px] mt-5 relative`}>
                                         <div className='absolute w-[35px] h-[35px] ml-[5px] mt-[5px] rounded-full bg-[#444444] grid place-content-center hover:cursor-pointer z-50' 
                                         onClick={()=> WishListItem(product.id)}>
                                             <Heart fill={isWishListed(product.id)} width={20} height={20} />

@@ -87,7 +87,7 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
                 console.log('added to table');
             }
         }catch(error){
-
+            console.log(error);
         }
     }
     const removeFromSupabaseBasket = async(id:string,size:number)=>{

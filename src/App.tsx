@@ -16,6 +16,8 @@ import { WishListContext } from "./context/WishListContext";
 import { BasketContext } from "./context/BasketContext";
 import { useErrorInfo } from "./context/ErrorContext";
 import { CheckOut } from "./Pages/CheckOut";
+import Authguard from "./components/AuthGuard";
+
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
   const {ErrorMessages} = useErrorInfo();
@@ -65,8 +67,10 @@ function App() {
                 </div>
                   <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/profile/:select?" element={<Profile />} />
-                    <Route path="/checkout" element={<CheckOut />}/>
+                      <Route element={<Authguard />}>
+                        <Route path="/profile/:select?" element={<Profile />} />
+                        <Route path="/checkout" element={<CheckOut />}/>
+                      </Route>
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/browse" element={<Browse />} />

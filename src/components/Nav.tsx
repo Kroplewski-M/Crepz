@@ -48,21 +48,6 @@ export const Nav = ()=>{
         const closeMobileMenu =():void=>{
             setShowMobileMenu(false);
         }
-
-        const isLoggedIn = ()=>{
-            if(userInfo.id == ""){
-                navigate('/register');
-            }else{
-                navigate('/profile/user');
-            }
-        }
-        const wishListRedirect = () =>{
-            if(userInfo.id == ""){
-                navigate('/register');
-            }else{
-                navigate('/profile/wishlist')
-            }
-        }
         const redirectAndFilter = (value:string) =>{
             SetGenderTrue(value);
             navigate('/browse');
@@ -90,10 +75,10 @@ export const Nav = ()=>{
                                 <p className='hover:cursor-pointer hover:text-gray-400 hover:underline underline-offset-4 decoration-2' onClick={()=>redirectAndFilter('Kids')}>Kids</p>
                             </div>
                             <div className='flex space-x-3 mr-5 self-center -mt-[7px]'>
-                                <div onClick={wishListRedirect} className='hover:cursor-pointer hover:brightness-50'>
+                                <div onClick={()=> navigate('/profile/wishlist')} className='hover:cursor-pointer hover:brightness-50'>
                                     <Heart fill="#FFFFFF" width={30} height={30} />
                                 </div>
-                                <div className='hover:cursor-pointer hover:brightness-50' onClick={isLoggedIn}>
+                                <div className='hover:cursor-pointer hover:brightness-50' onClick={()=> navigate('/profile/user')}>
                                     <UserIcon fill="#FFFFFF" width={30} height={30} />
                                 </div>
                                 <div className='hover:cursor-pointer hover:brightness-50 relative' onClick={()=> setState(true)}>

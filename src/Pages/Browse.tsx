@@ -128,7 +128,7 @@ export const Browse = ()=>{
         }
     }
     return(
-        <section className="w-[100vw] max-w-[2000px]  mx-auto pb-10 pt-16">
+        <section className="w-[100vw] max-w-[2000px] mx-auto pb-10 pt-16">
             <div className="w-[95px] mx-auto">
                 <div className='grid place-content-center w-[95px] h-[40px] bg-[#333333] hover:cursor-pointer md:hidden' onClick={()=>setShowFilter(true)}>
                     <div className='flex space-x-2'>

@@ -16,7 +16,7 @@ export const Filter = (props:FilterProps)=>{
     },[FilterState])
 
     return(
-        <div className="w-[100vw] md:w-[300px] md:h-[900px] h-[100vh] md:pb-10 pb-[160px] fixed overflow-y-auto md:overflow-y-hidden top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
+        <div className="w-[100vw] md:w-[400px] xl:w-[300px] md:h-[900px] h-[100vh] md:pb-10 pb-[160px] fixed overflow-y-auto md:overflow-y-hidden top-0 right-0 md:relative bg-[#333333] md:bg-gray-200 z-[100] text-gray-200 md:text-[#333333] md:ml-16 ">
             <div onClick={props.closeFilter} className='absolute w-[30px] h-[30px] right-1 top-1 md:hidden'>
                 <Close width={30} height={30}/>
             </div>

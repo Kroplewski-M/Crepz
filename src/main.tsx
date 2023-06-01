@@ -7,11 +7,9 @@ import {UserContext}  from './context/UserContext';
 import { ErrorContext } from "./context/ErrorContext";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <BrowserRouter>
     <UserContext>
     <ErrorContext>
         <App />
     </ErrorContext>
     </UserContext>
-    </BrowserRouter>
 )

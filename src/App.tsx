@@ -16,7 +16,6 @@ import { WishListContext } from "./context/WishListContext";
 import { BasketContext } from "./context/BasketContext";
 import { useErrorInfo } from "./context/ErrorContext";
 import { CheckOut } from "./Pages/CheckOut";
-import { GuardedRoute } from "./components/GuardedRoute";
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
   const {ErrorMessages} = useErrorInfo();
@@ -54,7 +53,6 @@ function App() {
         <ProductContext>
             <WishListContext>
               <BasketContext>
-              <BrowserRouter>
                 <Nav></Nav>
                 <div className="w-[100vw] fixed top-[50px] z-[100] flex flex-col">
                 {
@@ -67,8 +65,8 @@ function App() {
                 </div>
                   <Routes>
                     <Route path="/" element={<Home />} />
-                    <GuardedRoute path="/profile/:select?" element={<Profile />} />
-                    <GuardedRoute path="/checkout" element={<CheckOut />}/>
+                    <Route path="/profile/:select?" element={<Profile />} />
+                    <Route path="/checkout" element={<CheckOut />}/>
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/browse" element={<Browse />} />
@@ -76,7 +74,6 @@ function App() {
                     <Route path="/404"  element={<PageNotFound />}/>
                     <Route path="*"  element={<Navigate to="/404" />}/>
                   </Routes>
-                </BrowserRouter>
               </BasketContext>
             </WishListContext>
         </ProductContext>

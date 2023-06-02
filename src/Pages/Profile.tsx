@@ -34,13 +34,13 @@ export const Profile = ()=>{
                 <div className="font-bold text-gray-200 grid space-y-[10px] space-x-5 justify-items-center">
                     <div className="flex space-x-5 mt-[10px]">
                         <p className={`hover:text-gray-400 hover:cursor-pointer
-                         ${selectComp==Select.PROFILE?"underline underline-offset-8 decoration-4":""}`}
+                         ${selectComp===Select.PROFILE?("underline underline-offset-8 decoration-4"):("")}`}
                          onClick={()=>setSelectComp(Select.PROFILE)}>Profile</p>
                         <p className={`hover:text-gray-400 hover:cursor-pointer
-                         ${selectComp==Select.ORDERS?"underline underline-offset-8 decoration-4":""}`}
+                         ${selectComp===Select.ORDERS?("underline underline-offset-8 decoration-4"):("")}`}
                          onClick={()=>setSelectComp(Select.ORDERS)}>Orders</p>
                         <p className={`hover:text-gray-400 hover:cursor-pointer
-                         ${selectComp==Select.WISHLIST?"underline underline-offset-8 decoration-4":""}`}
+                         ${selectComp===Select.WISHLIST?("underline underline-offset-8 decoration-4"):("")}`}
                          onClick={()=>setSelectComp(Select.WISHLIST)}>WishList</p>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import { BasketCard } from './BasketCard'
 import { Close } from './SVG/Close'
 import { useBasketInfo } from '../context/BasketContext'
 import { useNavigate  } from 'react-router-dom';
+import React, { useRef, useEffect } from 'react';
 
 
 export const BasketMenu = ()=>{
@@ -11,8 +12,24 @@ export const BasketMenu = ()=>{
         setState(false);
         navigate('/checkout');
     }
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+          if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+            setState(false);
+          }
+        };
+        // Add the event listener when the component mounts
+        document.addEventListener('mousedown', handleClickOutside);
+        // Clean up the event listener when the component unmounts
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
+      
     return(
-    <div className="w-[100vw] md:w-[500px] h-[100vh] bg-[#444444] fixed top-0 right-0 z-[100] overflow-y-scroll pb-[100px]">
+    <div className="w-[100vw] md:w-[500px] h-[100vh] bg-[#444444] fixed top-0 right-0 z-[100] overflow-y-scroll pb-[100px]" ref={menuRef}>
         <div onClick={()=>setState(false)} className='w-[30px] float-right mt-[5px] mr-[5px] hover:cursor-pointer'>
             <Close width={30} height={30}/>
         </div>

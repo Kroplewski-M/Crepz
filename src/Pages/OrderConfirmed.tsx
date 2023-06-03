@@ -2,6 +2,8 @@ import { Bag } from "../components/SVG/Bag"
 
 export const OrderConfirmed = ()=>{
 
+// FETCH ID FROM URL AND CHECK WITH BACKEND 
+//REDIRECT USER BACK TO HOME PAGE IS ID DOESNT EXIST 
 
     return(
         <section className="w-[100vw] h-[100vh] pt-16">

@@ -30,8 +30,7 @@ export const OrdersContext = ({children}:OrderProviderProps)=>{
     const {userInfo} = useUserInfo();
     const {totalPrice} = useBasketInfo();
     const [Orders,setOrders] = useState<OrderItem[]>([]);
-
-    const pushToSupabase = async(address:string)=>{
+        const pushToSupabase = async(address:string)=>{
         try{
             const { data,error } = await supabase
             .from('Orders')

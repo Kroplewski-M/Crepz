@@ -1,5 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useUserInfo } from '../context/UserContext';
+
 const Authguard = () => {
     const {userInfo} = useUserInfo();
 
@@ -8,4 +9,4 @@ const Authguard = () => {
     )
 }
 
-export default Authguard
+export default Authguard;

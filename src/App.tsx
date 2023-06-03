@@ -77,7 +77,7 @@ function App() {
                     <Route path="/browse" element={<Browse />} />
                     <Route path="/product/:id" element={<Product />} />
                     <Route path="/404"  element={<PageNotFound />}/>
-                    <Route path="/OrderConfirmation"  element={<OrderConfirmed />}/>
+                    <Route path="/OrderConfirmation/:orderID"  element={<OrderConfirmed />}/>
                     <Route path="*"  element={<Navigate to="/404" />}/>
                   </Routes>
               </BasketContext>

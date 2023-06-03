@@ -2,18 +2,20 @@ import { createContext, ReactNode, useContext,useEffect,useState } from "react";
 import { useUserInfo } from "./UserContext";
 import { supabase } from "../supabaseClient";
 import { useBasketInfo } from "./BasketContext";
+
 type OrderItem = {
     OrderNo: string,
     Date: string,
     Total:number,
+    Address:string,
 }
 
 interface OrdersProvider{
-    AddToOrders: (OrderNo:string,Date:string,Total:number)=> void,
+    AddToOrders: (OrderNo:string,Date:string,Total:number,Address:string)=> void,
     fetchOrders: ()=> void,
     clearOrders: ()=> void,
     Orders: OrderItem[],
-    pushToSupabase: ()=>void,
+    pushToSupabase: (Address:string)=>void,
 }
 interface OrderProviderProps{
     children: ReactNode,
@@ -29,7 +31,7 @@ export const OrdersContext = ({children}:OrderProviderProps)=>{
     const {totalPrice} = useBasketInfo();
     const [Orders,setOrders] = useState<OrderItem[]>([]);
 
-    const pushToSupabase = async()=>{
+    const pushToSupabase = async(address:string)=>{
         try{
             const { data,error } = await supabase
             .from('Orders')
@@ -38,14 +40,14 @@ export const OrdersContext = ({children}:OrderProviderProps)=>{
             else{
                 console.log('added to orders');
                 console.log(data);
-                AddToOrders(data[0].OrderID,(data[0].Date).toString(),totalPrice());
+                AddToOrders(data[0].OrderID,(data[0].Date).toString(),totalPrice(),address);
             }
         }catch(error){
             console.log(error);
         }
     }
-    const AddToOrders = async(OrderNo:string,Date:string,Total:number)=>{
-        setOrders((currItems)=> [...currItems,{OrderNo,Date,Total}])
+    const AddToOrders = async(OrderNo:string,Date:string,Total:number,Address:string)=>{
+        setOrders((currItems)=> [...currItems,{OrderNo,Date,Total,Address}])
     }
     const fetchOrders = async()=>{
         try{
@@ -59,7 +61,8 @@ export const OrdersContext = ({children}:OrderProviderProps)=>{
                         const OrderNo:string = (order.OrderID).toString();
                         const Date:string = (order.Date).toString();
                         const Total:number = (order.Total);
-                        setOrders((currItems)=> [...currItems,{OrderNo,Date,Total}])
+                        const Address:string = (order.Address);
+                        setOrders((currItems)=> [...currItems,{OrderNo,Date,Total,Address}])
                     })
                 }
             }

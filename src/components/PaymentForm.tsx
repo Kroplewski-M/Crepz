@@ -32,56 +32,62 @@ export const PaymentForm = ()=>{
       }
     return(
         <section className="pb-16">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-[200px] mx-auto mt-10">
-                <label htmlFor="FullName" className="font-semibold text-[#444444]">FullName:</label>
-                <input {...register("FullName")} placeholder="John Doe" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.FullName?.message}</p>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-[200px] md:w-[450px] mx-auto mt-10 ">
+            <div className="flex flex-col md:flex-row md:space-x-10">
+                <div>
+                    <label htmlFor="FullName" className="font-semibold text-[#444444]">FullName:</label>
+                    <input {...register("FullName")} placeholder="John Doe" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.FullName?.message}</p>
 
-                <label htmlFor="Email" className="font-semibold text-[#444444]">Email:</label>
-                <input {...register("Email")} placeholder="JohnDoe@gmail.com" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.Email?.message}</p>
-                
-                <label htmlFor="StreetNumber" className="font-semibold text-[#444444]">Street Number:</label>
-                <input {...register("StreetNumber")} placeholder="58" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.StreetNumber?.message}</p>
-                
-                <label htmlFor="StreetName" className="font-semibold text-[#444444]">Street Name:</label>
-                <input {...register("StreetName")} placeholder="Gerald Road" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.StreetName?.message}</p>
-
-                <label htmlFor="City" className="font-semibold text-[#444444]">City:</label>
-                <input {...register("City")} placeholder="London" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.City?.message}</p>
-
-                <label htmlFor="PostCode" className="font-semibold text-[#444444]">Post Code:</label>
-                <input {...register("PostCode")} placeholder="S764HG" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.PostCode?.message}</p>
-
-
-                <label htmlFor="CardNo" className="font-semibold text-[#444444]">Card Number:</label>
-                <input {...register("CardNo")} placeholder="1234567891011121" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.CardNo?.message}</p>
-
-                <label htmlFor="CVC" className="font-semibold text-[#444444]">CVC:</label>
-                <input {...register("CVC")} placeholder="567" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
-                <p className="text-red-500 mb-5">{errors.CVC?.message}</p>
-
-                <div className="flex space-x-5">
-                    <div className="w-[45%]">
-                        <label htmlFor="CardExpMonth" className="font-semibold text-[#444444]">Card Expiry Month:</label>
-                        <input {...register("CardExpMonth")} placeholder="13" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none w-[80px]"/>
-                        <p className="text-red-500 mb-5">{errors.CardExpMonth?.message}</p>
-
-                    </div>
-                    <div className="w-[45%]">
-                        <label htmlFor="CardExpYear" className="font-semibold text-[#444444]">Card Expiry Year:</label>
-                        <input {...register("CardExpYear")} placeholder="26" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none w-[80px]"/>
-                        <p className="text-red-500 mb-5">{errors.CardExpYear?.message}</p>
-                    </div>
-
+                    <label htmlFor="Email" className="font-semibold text-[#444444]">Email:</label>
+                    <input {...register("Email")} placeholder="JohnDoe@gmail.com" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.Email?.message}</p>
+                    
+                    <label htmlFor="StreetNumber" className="font-semibold text-[#444444]">Street Number:</label>
+                    <input {...register("StreetNumber")} placeholder="58" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.StreetNumber?.message}</p>
+                    
+                    <label htmlFor="StreetName" className="font-semibold text-[#444444]">Street Name:</label>
+                    <input {...register("StreetName")} placeholder="Gerald Road" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.StreetName?.message}</p>
                 </div>
+
+                <div>
+                    <label htmlFor="City" className="font-semibold text-[#444444]">City:</label>
+                    <input {...register("City")} placeholder="London" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.City?.message}</p>
+
+                    <label htmlFor="PostCode" className="font-semibold text-[#444444]">Post Code:</label>
+                    <input {...register("PostCode")} placeholder="S764HG" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.PostCode?.message}</p>
+
+
+                    <label htmlFor="CardNo" className="font-semibold text-[#444444]">Card Number:</label>
+                    <input {...register("CardNo")} placeholder="1234567891011121" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.CardNo?.message}</p>
+
+                    <label htmlFor="CVC" className="font-semibold text-[#444444]">CVC:</label>
+                    <input {...register("CVC")} placeholder="567" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none"/>
+                    <p className="text-red-500 mb-5">{errors.CVC?.message}</p>
+
+                    <div className="flex space-x-5">
+                        <div className="w-[45%]">
+                            <label htmlFor="CardExpMonth" className="font-semibold text-[#444444]">Card Expiry Month:</label>
+                            <input {...register("CardExpMonth")} placeholder="13" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none w-[80px]"/>
+                            <p className="text-red-500 mb-5">{errors.CardExpMonth?.message}</p>
+
+                        </div>
+                        <div className="w-[45%]">
+                            <label htmlFor="CardExpYear" className="font-semibold text-[#444444]">Card Expiry Year:</label>
+                            <input {...register("CardExpYear")} placeholder="26" className="border-b-2 border-b-gray-200 mt-[5px] font-semibold focus:outline-none w-[80px]"/>
+                            <p className="text-red-500 mb-5">{errors.CardExpYear?.message}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
                 
-                <button className="font-bold w-[200px] h-[35px] bg-[#333333] text-gray-200 mt-[10px]">Complete Order</button>
+                <button className="font-bold w-[200px] h-[35px] bg-[#333333] text-gray-200 mt-[10px] md:mt-[20px] md:hover:bg-[#222222]">Complete Order</button>
         </form>
         </section>
     )

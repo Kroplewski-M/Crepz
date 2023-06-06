@@ -18,6 +18,7 @@ import { useErrorInfo } from "./context/ErrorContext";
 import { CheckOut } from "./Pages/CheckOut";
 import Authguard from "./components/AuthGuard";
 import { OrderConfirmed } from "./Pages/OrderConfirmed";
+import { Payment } from "./Pages/Payment";
 
 function App() {
   const {loginUser,logoutUser,userInfo} = useUserInfo();
@@ -78,6 +79,7 @@ function App() {
                     <Route path="/product/:id" element={<Product />} />
                     <Route path="/404"  element={<PageNotFound />}/>
                     <Route path="/OrderConfirmation/:orderID"  element={<OrderConfirmed />}/>
+                    <Route path="/Payment/:id" element={<Payment />} />
                     <Route path="*"  element={<Navigate to="/404" />}/>
                   </Routes>
               </BasketContext>

@@ -24,26 +24,30 @@ export const LoginForm = (props:LoginForm)=>{
     }
     async function login(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault();
-        props.changeLoggingState(LoginState.LOADING);
-        setLoading(true);
-        try{
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: Email,
-                password: Password,
-              })
-              if(error) throw error;
-              else{
-                console.log("account found!");
-                console.log(data.user);
-                fetchUser(data?.user?.id);
-              }
-        }catch(error){
-            console.log(error);
-            props.changeLoggingState(LoginState.ERROR);
-        }finally{
-            setLoading(false);
-            setEmail('');
-            setPassword('');
+        if(Password.length > 0 && Email.length>0){
+            props.changeLoggingState(LoginState.LOADING);
+            setLoading(true);
+            try{
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: Email,
+                    password: Password,
+                  })
+                  if(error) throw error;
+                  else{
+                    console.log("account found!");
+                    console.log(data.user);
+                    fetchUser(data?.user?.id);
+                  }
+            }catch(error){
+                console.log(error);
+                props.changeLoggingState(LoginState.ERROR);
+            }finally{
+                setLoading(false);
+                setEmail('');
+                setPassword('');
+            }
+        }else{
+            props.changeLoggingState(LoginState.EMPTY);
         }
 
     }

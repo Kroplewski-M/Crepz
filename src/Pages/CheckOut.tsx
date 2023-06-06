@@ -2,10 +2,12 @@ import { Bin } from '../components/SVG/Bin';
 import { EmptyBox } from '../components/SVG/EmptyBox';
 import { useBasketInfo } from '../context/BasketContext';
 import { useNavigate } from 'react-router-dom';
-
+import { useUserInfo } from '../context/UserContext';
 export const CheckOut = ()=>{
     const {basketItems,updateQuantity,totalPrice,removeFromBasket,clearBasket} = useBasketInfo();
+    const {userInfo} = useUserInfo();
     const navigate = useNavigate();
+
     return(
         <section className="w-[100vw] grid place-content-center pb-10">
             <h1 className="font-bold text-[30px] mt-10 text-center text-[#333333]">My basket</h1>
@@ -88,7 +90,7 @@ export const CheckOut = ()=>{
                     </div>
 
                     <p className='font-bold text-[#333333] text-[30px] mt-5 text-center md:text-left'>Total: £{totalPrice().toFixed(2)}</p>
-                    <div className='w-[220px] h-[40px] mt-5 mx-auto md:mx-0'>
+                    <div className='w-[220px] h-[40px] mt-5 mx-auto md:mx-0' onClick={()=>navigate(`/Payment/${userInfo.id}`)}>
                         <button className='w-[100%] h-[100%] bg-[#333333] hover:bg-[#444444] font-bold text-gray-200 rounded-sm text-[19px]'>Continue to checkout</button>
                     </div>
                     </div>

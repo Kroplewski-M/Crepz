@@ -33,6 +33,13 @@ export const LoginPrompt = (props:LoginPromptProps)=>{
                         </div>
                     ):(<div></div>)
                 }
+                {
+                      props.state == 'empty'?(
+                        <div className="w-[300px] h-[30px] bg-red-500/40 rounded-md grid place-content-center mx-auto mb-5">
+                            <p className="font-bold">Please Fill in all the fields!</p>
+                        </div>
+                    ):(<div></div>)
+                }
 
         </section>
     )

@@ -9,6 +9,7 @@ export enum LoginState{
     ERROR = 'error',
     DEFAULT = 'default',
     LOADING = 'loading',
+    EMPTY = 'empty'
 }
 
 export const Login = ()=>{

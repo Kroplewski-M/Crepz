@@ -187,8 +187,20 @@ export const BasketContext = ({children}:BasketProviderProps)=>{
         })
         return total;
     }
-    const clearBasket = ()=>{
+    const clearBasket = async()=>{
         setBasketItems([]);
+        try{
+            const { error } = await supabase
+            .from('Basket')
+            .delete()
+            .eq('UserID', userInfo.id);
+            if(error) throw error;
+            else{
+                console.log('items removed');
+            }
+        }catch(error){
+            console.log(error);
+        }
     }
 
 

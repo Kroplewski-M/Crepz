@@ -36,7 +36,7 @@ export const CheckOut = ()=>{
                         <tbody>
                             {
                                 basketItems.map(product =>(
-                                        <tr className='bg-gray-200 h-[70px] border-b border-black'>
+                                        <tr className='bg-gray-200 h-[70px] border-b border-black' key={product.id + product.size}>
                                             <td className='flex pt-[10px]'>
                                                 <img src={product.imageUrl} alt="" className='w-[70px] ml-[5px] -rotate-[15deg] hidden md:block'/>
                                                 <p className='ml-[10px] font-semibold text-[12px] md:text-[16px]'>{product.name}</p>
